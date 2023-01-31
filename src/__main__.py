@@ -11,7 +11,7 @@ logger.add(sys.stdout, colorize=True, format="<green>{time}</green> <level>{mess
 
 class Window:
     done = False
-    width, height = utils.get_size(True, True)
+    width, height = utils.get_size(width=True, height=True)
     fps = 60
 
 logger.debug("Current folder: {}", utils.get_folder( utils.get_parent(os.getcwd()), __file__), feature='f-strings')
