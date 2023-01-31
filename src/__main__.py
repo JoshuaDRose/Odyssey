@@ -9,13 +9,13 @@ from pygame import K_ESCAPE, QUIT
 logger.remove()
 logger.add(sys.stdout, colorize=True, format="<green>{time}</green> <level>{message}</level>")
 
-class window:
+class Window:
     done = False
     width, height = utils.get_size(True, True)
     fps = 60
 
 logger.debug("Current folder: {}", utils.get_folder( utils.get_parent(os.getcwd()), __file__), feature='f-strings')
-screen = pygame.display.set_mode((window.width, window.height), 0, 32)
+screen = pygame.display.set_mode((Window.width, Window.height), 0, 32)
 pygame.display.set_caption("Ninja Adventure")
 
 player = entities.Player(
@@ -26,13 +26,13 @@ clock = pygame.time.Clock()
 
 dt = 0
 
-while not window.done:
+while not Window.done:
     for event in pygame.event.get():
         if event.type == QUIT:
-            window.done = True
+            Window.done = True
 
     pygame.display.flip()
-    dt = clock.tick(window.fps) / 1000
+    dt = clock.tick(Window.fps) / 1000
 
 pygame.quit()
 sys.exit()
