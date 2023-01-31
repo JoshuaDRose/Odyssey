@@ -4,6 +4,7 @@ import pygame
 import entities
 import utilities as utils
 from loguru import logger
+from pygame import K_ESCAPE, QUIT
 
 logger.remove()
 logger.add(sys.stdout, colorize=True, format="<green>{time}</green> <level>{message}</level>")
@@ -11,12 +12,25 @@ logger.add(sys.stdout, colorize=True, format="<green>{time}</green> <level>{mess
 class window:
     done = False
     width, height = utils.get_size(True, True)
+    fps = 60
 
+logger.debug("Current folder: {}", utils.get_folder( utils.get_parent(os.getcwd()), __file__), feature='f-strings')
+screen = pygame.display.set_mode((window.width, window.height), 0, 32)
+pygame.display.set_caption("Ninja Adventure")
 
 player = entities.Player(
         x = 100,
         y = 100)
 
-logger.debug("Current folder: {}", utils.get_folder( utils.get_parent(os.getcwd()), __file__), feature='f-strings')
-screen = pygame.display.set_mode((window.width, window.height), 0, 32)
-pygame.display.set_caption("Ninja Adventure")
+clock = pygame.time.Clock()
+
+while not window.done:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            window.done = True
+
+    pygame.display.flip()
+    dt = clock.tick(window.fps) / 1000
+
+pygame.quit()
+sys.exit()
