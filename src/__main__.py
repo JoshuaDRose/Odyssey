@@ -24,8 +24,6 @@ player = entities.Player(
 
 clock = pygame.time.Clock()
 
-
-
 dt = 0
 while not Window.done:
     for event in pygame.event.get():
