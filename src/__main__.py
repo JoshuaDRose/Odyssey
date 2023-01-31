@@ -18,9 +18,7 @@ logger.debug("Current folder: {}", utils.get_folder( utils.get_parent(os.getcwd(
 screen = pygame.display.set_mode((Window.width, Window.height), 0, 32)
 pygame.display.set_caption("Ninja Adventure")
 
-player = entities.Player(
-        x = 100,
-        y = 100)
+player = entities.Player( x = 100, y = 100 )
 
 clock = pygame.time.Clock()
 
