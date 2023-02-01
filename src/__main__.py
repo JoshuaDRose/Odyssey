@@ -32,7 +32,9 @@ class Window:
     fps = 60
 
 logger.debug("Workspace: {}",
-             os.path.relpath(utils.get_folder(utils.get_parent(os.getcwd()), __file__)),
+             os.path.relpath(
+                 utils.get_folder(
+                     utils.get_parent(os.getcwd()), __file__)),
              feature='f-strings')
 
 screen = pygame.display.set_mode((Window.width, Window.height), 0, 32)
@@ -53,6 +55,9 @@ clock = pygame.time.Clock()
 
 dt = 0
 selecting = True
+
+if pygame.mouse.get_visible():
+    pygame.mouse.set_visible(0)
 
 # in loud voice (choose your character!)
 while selection_screen.running:
