@@ -2,7 +2,7 @@ import os
 import sys
 import pygame
 import entities
-import utilities as utils
+import utils
 from loguru import logger
 from pygame import K_ESCAPE, QUIT
 
@@ -14,7 +14,7 @@ class Window:
     width, height = utils.get_size(get_width=True, get_height=True)
     fps = 60
 
-logger.debug("Current folder: {}", utils.get_folder( utils.get_parent(os.getcwd()), __file__), feature='f-strings')
+logger.debug("Current folder: {}", get_folder(get_parent(os.getcwd()), __file__), feature='f-strings')
 screen = pygame.display.set_mode((Window.width, Window.height), 0, 32)
 pygame.display.set_caption("Ninja Adventure")
 
