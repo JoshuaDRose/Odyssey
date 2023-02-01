@@ -1,5 +1,5 @@
 import pygame
+from .player import Player
 
 pygame.display.init()
 
-from .player import Player
