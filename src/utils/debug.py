@@ -4,7 +4,7 @@ import utils
 import pygame
 
 
-colors = json.load(open('src/colors.json'))
+# colors = json.load(open('src/colors.json'))
 pygame.font.init()
 
 class TextBox(pygame.sprite.Sprite):

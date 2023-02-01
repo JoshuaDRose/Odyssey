@@ -6,8 +6,6 @@ import entities
 from loguru import logger
 from pygame import K_ESCAPE, QUIT
 
-for path in utils.get_insert_paths(os.getcwd()):
-    sys.path.insert(0, path)
 
 logger.remove()
 logger.add(
@@ -15,13 +13,26 @@ logger.add(
         colorize=True,
         format="<green>{time}</green> <level>{message}</level>")
 
+pathDict = utils.get_insert_paths(os.getcwd())
+pathList = []
+
+for value in list(pathDict.values()):
+    for item in value:
+        pathList.append(item)
+
+for path in pathList:
+    logger.debug("Appending folder: {} to Workspace",
+            path,
+            feature='f-strings')
+    sys.path.insert(0, path)
+
 class Window:
     done = False
     width, height = utils.get_size(get_width=True, get_height=True)
     fps = 60
 
-logger.debug("Current folder: {}",
-             utils.get_folder(utils.get_parent(os.getcwd()), __file__),
+logger.debug("Workspace: {}",
+             os.path.relpath(utils.get_folder(utils.get_parent(os.getcwd()), __file__)),
              feature='f-strings')
 
 screen = pygame.display.set_mode((Window.width, Window.height), 0, 32)
