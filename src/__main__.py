@@ -39,6 +39,13 @@ screen = pygame.display.set_mode((Window.width, Window.height), 0, 32)
 selection_screen = utils.SelectionScreen()
 pygame.display.set_caption("Ninja Adventure")
 
+if not pygame.mixer.get_init():
+    logger.debug("Initializing pygame.mixer")
+
+logger.debug(f"""[Mixer]
+Bitrate: {pygame.mixer.get_init()[0]}
+Channels: {pygame.mixer.get_num_channels()}""", feature="f-strings""")
+
 # TODO get player to work after selection screen is done
 # player = entities.Player( x = 100, y = 100 )
 
