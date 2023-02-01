@@ -1,8 +1,10 @@
 import os
 import sys
-import pygame
 
-sys.path.insert(0, '~/projects/Ninja Adventure/src/utils/')
+import utils
+import entities
+
+import pygame
 
 class Player(object):
     def __init__(self, x: int, y: int):
