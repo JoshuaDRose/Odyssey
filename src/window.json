@@ -2,5 +2,6 @@
     "fps": 60,
     "width": 900,
     "height": 750,
-    "vsync": true
+    "vsync": true,
+    "tilesize": 64
 }
