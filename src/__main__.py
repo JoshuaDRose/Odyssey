@@ -6,9 +6,8 @@ import entities
 from loguru import logger
 from pygame import K_ESCAPE, QUIT
 
-sys.path.insert(0, './src/utils/')
-sys.path.insert(0, './src/levels/')
-sys.path.insert(0, './src/entities/')
+for path in get_insert_paths(os.getcwd()):
+    sys.path.insert(0, path)
 
 logger.remove()
 logger.add(
