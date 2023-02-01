@@ -7,14 +7,19 @@ from loguru import logger
 from pygame import K_ESCAPE, QUIT
 
 logger.remove()
-logger.add(sys.stdout, colorize=True, format="<green>{time}</green> <level>{message}</level>")
+logger.add(
+        sys.stdout,
+        colorize=True,
+        format="<green>{time}</green> <level>{message}</level>")
 
 class Window:
     done = False
     width, height = utils.get_size(get_width=True, get_height=True)
     fps = 60
 
-logger.debug("Current folder: {}", get_folder(get_parent(os.getcwd()), __file__), feature='f-strings')
+logger.debug("Current folder: {}",
+             get_folder(get_parent(os.getcwd()), __file__),
+             feature='f-strings')
 screen = pygame.display.set_mode((Window.width, Window.height), 0, 32)
 pygame.display.set_caption("Ninja Adventure")
 
