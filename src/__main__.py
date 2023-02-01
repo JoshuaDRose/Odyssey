@@ -36,6 +36,7 @@ logger.debug("Workspace: {}",
              feature='f-strings')
 
 screen = pygame.display.set_mode((Window.width, Window.height), 0, 32)
+selection_screen = utils.SelectionScreen()
 pygame.display.set_caption("Ninja Adventure")
 
 player = entities.Player( x = 100, y = 100 )
@@ -43,6 +44,13 @@ player = entities.Player( x = 100, y = 100 )
 clock = pygame.time.Clock()
 
 dt = 0
+selecting = True
+
+# in loud voice (choose your character!)
+while selection_screen.running:
+    selection_screen.update()
+    selection_screen.draw()
+
 while not Window.done:
     for event in pygame.event.get():
         if event.type == QUIT:

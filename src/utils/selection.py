@@ -1,5 +1,6 @@
 """ Character selection screen """
 import os
+import pygame
 import json
 import utils
 
@@ -28,6 +29,9 @@ class SelectionScreen:
         # NOTE covers have black bg
         self.spritesheet = utils.Spritesheet(self.image_path)
         self.profile_icons = pygame.sprite.Group()
+        self.screen = pygame.display.get_surface()
+        self.load_profiles()
+        self.running = True
 
     def load_profiles(self):
         """
@@ -42,3 +46,9 @@ class SelectionScreen:
                         locations[character]['y'],
                         38, 40)), x, y, self.profile_icons)
             x += 38
+
+    def draw(self):
+        pass
+
+    def update(self):
+        pass
