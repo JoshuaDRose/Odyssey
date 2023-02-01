@@ -18,8 +18,8 @@ locations = json.load(open('src/profiles.json'))
 
 class ProfileIcon(pygame.sprite.Sprite):
     selected = 0
-    def __init__(self, image, x, y, group):
-        super().__init__(group)
+    def __init__(self, image, x, y):
+        super().__init__()
         self.image: pygame.surface.Surface = image
         self.image = pygame.transform.scale2x(self.image)
         self.rect = self.image.get_rect()
@@ -41,6 +41,9 @@ class ProfileIcon(pygame.sprite.Sprite):
             self.selectBox.set_alpha(255)
         else:
             self.selectBox.set_alpha(0)
+
+    def draw(self, surface):
+        surface.blit(self.image, self.rect)
 
 class SelectionScreen:
     def __init__(self):
@@ -78,29 +81,46 @@ class SelectionScreen:
                     self.spritesheet.image_at((
                         locations[character]['x'],
                         locations[character]['y'],
-                        38, 40), (20, 27, 27)), x, 0, self.profile_icons)
+                        38, 40), (20, 27, 27)), x, 0)
+            self.profile_icons.append(icon)
             x += 76
 
         for index, icon in enumerate(self.profile_icons):
             if index <= 1:
                 icon.selected = True
+        print(self.profile_icons)
 
     def draw(self):
-        self.profile_icons.draw(self.screen)
         for icon in self.profile_icons:
-            icon.update()
-
+            icon.draw(self.screen)
+            
     def update(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
             if event.type == pygame.KEYDOWN:
+                print(self.profile_icons[ProfileIcon.selected])
+                print(f"index: {index}")
                 if event.key == pygame.K_RIGHT:
                     if pygame.mixer.Channel(6).get_busy():
                         pygame.mixer.Channel(6).stop()
                     pygame.mixer.Channel(6).play(self.sound_next)
+
+                    if (ProfileIcon.selected) > len(self.profile_icons)-1:
+                        self.profile_icons[ProfileIcon.selected].selected = False
+                        ProfileIcon.selected = 0
+                    else:
+                        ProfileIcon.selected += 1
+
                 if event.key == pygame.K_LEFT:
                     if pygame.mixer.Channel(6).get_busy():
                         pygame.mixer.Channel(6).stop()
                     pygame.mixer.Channel(6).play(self.sound_prev)
+                    if ProfileIcon.selected < 0:
+                        self.profile_icons[ProfileIcon.selected].selected = False
+                        ProfileIcon.selected = len(self.profile_icons) - 1
+
+        for icon in self.profile_icons:
+            icon.update()
