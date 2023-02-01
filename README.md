@@ -5,3 +5,6 @@ in this project can be found [here](https://pixel-boy.itch.io/ninja-adventure-as
 
 ### License
 This project is registered under the MIT license which can be found [here](https://github.com/JoshuaDRose/Ninja-Adventure/blob/main/LICENSE).
+
+### Versioning
+The versioning system (semantic versioning) that this project uses for releases can be found [here](https://semver.org/)
