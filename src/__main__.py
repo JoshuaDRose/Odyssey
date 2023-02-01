@@ -52,6 +52,9 @@ while selection_screen.running:
     selection_screen.update()
     selection_screen.draw()
 
+    pygame.display.flip()
+    dt = clock.tick(Window.fps) / 1000
+
 while not Window.done:
     for event in pygame.event.get():
         if event.type == QUIT:

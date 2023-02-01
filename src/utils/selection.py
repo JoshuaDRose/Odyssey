@@ -45,14 +45,15 @@ class SelectionScreen:
                     self.spritesheet.image_at((
                         locations[character]['x'],
                         locations[character]['y'],
-                        38, 40)), x, y, self.profile_icons)
+                        38, 40), (20, 27, 27)), x, y, self.profile_icons)
             x += 38
+
         for icon in self.profile_icons:
             if icon.rect.x == 10:
                 icon.selected = True
 
     def draw(self):
-        pass
+        self.profile_icons.draw(self.screen)
 
     def update(self):
         for event in pygame.event.get():

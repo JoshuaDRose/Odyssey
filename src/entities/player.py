@@ -37,6 +37,11 @@ class Player(pygame.sprite.Sprite):
                 pos[i] = camera.center[i]
             elif pos[i] > camera.background.size[i] - camera.center[i]:
                 pos[i] = camera.size[i] - camera.background.size[i] + pos[i]
+
         window.blit(self.image, (int(pos[0]), int(pos[1])))
 
-
+    def update(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit(0)
