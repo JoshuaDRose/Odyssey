@@ -60,14 +60,17 @@ class SelectionScreen:
         self.queue = []
 
         pygame.mixer.Channel(1).set_volume(.5)
+        pygame.mixer.Channel(6).set_volume(.75)
         pygame.mixer.Channel(1).play(self.sound_init)
 
     def load_profiles(self):
         """
         load profile images and add to profile_icons as sprites.
         """
+
         # width, height = 38, 40
         # scaled = 76, 80
+
         x = 0
         for character in locations:
             icon = ProfileIcon(
@@ -85,10 +88,6 @@ class SelectionScreen:
         self.profile_icons.draw(self.screen)
         for icon in self.profile_icons:
             icon.update()
-
-    @staticmethod
-    def play_sound(sound):
-        sound.play()
 
     def update(self):
         for event in pygame.event.get():
