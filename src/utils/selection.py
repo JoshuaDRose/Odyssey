@@ -17,6 +17,7 @@ image_path = os.path.join('assets/Actor/Characters', 'AllPreview.png')
 locations = json.load(open('src/profiles.json'))
 
 class ProfileIcon(pygame.sprite.Sprite):
+    selected = 0
     def __init__(self, image, x, y, group):
         super().__init__(group)
         self.image: pygame.surface.Surface = image
@@ -46,7 +47,7 @@ class SelectionScreen:
         self.image_path = image_path
         # NOTE covers have black bg
         self.spritesheet = utils.Spritesheet(self.image_path)
-        self.profile_icons = pygame.sprite.Group()
+        self.profile_icons = []
         self.screen = pygame.display.get_surface()
         self.load_profiles()
         self.running = True
@@ -95,11 +96,11 @@ class SelectionScreen:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                if event.type == pygame.K_RIGHT:
+                if event.key == pygame.K_RIGHT:
                     if pygame.mixer.Channel(6).get_busy():
                         pygame.mixer.Channel(6).stop()
                     pygame.mixer.Channel(6).play(self.sound_next)
-                if event.type == pygame.K_LEFT:
+                if event.key == pygame.K_LEFT:
                     if pygame.mixer.Channel(6).get_busy():
                         pygame.mixer.Channel(6).stop()
                     pygame.mixer.Channel(6).play(self.sound_prev)
