@@ -9,3 +9,10 @@
  - [ ] Enemy interaction and combat
  - [ ] health and attack ui
  - [ ] player stats screen
+
+### General
+- [ ] add player selection screen
+- [ ] main menu
+- [ ] pause menu
+- [ ] graphics menu 
+- [ ] saving settings / stats system
