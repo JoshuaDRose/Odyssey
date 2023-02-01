@@ -39,7 +39,8 @@ screen = pygame.display.set_mode((Window.width, Window.height), 0, 32)
 selection_screen = utils.SelectionScreen()
 pygame.display.set_caption("Ninja Adventure")
 
-player = entities.Player( x = 100, y = 100 )
+# TODO get player to work after selection screen is done
+# player = entities.Player( x = 100, y = 100 )
 
 clock = pygame.time.Clock()
 

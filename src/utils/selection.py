@@ -1,5 +1,6 @@
 """ Character selection screen """
 import os
+import sys
 import pygame
 import json
 import utils
@@ -17,7 +18,7 @@ class ProfileIcon(pygame.sprite.Sprite):
         # Box to highlight profile icon
         self.selectBox = pygame.Surface(
                 (self.rect.width, self.rect.height))
-        pygame.draw.Rect(
+        pygame.draw.rect(
                 self.selectBox,
                 (255, 255, 255),
                 self.rect,
@@ -41,7 +42,7 @@ class SelectionScreen:
         x, y = 10, 10
         for character in locations:
             icon = ProfileIcon(
-                    utils.spritesheet.image_at((
+                    self.spritesheet.image_at((
                         locations[character]['x'],
                         locations[character]['y'],
                         38, 40)), x, y, self.profile_icons)
@@ -51,4 +52,7 @@ class SelectionScreen:
         pass
 
     def update(self):
-        pass
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
