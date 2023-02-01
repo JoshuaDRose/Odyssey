@@ -6,6 +6,10 @@ import entities
 from loguru import logger
 from pygame import K_ESCAPE, QUIT
 
+sys.path.insert(0, './src/utils/')
+sys.path.insert(0, './src/levels/')
+sys.path.insert(0, './src/entities/')
+
 logger.remove()
 logger.add(
         sys.stdout,
@@ -20,6 +24,7 @@ class Window:
 logger.debug("Current folder: {}",
              utils.get_folder(utils.get_parent(os.getcwd()), __file__),
              feature='f-strings')
+
 screen = pygame.display.set_mode((Window.width, Window.height), 0, 32)
 pygame.display.set_caption("Ninja Adventure")
 

@@ -1,0 +1,7 @@
+{
+    "paths": [
+        "$HOME/projects/Ninja Adventure/src/levels",
+        "$HOME/projects/Ninja Adventure/src/entities",
+        "$HOME/projects/Ninja Adventure/src/utils",
+    ]
+}
