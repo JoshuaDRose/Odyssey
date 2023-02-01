@@ -6,7 +6,7 @@ import entities
 from loguru import logger
 from pygame import K_ESCAPE, QUIT
 
-for path in get_insert_paths(os.getcwd()):
+for path in utils.get_insert_paths(os.getcwd()):
     sys.path.insert(0, path)
 
 logger.remove()
