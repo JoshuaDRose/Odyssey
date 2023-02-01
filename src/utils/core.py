@@ -31,3 +31,10 @@ def get_parent(directory):
 def get_folder(dir, file):
     """ Returns the current directory appended to file """
     return os.path.join(dir, file)
+
+def get_insert_paths(cwd) -> dict:
+    content = dict()
+    with open(os.path.join(cwd, 'meta.json'), 'r') as fp:
+        content = json.load(fp)
+        fp.close()
+    return content
