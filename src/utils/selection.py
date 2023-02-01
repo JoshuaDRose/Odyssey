@@ -47,6 +47,9 @@ class SelectionScreen:
                         locations[character]['y'],
                         38, 40)), x, y, self.profile_icons)
             x += 38
+        for icon in self.profile_icons:
+            if icon.rect.x == 10:
+                icon.selected = True
 
     def draw(self):
         pass
