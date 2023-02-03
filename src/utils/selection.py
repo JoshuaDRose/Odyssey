@@ -44,14 +44,19 @@ class Box(pygame.sprite.Sprite):
             if pygame.mixer.Channel(6).get_busy():
                 pygame.mixer.Channel(6).stop()
             pygame.mixer.Channel(6).play(self.sound_next)
-        if key == pygame.K_LEFT:
+        elif key == pygame.K_LEFT:
             if pygame.mixer.Channel(6).get_busy():
                 pygame.mixer.Channel(6).stop()
             pygame.mixer.Channel(6).play(self.sound_prev)
-        if key == pygame.K_LEFT or pygame.K_RETURN:
+        elif key == pygame.K_SPACE or pygame.K_RETURN:
             if pygame.mixer.Channel(6).get_busy():
                 pygame.mixer.Channel(6).stop()
             pygame.mixer.Channel(6).play(self.sound_select)
+        else:
+            logger.debug("Invalid keypress, defaulting to Menu2.wav")
+            if pygame.mixer.Channel(6).get_busy():
+                pygame.mixer.Channel(6).stop()
+            pygame.mixer.Channel(6).play(self.sound_next)
 
         if character == 0:
             current_text = "The One True Doge"
@@ -90,6 +95,7 @@ class SelectionScreen:
         self.running = True
 
         self.sound_init = pygame.mixer.Sound(os.path.join(sfx, "choose_character.wav"))
+        pygame.display.set_caption("Ninja Adventure - Choose Your Character!")
 
         self.queue = []
 
@@ -144,7 +150,7 @@ class SelectionScreen:
                         ProfileIcon.selected = len(self.profile_icons) - 1
                     else:
                         ProfileIcon.selected -= 1
-                    selectBox.select(ProfileIcon.selected)
+                selectBox.select(ProfileIcon.selected, event.key)
                 self.draw()
                 self.screen.blit(selectBox.image, selectBox.rect)
                 self.textbox.draw(current_text)
