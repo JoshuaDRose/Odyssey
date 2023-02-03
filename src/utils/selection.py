@@ -88,7 +88,6 @@ class SelectionScreen:
         for index, icon in enumerate(self.profile_icons):
             if index <= 1:
                 icon.selected = True
-        print(self.profile_icons)
 
     def draw(self):
         for icon in self.profile_icons:
@@ -101,14 +100,13 @@ class SelectionScreen:
                 sys.exit()
 
             if event.type == pygame.KEYDOWN:
-                print(self.profile_icons[ProfileIcon.selected])
-                print(f"index: {index}")
+                print(ProfileIcon.selected)
                 if event.key == pygame.K_RIGHT:
                     if pygame.mixer.Channel(6).get_busy():
                         pygame.mixer.Channel(6).stop()
                     pygame.mixer.Channel(6).play(self.sound_next)
 
-                    if (ProfileIcon.selected) > len(self.profile_icons)-1:
+                    if (ProfileIcon.selected) >= len(self.profile_icons) - 1:
                         self.profile_icons[ProfileIcon.selected].selected = False
                         ProfileIcon.selected = 0
                     else:
@@ -118,9 +116,11 @@ class SelectionScreen:
                     if pygame.mixer.Channel(6).get_busy():
                         pygame.mixer.Channel(6).stop()
                     pygame.mixer.Channel(6).play(self.sound_prev)
-                    if ProfileIcon.selected < 0:
+                    if ProfileIcon.selected <= 0:
                         self.profile_icons[ProfileIcon.selected].selected = False
                         ProfileIcon.selected = len(self.profile_icons) - 1
+                    else:
+                        ProfileIcon.selected -= 1
 
         for icon in self.profile_icons:
             icon.update()
