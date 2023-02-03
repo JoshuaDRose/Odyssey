@@ -21,6 +21,7 @@ try:
     locations = json.load(open('src/profiles.json'))
 except FileNotFoundError:
     os.chdir('..')
+locations = json.load(open('src/profiles.json'))
 
 current_text = "Choose your character"
 
@@ -37,11 +38,20 @@ class Box(pygame.sprite.Sprite):
         self.sound_prev = pygame.mixer.Sound(os.path.join(sfx, "Menu3.wav"))
         self.sound_select = pygame.mixer.Sound(os.path.join(sfx, "Menu9.wav"))
 
-    def select(self, character):
+    def select(self, character, key=pygame.K_RIGHT):
         global current_text
-        if pygame.mixer.Channel(6).get_busy():
-            pygame.mixer.Channel(6).stop()
-        pygame.mixer.Channel(6).play(self.sound_next)
+        if key == pygame.K_RIGHT:
+            if pygame.mixer.Channel(6).get_busy():
+                pygame.mixer.Channel(6).stop()
+            pygame.mixer.Channel(6).play(self.sound_next)
+        if key == pygame.K_LEFT:
+            if pygame.mixer.Channel(6).get_busy():
+                pygame.mixer.Channel(6).stop()
+            pygame.mixer.Channel(6).play(self.sound_prev)
+        if key == pygame.K_LEFT or pygame.K_RETURN:
+            if pygame.mixer.Channel(6).get_busy():
+                pygame.mixer.Channel(6).stop()
+            pygame.mixer.Channel(6).play(self.sound_select)
 
         if character == 0:
             current_text = "The One True Doge"
@@ -49,9 +59,9 @@ class Box(pygame.sprite.Sprite):
             return;
         else:
             if character == 1:
-                current_text = "Samurai Ninja"
+                current_text = "Ninja"
             if character == 2:
-                current_text = "Sand person"
+                current_text = "Ninjet"
             self.rect.x = 76 * (character)
 
 selectBox = Box(0, 0)
