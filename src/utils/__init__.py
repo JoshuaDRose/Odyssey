@@ -4,4 +4,4 @@ from .camera import Background, Camera
 from .logger import Logger
 from .debug import TextBox
 from .spritesheet import Spritesheet
-from .selection import SelectionScreen, ProfileIcon
+from .selection import SelectionScreen, ProfileIcon, Box

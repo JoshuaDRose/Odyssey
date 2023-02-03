@@ -14,7 +14,31 @@ if not pygame.mixer.get_init():
 pygame.mixer.music.set_volume(1.0)
 
 image_path = os.path.join('assets/Actor/Characters', 'AllPreview.png')
+sfx = 'assets/sfx/Menu'
 locations = json.load(open('src/profiles.json'))
+
+class Box(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        self.image = pygame.Surface((76, 80), pygame.SRCALPHA)
+        self.image.set_colorkey((0, 0, 0))
+        self.rect = self.image.get_rect()
+        self.rect.x, self.rect.y = x, y
+        pygame.draw.rect(self.image, (255, 255, 255), self.rect, 3)
+        self.sound_next = pygame.mixer.Sound(os.path.join(sfx, "Menu2.wav"))
+        self.sound_prev = pygame.mixer.Sound(os.path.join(sfx, "Menu3.wav"))
+        self.sound_select = pygame.mixer.Sound(os.path.join(sfx, "Menu9.wav"))
+
+    def select(self, character):
+        if pygame.mixer.Channel(6).get_busy():
+            pygame.mixer.Channel(6).stop()
+        pygame.mixer.Channel(6).play(self.sound_next)
+        if character == 0:
+            self.rect.x = 0
+        else:
+            self.rect.x = 76 * (character)
+
+selectBox = Box(0, 0)
 
 class ProfileIcon(pygame.sprite.Sprite):
     selected = 0
@@ -24,23 +48,6 @@ class ProfileIcon(pygame.sprite.Sprite):
         self.image = pygame.transform.scale2x(self.image)
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = x, y
-        self.selected = False
-        # Box to highlight profile icon
-        self.selectBox = pygame.Surface(
-                (self.rect.width, self.rect.height))
-        pygame.draw.rect(
-                self.selectBox,
-                (255, 255, 255),
-                self.rect,
-                3)
-        self.selectBox.set_colorkey((0, 0, 0));
-        self.image.blit(self.selectBox, (0, 0))
-
-    def update(self):
-        if self.selected:
-            self.selectBox.set_alpha(255)
-        else:
-            self.selectBox.set_alpha(0)
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
@@ -55,10 +62,6 @@ class SelectionScreen:
         self.load_profiles()
         self.running = True
 
-        sfx = 'assets/sfx/Menu'
-        self.sound_next = pygame.mixer.Sound(os.path.join(sfx, "Menu2.wav"))
-        self.sound_prev = pygame.mixer.Sound(os.path.join(sfx, "Menu3.wav"))
-        self.sound_select = pygame.mixer.Sound(os.path.join(sfx, "Menu9.wav"))
         self.sound_init = pygame.mixer.Sound(os.path.join(sfx, "choose_character.wav"))
 
         self.queue = []
@@ -85,13 +88,10 @@ class SelectionScreen:
             self.profile_icons.append(icon)
             x += 76
 
-        for index, icon in enumerate(self.profile_icons):
-            if index <= 1:
-                icon.selected = True
-
     def draw(self):
+        self.screen.fill((0, 0, 0))
         for icon in self.profile_icons:
-            icon.draw(self.screen)
+            self.screen.blit(icon.image, icon.rect)
             
     def update(self):
         for event in pygame.event.get():
@@ -100,27 +100,17 @@ class SelectionScreen:
                 sys.exit()
 
             if event.type == pygame.KEYDOWN:
-                print(ProfileIcon.selected)
                 if event.key == pygame.K_RIGHT:
-                    if pygame.mixer.Channel(6).get_busy():
-                        pygame.mixer.Channel(6).stop()
-                    pygame.mixer.Channel(6).play(self.sound_next)
-
-                    if (ProfileIcon.selected) >= len(self.profile_icons) - 1:
-                        self.profile_icons[ProfileIcon.selected].selected = False
+                    if (ProfileIcon.selected) == len(self.profile_icons) - 1:
                         ProfileIcon.selected = 0
                     else:
                         ProfileIcon.selected += 1
-
                 if event.key == pygame.K_LEFT:
-                    if pygame.mixer.Channel(6).get_busy():
-                        pygame.mixer.Channel(6).stop()
-                    pygame.mixer.Channel(6).play(self.sound_prev)
-                    if ProfileIcon.selected <= 0:
-                        self.profile_icons[ProfileIcon.selected].selected = False
+                    if ProfileIcon.selected == 0:
                         ProfileIcon.selected = len(self.profile_icons) - 1
                     else:
                         ProfileIcon.selected -= 1
-
-        for icon in self.profile_icons:
-            icon.update()
+                selectBox.select(ProfileIcon.selected)
+        self.draw()
+        print(ProfileIcon.selected)
+        self.screen.blit(selectBox.image, selectBox.rect)

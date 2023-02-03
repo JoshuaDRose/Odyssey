@@ -62,10 +62,8 @@ if pygame.mouse.get_visible():
 # in loud voice (choose your character!)
 while selection_screen.running:
     selection_screen.update()
-    selection_screen.draw()
 
-    pygame.display.flip()
-    dt = clock.tick(Window.fps) / 1000
+    pygame.display.update()
 
 while not Window.done:
     for event in pygame.event.get():
