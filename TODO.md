@@ -11,8 +11,12 @@
  - [ ] player stats screen
 
 ### General
-- [ ] add player selection screen
 - [ ] main menu
 - [ ] pause menu
 - [ ] graphics menu 
 - [ ] saving settings / stats system
+
+### Selection menu
+- [ ] add statistics to each player on hover
+- [ ] add text to state the name of the player
+
