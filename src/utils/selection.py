@@ -16,7 +16,12 @@ pygame.mixer.music.set_volume(1.0)
 
 image_path = os.path.join('assets/Actor/Characters', 'AllPreview.png')
 sfx = 'assets/sfx/Menu'
-locations = json.load(open('src/profiles.json'))
+
+try:
+    locations = json.load(open('src/profiles.json'))
+except FileNotFoundError:
+    os.chdir('..')
+
 current_text = "Choose your character"
 
 
