@@ -10,28 +10,25 @@ pygame.font.init()
 class TextBox(pygame.sprite.Sprite):
     fontPath = pygame.font.match_font('InconsolataLGC Nerd Font')
 
-    def __init__(self, x, y):
-        # pygame.font.SysFont takes in arguments of fontpath, size (int)
+    def __init__(self, x, y, size):
         self.surface = pygame.display.get_surface()
-        self.font = pygame.font.SysFont(TextBox.fontPath, 15)
-        sample = "The quick brown fox."
-        self.image = pygame.Surface([self.font.render(sample).size()])
-        self.rect = pygame.Rect(
-                x, y, self.image.get_width(), self.image.get_height())
-        pygame.draw.rect(
+        self.font = pygame.font.SysFont(TextBox.fontPath, size)
+        """
+        pygame.draw.rect( # BUG does not scale as text can change in width
                 self.image,
                 pygame.Color("#B0BF1A"),
                 self.rect,
                 2,
                 10)
+        """
+        self.image = pygame.Surface((0, 0))
+        self.x = x
+        self.y = y
 
     def draw(self, text):
-        text = self.font.render(
+        text = self.font.render( text, True, pygame.Color("#EFDECD"))
+        rect = text.get_rect()
+        self.surface.blit(
                 text,
-                True,
-                pygame.Color("#EFDECD"))
-        self.image.blit(
-                self.text,
-                self.text.get_width() // 2 - self.rect.width // 2,
-                self.text.get_height() // 2 - self.rect.height // 2)
-        self.surface.blit(self.image, self.rect)
+                (self.surface.get_width() // 2 - rect.width // 2,
+                self.surface.get_height() // 2 - rect.height // 2))

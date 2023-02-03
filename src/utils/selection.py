@@ -4,6 +4,7 @@ import sys
 import pygame
 import json
 import utils
+from .debug import TextBox
 from pygame import K_RIGHT, K_LEFT, AUDIO_ALLOW_FREQUENCY_CHANGE, AUDIO_ALLOW_CHANNELS_CHANGE
 from pygame import K_UP, K_DOWN, MOUSEBUTTONDOWN, MOUSEBUTTONUP, MOUSEMOTION
 from loguru import logger
@@ -16,6 +17,8 @@ pygame.mixer.music.set_volume(1.0)
 image_path = os.path.join('assets/Actor/Characters', 'AllPreview.png')
 sfx = 'assets/sfx/Menu'
 locations = json.load(open('src/profiles.json'))
+current_text = "Choose your character"
+
 
 class Box(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -69,6 +72,12 @@ class SelectionScreen:
         pygame.mixer.Channel(1).set_volume(.5)
         pygame.mixer.Channel(6).set_volume(.75)
         pygame.mixer.Channel(1).play(self.sound_init)
+        
+        self.textbox = TextBox(self.screen.get_width() // 2, self.screen.get_height() // 2, 55)
+
+        self.draw()
+        self.screen.blit(selectBox.image, selectBox.rect)
+        self.textbox.draw(text)
 
     def load_profiles(self):
         """
@@ -105,12 +114,13 @@ class SelectionScreen:
                         ProfileIcon.selected = 0
                     else:
                         ProfileIcon.selected += 1
+                    selectBox.select(ProfileIcon.selected)
                 if event.key == pygame.K_LEFT:
                     if ProfileIcon.selected == 0:
                         ProfileIcon.selected = len(self.profile_icons) - 1
                     else:
                         ProfileIcon.selected -= 1
-                selectBox.select(ProfileIcon.selected)
-        self.draw()
-        print(ProfileIcon.selected)
-        self.screen.blit(selectBox.image, selectBox.rect)
+                    selectBox.select(ProfileIcon.selected)
+                self.draw()
+                self.screen.blit(selectBox.image, selectBox.rect)
+                self.textbox.draw(current_text)
