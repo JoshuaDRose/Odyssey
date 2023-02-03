@@ -33,6 +33,7 @@ class Box(pygame.sprite.Sprite):
         self.sound_select = pygame.mixer.Sound(os.path.join(sfx, "Menu9.wav"))
 
     def select(self, character):
+        global current_text
         if pygame.mixer.Channel(6).get_busy():
             pygame.mixer.Channel(6).stop()
         pygame.mixer.Channel(6).play(self.sound_next)
