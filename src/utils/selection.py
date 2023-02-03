@@ -65,6 +65,7 @@ class ProfileIcon(pygame.sprite.Sprite):
 class SelectionScreen:
     def __init__(self):
         self.image_path = image_path
+
         # NOTE covers have black bg
         self.spritesheet = utils.Spritesheet(self.image_path)
         self.profile_icons = []
