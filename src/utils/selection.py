@@ -36,9 +36,16 @@ class Box(pygame.sprite.Sprite):
         if pygame.mixer.Channel(6).get_busy():
             pygame.mixer.Channel(6).stop()
         pygame.mixer.Channel(6).play(self.sound_next)
+
         if character == 0:
+            current_text = "The One True Doge"
             self.rect.x = 0
+            return;
         else:
+            if character == 1:
+                current_text = "Samurai Ninja"
+            if character == 2:
+                current_text = "Sand person"
             self.rect.x = 76 * (character)
 
 selectBox = Box(0, 0)
@@ -77,7 +84,7 @@ class SelectionScreen:
 
         self.draw()
         self.screen.blit(selectBox.image, selectBox.rect)
-        self.textbox.draw(text)
+        self.textbox.draw(current_text)
 
     def load_profiles(self):
         """
@@ -124,3 +131,4 @@ class SelectionScreen:
                 self.draw()
                 self.screen.blit(selectBox.image, selectBox.rect)
                 self.textbox.draw(current_text)
+                pygame.display.update()
