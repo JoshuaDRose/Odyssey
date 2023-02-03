@@ -3,8 +3,6 @@ import json
 import utils
 import pygame
 
-
-# colors = json.load(open('src/colors.json'))
 pygame.font.init()
 
 class TextBox(pygame.sprite.Sprite):
@@ -21,14 +19,13 @@ class TextBox(pygame.sprite.Sprite):
                 2,
                 10)
         """
-        self.image = pygame.Surface((0, 0))
         self.x = x
         self.y = y
+        self.image = pygame.Surface((0, 0))
 
     def draw(self, text):
-        text = self.font.render( text, True, pygame.Color("#EFDECD"))
+        text = self.font.render(text, True, pygame.Color("#EFDECD"))
         rect = text.get_rect()
-        self.surface.blit(
-                text,
+        self.surface.blit(text,
                 (self.surface.get_width() // 2 - rect.width // 2,
                 self.surface.get_height() // 2 - rect.height // 2))
