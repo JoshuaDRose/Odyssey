@@ -13,12 +13,13 @@ logger.add(
         colorize=True,
         format="<green>{time}</green> <level>{message}</level>")
 
-pathDict = utils.get_insert_paths(os.getcwd())
+pathDict = utils.get_insert_paths(os.getcwd()).get('paths')
 pathList = []
 
-for value in list(pathDict.values()):
-    for item in value:
-        pathList.append(item)
+logger.debug(pathDict)
+
+for item in list(pathDict):
+    pathList.append(item)
 
 for path in pathList:
     logger.debug("Appending folder: {} to Workspace",
@@ -53,16 +54,20 @@ Channels: {pygame.mixer.get_num_channels()}""", feature="f-strings""")
 
 clock = pygame.time.Clock()
 
-selecting = True
-
 if pygame.mouse.get_visible():
     pygame.mouse.set_visible(0)
 
 # in loud voice (choose your character!)
 while selection_screen.running:
     selection_screen.update()
-
     pygame.display.update()
+
+character = None
+
+# Retrieve character from  json file
+with open('meta.json') as fp:
+    character = json.load(fp)['character']
+    fp.close()
 
 while not Window.done:
     for event in pygame.event.get():
