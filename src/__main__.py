@@ -4,7 +4,6 @@ import levels
 import sys
 import pygame
 import utils
-import entities
 from loguru import logger
 from pygame import K_ESCAPE, QUIT
 
@@ -57,6 +56,7 @@ Channels: {pygame.mixer.get_num_channels()}""", feature="f-strings""")
 
 clock = pygame.time.Clock()
 
+
 if pygame.mouse.get_visible():
     # NOTE Default = 0
     pygame.mouse.set_visible(0)
@@ -93,6 +93,8 @@ if ftp:
     # TEXT: HEY THERE! I NOTICED THIS IS YOUR FIRST TIME PLAYING! WOULD YOU LIKE TO DO THE TUTORIAL?
     # OPTIONS: YES | NO
     logger.info("Loading tutorial")
+
+
 
 while not Window.done:
     for event in pygame.event.get():
