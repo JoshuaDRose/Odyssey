@@ -63,7 +63,7 @@ class Box(pygame.sprite.Sprite):
                 pygame.mixer.Channel(6).stop()
             pygame.mixer.Channel(6).play(self.sound_select)
         else:
-            logger.debug("Invalid keypress, defaulting to Menu2.wav")
+            logger.error(f"Invalid keypress: {key}")
             if pygame.mixer.Channel(6).get_busy():
                 pygame.mixer.Channel(6).stop()
             pygame.mixer.Channel(6).play(self.sound_next)
