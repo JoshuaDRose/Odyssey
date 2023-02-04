@@ -1,5 +1,7 @@
 """ Character selection screen """
 import os
+import math
+import time
 import sys
 import pygame
 import json
@@ -8,6 +10,10 @@ from .debug import TextBox
 from pygame import K_RIGHT, K_LEFT, AUDIO_ALLOW_FREQUENCY_CHANGE, AUDIO_ALLOW_CHANNELS_CHANGE
 from pygame import K_UP, K_DOWN, MOUSEBUTTONDOWN, MOUSEBUTTONUP, MOUSEMOTION
 from loguru import logger
+
+import numpy as np
+from matplotlib import pyplot as plt
+from matplotlib import animation
 
 if not pygame.mixer.get_init():
     pygame.mixer.init()
@@ -107,7 +113,7 @@ class SelectionScreen:
 
         self.draw()
         self.screen.blit(selectBox.image, selectBox.rect)
-        self.textbox.draw(current_text)
+        self.textbox.draw(current_text, 0)
 
     def load_profiles(self):
         """
@@ -131,8 +137,10 @@ class SelectionScreen:
         self.screen.fill((0, 0, 0))
         for icon in self.profile_icons:
             self.screen.blit(icon.image, icon.rect)
-            
+
     def update(self):
+        self.screen.fill((0, 0, 0))
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -150,8 +158,9 @@ class SelectionScreen:
                         ProfileIcon.selected = len(self.profile_icons) - 1
                     else:
                         ProfileIcon.selected -= 1
+
                 selectBox.select(ProfileIcon.selected, event.key)
-                self.draw()
-                self.screen.blit(selectBox.image, selectBox.rect)
-                self.textbox.draw(current_text)
-                pygame.display.update()
+
+        self.draw()
+        self.screen.blit(selectBox.image, (selectBox.rect.x, selectBox.rect.y))
+        self.textbox.draw(current_text, time.time())

@@ -53,7 +53,6 @@ Channels: {pygame.mixer.get_num_channels()}""", feature="f-strings""")
 
 clock = pygame.time.Clock()
 
-dt = 0
 selecting = True
 
 if pygame.mouse.get_visible():

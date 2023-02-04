@@ -1,4 +1,5 @@
 """ Used for debugging, as name suggests :) """
+import math
 import json
 import utils
 import pygame
@@ -22,10 +23,11 @@ class TextBox(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.image = pygame.Surface((0, 0))
+        self.i = 0
 
-    def draw(self, text):
+    def draw(self, text, time):
         text = self.font.render(text, True, pygame.Color("#EFDECD"))
         rect = text.get_rect()
         self.surface.blit(text,
                 (self.surface.get_width() // 2 - rect.width // 2,
-                self.surface.get_height() // 2 - rect.height // 2))
+                (self.surface.get_height() // 2 - rect.height // 2) + int(math.sin(time * 5) * 2)))
