@@ -1,5 +1,6 @@
 import json
 import os
+import levels
 import sys
 import pygame
 import utils
@@ -71,7 +72,9 @@ ftp = None # NOTE ftp shortened ver. of first time playing
 # NOTE Retrieve character from  json file
 try:
     with open('meta.json') as fp:
-        character = json.load(fp)['character']
+        data = json.load(fp)
+        character = data['character']
+        ftp = data['ftp']
         fp.close()
 except FileNotFoundError:
     # NOTE: this will likely never happen as path checks are done for json 
@@ -83,9 +86,12 @@ except FileNotFoundError:
 # TODO: remove when redundant or ready
 logger.debug(f"Loading main menu as {character}.")
 
-# NOTE: IF FIRST TIME PLAYING GIVE OPTION TO DO TUTORIAL
-# TEXT: HEY THERE! I NOTICED THIS IS YOUR FIRST TIME PLAYING! WOULD YOU LIKE TO DO THE TUTORIAL?
-# OPTIONS: YES | NO
+
+if ftp:
+    # NOTE: IF FIRST TIME PLAYING GIVE OPTION TO DO TUTORIAL
+    # TEXT: HEY THERE! I NOTICED THIS IS YOUR FIRST TIME PLAYING! WOULD YOU LIKE TO DO THE TUTORIAL?
+    # OPTIONS: YES | NO
+    logger.info("Loading tutorial")
 
 while not Window.done:
     for event in pygame.event.get():
