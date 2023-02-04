@@ -46,6 +46,7 @@ class Box(pygame.sprite.Sprite):
 
     def select(self, character, key=pygame.K_RIGHT):
         global current_text
+        select = False
         if key == pygame.K_RIGHT:
             if pygame.mixer.Channel(6).get_busy():
                 pygame.mixer.Channel(6).stop()
@@ -58,10 +59,12 @@ class Box(pygame.sprite.Sprite):
             if pygame.mixer.Channel(6).get_busy():
                 pygame.mixer.Channel(6).stop()
             pygame.mixer.Channel(6).play(self.sound_select)
+            select = True
         elif key == pygame.K_RETURN:
             if pygame.mixer.Channel(6).get_busy():
                 pygame.mixer.Channel(6).stop()
             pygame.mixer.Channel(6).play(self.sound_select)
+            select = True
         else:
             logger.error(f"Invalid keypress: {key}")
             if pygame.mixer.Channel(6).get_busy():
@@ -81,7 +84,14 @@ class Box(pygame.sprite.Sprite):
                 current_text = "Bones"
             elif character == 4:
                 current_text = "Detective"
+        if character == 0:
+            self.rect.x = 0
+        else:
             self.rect.x = 76 * (character)
+        if not select:
+            return;
+        elif select:
+            ProfileIcon.store_character(current_text)
 
 selectBox = Box(0, 0)
 
@@ -97,11 +107,30 @@ class ProfileIcon(pygame.sprite.Sprite):
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
+    @staticmethod
+    def store_character(character: str):
+        """ Puts character name into meta.json for main file to read """
+        logger.info("Loading character")
+        # NOTE 1. Load json data
+        logger.debug("Reading ./meta.json")
+        data = dict()
+        with open('meta.json', 'r') as fp:
+            data = json.load(fp)
+            fp.close()
+        # NOTE 2. change character value (currently null)
+        logger.debug("Dumping to ./meta.json")
+        data["character"] = character
+        # NOTE 3. put back in json file
+        with open('meta.json', 'w') as fp:
+            json.dump(data, fp)
+            fp.close()
+
+
+
 class SelectionScreen:
     def __init__(self):
         self.image_path = image_path
 
-        # NOTE covers have black bg
         self.spritesheet = utils.Spritesheet(self.image_path)
         self.profile_icons = []
         self.screen = pygame.display.get_surface()
