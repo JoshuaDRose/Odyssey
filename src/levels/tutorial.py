@@ -6,6 +6,7 @@ from loguru import logger
 class Tutorial(object):
     def __init__(self):
         self.screen = pygame.display.get_surface()
+        self.running = False
 
     def load_sprites(self):
         pass

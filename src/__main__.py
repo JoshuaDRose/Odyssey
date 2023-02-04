@@ -95,9 +95,17 @@ if ftp:
     # TEXT: HEY THERE! I NOTICED THIS IS YOUR FIRST TIME PLAYING! WOULD YOU LIKE TO DO THE TUTORIAL?
     # OPTIONS: YES | NO
 
-    tutorial_query = utils.Choice(10, 10)
-    while tutorial_query == 0:
+    tutorial_query = utils.Choice(True, 100)
+    while tutorial_query.choice == 0:
         screen.fill((0, 0, 0))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                tutorial_query.button_collided(mp)
+            elif event.type == pygame.MOUSEMOTION:
+                mp = pygame.mouse.get_pos()
         tutorial_query.draw(screen)
         tutorial_query.update()
 
@@ -106,16 +114,15 @@ if ftp:
 
     logger.debug(f"{tutorial_query}")
 
+    mp = tuple()
     if tutorial_query == 1:
         while tutorial.running:
             tutorial.draw()
-            tutorial.update()
         logger.debug("Tutorial object removed")
     elif tutorial_query == -1:
         # NOTE Don't do tutorial, create level instance etc ...
         # TODO Setup tutorial as mentioned above
-        return
-
+        pass
 
 
 while not Window.done:
