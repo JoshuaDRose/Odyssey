@@ -29,7 +29,7 @@ class Button(pygame.sprite.Sprite):
         if not isinstance(image, str):
             logger.critical(f"Image loaded as {type(image)}, needs to be loaded as string")
 
-        self.image = image
+        self.image = pygame.image.load(image)
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = x, y
 

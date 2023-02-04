@@ -88,12 +88,13 @@ logger.debug(f"Loading main menu as {character}.")
 
 tutorial = levels.Tutorial()
 
+
 if ftp:
     # NOTE: IF FIRST TIME PLAYING GIVE OPTION TO DO TUTORIAL
     # TEXT: HEY THERE! I NOTICED THIS IS YOUR FIRST TIME PLAYING! WOULD YOU LIKE TO DO THE TUTORIAL?
     # OPTIONS: YES | NO
+    tutorial_query = utils.Choice(10, 10)
     logger.info("Loading tutorial")
-
 
 
 while not Window.done:
