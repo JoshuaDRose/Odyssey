@@ -97,7 +97,7 @@ if ftp:
 
     tutorial_query = utils.Choice(True, 100)
     while tutorial_query.choice == 0:
-        screen.fill((0, 0, 0))
+        screen.fill((242, 234, 241))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()

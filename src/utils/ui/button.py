@@ -37,11 +37,16 @@ class Choice(pygame.sprite.Sprite):
             self.buttons[button]
         """
 
-        # NOTE rect.y is constant on all values in self.buttons
-        for i in self.buttons:
-            self.buttons[i].rect.y = self.rect.height // 2 - self.buttons[i].rect.height // 2
+        for index, i in enumerate(self.buttons):
+            if index == 0:
+                self.buttons[i].rect.x = self.rect.width - 80
+            else:
+                self.buttons[i].rect.x = 30
+            self.buttons[i].rect.y = self.rect.height // 2 - (self.buttons[i].rect.height // 2) - 8
+            self.image.blit(self.buttons[i].image, self.buttons[i].rect)
 
         self.choice = 0
+
         if not pygame.mouse.get_visible():
             pygame.mouse.set_visible(True)
 
