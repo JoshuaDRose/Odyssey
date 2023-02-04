@@ -66,12 +66,13 @@ with open('meta.json') as fp:
     character = json.load(fp)['character']
     fp.close()
 
-logger.debug(f"{character}")
+logger.debug(f"Loading main menu as {character}.")
 
 while not Window.done:
     for event in pygame.event.get():
         if event.type == QUIT:
             Window.done = True
+    screen.fill((0, 0, 0))
 
     pygame.display.flip()
     dt = clock.tick(Window.fps) / 1000
