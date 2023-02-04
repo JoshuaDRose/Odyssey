@@ -110,20 +110,23 @@ class ProfileIcon(pygame.sprite.Sprite):
     @staticmethod
     def store_character(character: str):
         """ Puts character name into meta.json for main file to read """
-        logger.info("Loading character")
-        # NOTE 1. Load json data
-        logger.debug("Reading ./meta.json")
-        data = dict()
-        with open('meta.json', 'r') as fp:
-            data = json.load(fp)
-            fp.close()
-        # NOTE 2. change character value (currently null)
-        logger.debug("Dumping to ./meta.json")
-        data["character"] = character
-        # NOTE 3. put back in json file
-        with open('meta.json', 'w') as fp:
-            json.dump(data, fp)
-            fp.close()
+        try:
+            logger.info("Loading character")
+            # NOTE 1. Load json data
+            logger.debug("Reading ./meta.json")
+            data = dict()
+            with open('meta.json', 'r') as fp:
+                data = json.load(fp)
+                fp.close()
+            # NOTE 2. change character value (currently null)
+            logger.debug("Dumping to ./meta.json")
+            data["character"] = character
+            # NOTE 3. put back in json file
+            with open('meta.json', 'w') as fp:
+                json.dump(data, fp)
+                fp.close()
+        finally:
+            logger.success("Success!")
 
 
 

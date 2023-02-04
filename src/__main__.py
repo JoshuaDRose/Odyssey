@@ -11,7 +11,7 @@ logger.remove()
 logger.add(
         sys.stdout,
         colorize=True,
-        format="<green>{time}</green> <level>{message}</level>")
+        format="<grey>{time}</grey> <level>{message}</level>")
 
 pathDict = utils.get_insert_paths(os.getcwd()).get('paths')
 pathList = []
