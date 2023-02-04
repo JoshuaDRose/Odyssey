@@ -34,10 +34,27 @@ class Box(pygame.sprite.Sprite):
 
     def select(self, character):
         global current_text
-        if pygame.mixer.Channel(6).get_busy():
-            pygame.mixer.Channel(6).stop()
-        pygame.mixer.Channel(6).play(self.sound_next)
-
+        if key == pygame.K_RIGHT:
+            if pygame.mixer.Channel(6).get_busy():
+                pygame.mixer.Channel(6).stop()
+            pygame.mixer.Channel(6).play(self.sound_next)
+        elif key == pygame.K_LEFT:
+            if pygame.mixer.Channel(6).get_busy():
+                pygame.mixer.Channel(6).stop()
+            pygame.mixer.Channel(6).play(self.sound_prev)
+        elif key == pygame.K_SPACE:
+            if pygame.mixer.Channel(6).get_busy():
+                pygame.mixer.Channel(6).stop()
+            pygame.mixer.Channel(6).play(self.sound_select)
+        elif key == pygame.K_RETURN:
+            if pygame.mixer.Channel(6).get_busy():
+                pygame.mixer.Channel(6).stop()
+            pygame.mixer.Channel(6).play(self.sound_select)
+        else:
+            logger.error(f"Invalid input keypress: {key}")
+            # logger.info("K_SPACE, K_RETURN, K_LEFT, K_RIGHT are all accepted keys")
+            if pygame.mixer.Channel(6).get_busy():
+                pygame.mixer.Channel(6).stop()
         if character == 0:
             current_text = "The One True Doge"
             self.rect.x = 0
@@ -87,6 +104,8 @@ class SelectionScreen:
         self.draw()
         self.screen.blit(selectBox.image, selectBox.rect)
         self.textbox.draw(current_text)
+
+        self.current_character: ProfileIcon | None = None
 
     def load_profiles(self):
         """
