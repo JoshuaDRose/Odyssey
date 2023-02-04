@@ -102,6 +102,12 @@ if ftp:
 
         pygame.display.flip()
         clock.tick(Window.fps)
+    logger.debug(f"{tutorial_query}")
+    if tutorial_query == 1:
+        while tutorial.running:
+            tutorial.draw()
+            tutorial.update()
+        logger.debug("Tutorial object removed")
 
 
 while not Window.done:
