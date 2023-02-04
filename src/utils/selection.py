@@ -75,6 +75,8 @@ class Box(pygame.sprite.Sprite):
                 current_text = "Ninjet"
             elif character == 3:
                 current_text = "Bones"
+            elif character == 4:
+                current_text = "Detective"
             self.rect.x = 76 * (character)
 
 selectBox = Box(0, 0)
