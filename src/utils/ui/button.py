@@ -26,7 +26,10 @@ class Choice(pygame.sprite.Sprite):
         for button in self.buttons.values():
             # TODO: add code.
             if pygame.Rect.collidepoint(button.rect, mp):
-                ...
+                if button == self.buttons["yes"]:
+                    self.choice == 1
+                elif button == self.buttons["no"]:
+                    self.choice == -1
 
 
 
@@ -43,7 +46,8 @@ class Button(pygame.sprite.Sprite):
         if not isinstance(image, str):
             logger.critical(f"Image loaded as {type(image)}, needs to be loaded as string")
 
-        self.image = pygame.image.load(image)
+        self.path = image
+        self.image = pygame.image.load(self.path)
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = x, y
 

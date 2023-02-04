@@ -94,9 +94,12 @@ if ftp:
     # NOTE: IF FIRST TIME PLAYING GIVE OPTION TO DO TUTORIAL
     # TEXT: HEY THERE! I NOTICED THIS IS YOUR FIRST TIME PLAYING! WOULD YOU LIKE TO DO THE TUTORIAL?
     # OPTIONS: YES | NO
-    while ftp_query:
-        tutorial_query = utils.Choice(10, 10)
-        tutorial_query
+    tutorial_query = utils.Choice(10, 10)
+    while tutorial_query == 0:
+        screen.fill((0, 0, 0))
+        tutorial_query.draw(screen)
+        tutorial_query.update()
+
         pygame.display.flip()
         clock.tick(Window.fps)
 
