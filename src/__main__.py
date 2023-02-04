@@ -68,6 +68,9 @@ with open('meta.json') as fp:
 
 logger.debug(f"Loading main menu as {character}.")
 
+# IF FIRST TIME PLAYING GIVE OPTION TO DO TUTORIAL
+# TEXT: HEY THERE! I NOTICED THIS IS YOUR FIRST TIME PLAYING! WOULD YOU LIKE TO DO THE TUTORIAL?
+
 while not Window.done:
     for event in pygame.event.get():
         if event.type == QUIT:
