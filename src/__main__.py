@@ -49,22 +49,18 @@ logger.info(f"""[Mixer]
 Bitrate: {pygame.mixer.get_init()[0]}
 Channels: {pygame.mixer.get_num_channels()}""", feature="f-strings""")
 
-# TODO get player to work after selection screen is done
-# player = entities.Player( x = 100, y = 100 )
-
 clock = pygame.time.Clock()
 
 if pygame.mouse.get_visible():
     pygame.mouse.set_visible(0)
 
-# in loud voice (choose your character!)
 while selection_screen.running:
     selection_screen.update()
     pygame.display.update()
 
 character = None
 
-# Retrieve character from  json file
+# NOTE Retrieve character from  json file
 with open('meta.json') as fp:
     character = json.load(fp)['character']
     fp.close()
