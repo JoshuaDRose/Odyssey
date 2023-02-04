@@ -1,5 +1,6 @@
 import pygame
 import os
+from loguru import logger
 
 
 class Choice(pygame.sprite.Sprite):
@@ -10,15 +11,24 @@ class Choice(pygame.sprite.Sprite):
         self.image = pygame.image.load('assets/HUD/Dialog/ChoiceBox.png').convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = x, y
+        buttons = {
+                "yes": Button(0, 0, 'assets/HUD/Dialog/YesButton.png'),
+                "no": Button(0, 0, 'assets/HUD/Dialog/NoButton.png')}
 
 
 class Button(pygame.sprite.Sprite):
     """ Button, can be used in choice class as well """
-    def __init__(self, x, y, image, group):
+    def __init__(self, x, y, image: str, group=None):
         """ Constructor inherits all sprite methods, draw is overriden unless
             called from an instance of pygame.sprite.Group().draw()
         """
-        super().__init__(group)
+        if group:
+            super().__init__(group)
+        else:
+            super().__init__()
+        if not isinstance(image, str):
+            logger.critical(f"Image loaded as {type(image)}, needs to be loaded as string")
+
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = x, y
