@@ -15,6 +15,7 @@
 - [ ] pause menu
 - [ ] graphics menu 
 - [ ] saving settings / stats system
+- [ ] add text rendering capability from image asset with letters and such
 
 ### Selection menu
 - [ ] add statistics to each player on hover

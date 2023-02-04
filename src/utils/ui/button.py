@@ -14,10 +14,19 @@ class Choice(pygame.sprite.Sprite):
         self.buttons = {
                 "yes": Button(0, 0, 'assets/HUD/Dialog/YesButton.png'),
                 "no": Button(0, 0, 'assets/HUD/Dialog/NoButton.png')}
+        self.choice = 0
+        if not pygame.mouse.get_visible():
+            pygame.mouse.set_visible(True)
 
     def draw(self, surface):
         for button in self.buttons.values():
             surface.blit(button.image, button.rect)
+
+    def update(self):
+        for button in self.buttons.values():
+            # TODO: add code.
+            if pygame.Rect.collidepoint(button.rect, mp):
+                ...
 
 
 

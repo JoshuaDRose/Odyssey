@@ -87,14 +87,18 @@ except FileNotFoundError:
 logger.debug(f"Loading main menu as {character}.")
 
 tutorial = levels.Tutorial()
+ftp_query = True
 
 
 if ftp:
     # NOTE: IF FIRST TIME PLAYING GIVE OPTION TO DO TUTORIAL
     # TEXT: HEY THERE! I NOTICED THIS IS YOUR FIRST TIME PLAYING! WOULD YOU LIKE TO DO THE TUTORIAL?
     # OPTIONS: YES | NO
-    tutorial_query = utils.Choice(10, 10)
-    logger.info("Loading tutorial")
+    while ftp_query:
+        tutorial_query = utils.Choice(10, 10)
+        tutorial_query
+        pygame.display.flip()
+        clock.tick(Window.fps)
 
 
 while not Window.done:
