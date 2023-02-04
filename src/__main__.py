@@ -39,8 +39,12 @@ logger.info("Workspace: {}",
                      utils.get_parent(os.getcwd()), __file__)),
              feature='f-strings')
 
+# NOTE: This screen is also declared in utils/selection.py/Selection class
 screen = pygame.display.set_mode((Window.width, Window.height), 0, 32)
+# BUG: pygame.get_display is called, and we need not assign selection_screen here.
 selection_screen = utils.SelectionScreen()
+# BUG: Caption cannot be redeclared unless the display from THIS SCOPE is parsed into a 
+# seperate file.
 pygame.display.set_caption("Ninja Adventure")
 
 if not pygame.mixer.get_init():
@@ -53,33 +57,46 @@ Channels: {pygame.mixer.get_num_channels()}""", feature="f-strings""")
 clock = pygame.time.Clock()
 
 if pygame.mouse.get_visible():
+    # NOTE Default = 0
     pygame.mouse.set_visible(0)
 
 while selection_screen.running:
     selection_screen.update()
     pygame.display.update()
 
+# Character will later be set to a string, read from meta.json
 character = None
 
 # NOTE Retrieve character from  json file
-with open('meta.json') as fp:
-    character = json.load(fp)['character']
-    fp.close()
+try:
+    with open('meta.json') as fp:
+        character = json.load(fp)['character']
+        fp.close()
+except FileNotFoundError:
+    # NOTE: this will likely never happen as path checks are done for json 
+    # files before this even runs
+    logger.critical("Could not find essential files: meta.json")
+    # NOTE: code 1 is exit vode
+    sys.exit(1)
 
+# TODO: remove when redundant or ready
 logger.debug(f"Loading main menu as {character}.")
 
 # NOTE: IF FIRST TIME PLAYING GIVE OPTION TO DO TUTORIAL
 # TEXT: HEY THERE! I NOTICED THIS IS YOUR FIRST TIME PLAYING! WOULD YOU LIKE TO DO THE TUTORIAL?
 # OPTIONS: YES | NO
 
-
 while not Window.done:
     for event in pygame.event.get():
         if event.type == QUIT:
             Window.done = True
+    # NOTE filling display with black also prevents frame ghosting
     screen.fill((0, 0, 0))
 
+    # ALTERNATIVE: pygame.display.update()
     pygame.display.flip()
+    # NOTE not used currently but likely in the future for
+    # frame time regulation.
     dt = clock.tick(Window.fps) / 1000
 
 pygame.quit()
