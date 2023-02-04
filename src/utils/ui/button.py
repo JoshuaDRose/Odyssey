@@ -24,7 +24,6 @@ class Choice(pygame.sprite.Sprite):
 
     def update(self):
         for button in self.buttons.values():
-            # TODO: add code.
             if pygame.Rect.collidepoint(button.rect, mp):
                 if button == self.buttons["yes"]:
                     self.choice == 1
