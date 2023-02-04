@@ -11,9 +11,14 @@ class Choice(pygame.sprite.Sprite):
         self.image = pygame.image.load('assets/HUD/Dialog/ChoiceBox.png').convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = x, y
-        buttons = {
+        self.buttons = {
                 "yes": Button(0, 0, 'assets/HUD/Dialog/YesButton.png'),
                 "no": Button(0, 0, 'assets/HUD/Dialog/NoButton.png')}
+
+    def draw(self, surface):
+        for button in self.buttons.values():
+            surface.blit(button.image, button.rect)
+
 
 
 class Button(pygame.sprite.Sprite):
