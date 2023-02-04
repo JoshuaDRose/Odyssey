@@ -92,6 +92,7 @@ class Box(pygame.sprite.Sprite):
             return;
         elif select:
             ProfileIcon.store_character(current_text)
+            SelectionScreen.running = False
 
 selectBox = Box(0, 0)
 
@@ -132,6 +133,8 @@ class ProfileIcon(pygame.sprite.Sprite):
 
 
 class SelectionScreen:
+    running = True  # NOTE: Needs to be accessed by ProfileIcon
+
     def __init__(self):
         self.image_path = image_path
 
@@ -139,7 +142,6 @@ class SelectionScreen:
         self.profile_icons = []
         self.screen = pygame.display.get_surface()
         self.load_profiles()
-        self.running = True
 
         self.sound_init = pygame.mixer.Sound(os.path.join(sfx, "choose_character.wav"))
         pygame.display.set_caption("Ninja Adventure - Choose Your Character!")
@@ -182,28 +184,31 @@ class SelectionScreen:
             self.screen.blit(icon.image, icon.rect)
 
     def update(self):
-        self.screen.fill((0, 0, 0))
+        if SelectionScreen.running:
+            self.screen.fill((0, 0, 0))
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    if (ProfileIcon.selected) == len(self.profile_icons) - 1:
-                        ProfileIcon.selected = 0
-                    else:
-                        ProfileIcon.selected += 1
-                    selectBox.select(ProfileIcon.selected)
-                if event.key == pygame.K_LEFT:
-                    if ProfileIcon.selected == 0:
-                        ProfileIcon.selected = len(self.profile_icons) - 1
-                    else:
-                        ProfileIcon.selected -= 1
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RIGHT:
+                        if (ProfileIcon.selected) == len(self.profile_icons) - 1:
+                            ProfileIcon.selected = 0
+                        else:
+                            ProfileIcon.selected += 1
+                        selectBox.select(ProfileIcon.selected)
+                    if event.key == pygame.K_LEFT:
+                        if ProfileIcon.selected == 0:
+                            ProfileIcon.selected = len(self.profile_icons) - 1
+                        else:
+                            ProfileIcon.selected -= 1
 
-                selectBox.select(ProfileIcon.selected, event.key)
+                    selectBox.select(ProfileIcon.selected, event.key)
 
-        self.draw()
-        self.screen.blit(selectBox.image, (selectBox.rect.x, selectBox.rect.y))
-        self.textbox.draw(current_text, time.time())
+            self.draw()
+            self.screen.blit(selectBox.image, (selectBox.rect.x, selectBox.rect.y))
+            self.textbox.draw(current_text, time.time())
+        else:
+            return

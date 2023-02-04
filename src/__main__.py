@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 import pygame
@@ -64,6 +65,8 @@ character = None
 with open('meta.json') as fp:
     character = json.load(fp)['character']
     fp.close()
+
+logger.debug(f"{character}")
 
 while not Window.done:
     for event in pygame.event.get():
