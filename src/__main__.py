@@ -22,7 +22,7 @@ for item in list(pathDict):
     pathList.append(item)
 
 for path in pathList:
-    logger.debug("Appending folder: {} to Workspace",
+    logger.info("Appending folder: {} to Workspace",
             path,
             feature='f-strings')
     sys.path.insert(0, path)
@@ -32,7 +32,7 @@ class Window:
     width, height = utils.get_size(get_width=True, get_height=True)
     fps = 60
 
-logger.debug("Workspace: {}",
+logger.info("Workspace: {}",
              os.path.relpath(
                  utils.get_folder(
                      utils.get_parent(os.getcwd()), __file__)),
@@ -45,7 +45,7 @@ pygame.display.set_caption("Ninja Adventure")
 if not pygame.mixer.get_init():
     logger.debug("Initializing pygame.mixer")
 
-logger.debug(f"""[Mixer]
+logger.info(f"""[Mixer]
 Bitrate: {pygame.mixer.get_init()[0]}
 Channels: {pygame.mixer.get_num_channels()}""", feature="f-strings""")
 
