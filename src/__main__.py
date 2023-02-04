@@ -115,11 +115,11 @@ if ftp:
     logger.debug(f"{tutorial_query}")
 
     mp = tuple()
-    if tutorial_query == 1:
+    if tutorial_query.choice == 1:
         while tutorial.running:
             tutorial.draw()
         logger.debug("Tutorial object removed")
-    elif tutorial_query == -1:
+    elif tutorial_query.choice == -1:
         # NOTE Don't do tutorial, create level instance etc ...
         # TODO Setup tutorial as mentioned above
         pass
