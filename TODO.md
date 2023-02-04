@@ -18,5 +18,5 @@
 
 ### Selection menu
 - [ ] add statistics to each player on hover
-- [ ] add text to state the name of the player
-
+- [x] add text to state the name of the player
+- [ ] add more characters
