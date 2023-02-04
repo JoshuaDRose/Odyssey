@@ -71,7 +71,7 @@ ftp = None # NOTE ftp shortened ver. of first time playing
 
 # NOTE Retrieve character from  json file
 try:
-    with open('meta.json') as fp:
+    with open('src/data/meta.json') as fp:
         data = json.load(fp)
         character = data['character']
         ftp = data['ftp']
@@ -86,6 +86,7 @@ except FileNotFoundError:
 # TODO: remove when redundant or ready
 logger.debug(f"Loading main menu as {character}.")
 
+tutorial = levels.Tutorial()
 
 if ftp:
     # NOTE: IF FIRST TIME PLAYING GIVE OPTION TO DO TUTORIAL

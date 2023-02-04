@@ -24,10 +24,10 @@ image_path = os.path.join('assets/Actor/Characters', 'AllPreview.png')
 sfx = 'assets/sfx/Menu'
 
 try:
-    locations = json.load(open('src/profiles.json'))
+    locations = json.load(open('src/data/profiles.json'))
 except FileNotFoundError:
     os.chdir('..')
-locations = json.load(open('src/profiles.json'))
+locations = json.load(open('src/data/profiles.json'))
 
 current_text = "Choose your character"
 
@@ -117,14 +117,14 @@ class ProfileIcon(pygame.sprite.Sprite):
             logger.debug("Loading character (attempting io operation)")
             # NOTE 1. Load json data
             logger.debug("Reading ./meta.json")
-            with open('meta.json', 'r') as fp:
+            with open('src/data/meta.json', 'r') as fp:
                 data = json.load(fp)
                 fp.close()
             # NOTE 2. change character value (currently null)
             logger.debug("Dumping to ./meta.json")
             data["character"] = character
             # NOTE 3. put back in json file
-            with open('meta.json', 'w') as fp:
+            with open('src/data/meta.json', 'w') as fp:
                 json.dump(data, fp)
                 fp.close()
         finally:

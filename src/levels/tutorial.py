@@ -2,8 +2,8 @@ import pytmx
 import pygame
 
 
-class Tutorial:
-    def __init__():
+class Tutorial(object):
+    def __init__(self):
         pass
 
     def load_sprites(self):

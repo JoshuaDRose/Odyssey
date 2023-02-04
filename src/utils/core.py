@@ -6,7 +6,7 @@ import json
 from loguru import logger
 
 try:
-    window = os.path.join('src', 'window.json')
+    window = os.path.join('src/data', 'window.json')
 except FileNotFoundError as error:
     logger.error(error)
     sys.exit(1)
@@ -33,5 +33,5 @@ def get_folder(dir, file):
     return os.path.join(dir, file)
 
 def get_insert_paths(cwd) -> dict:
-    with open(os.path.join(cwd, 'meta.json'), 'r') as fp:
+    with open(os.path.join(cwd, 'src/data/meta.json'), 'r') as fp:
         return json.load(fp)
