@@ -20,3 +20,5 @@
 - [ ] add statistics to each player on hover
 - [x] add text to state the name of the player
 - [x] add more characters
+### Main Menu
+- [ ] get choice boxes to work
