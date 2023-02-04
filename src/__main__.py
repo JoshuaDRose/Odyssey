@@ -66,6 +66,7 @@ while selection_screen.running:
 
 # Character will later be set to a string, read from meta.json
 character = None
+ftp = None # NOTE ftp shortened ver. of first time playing
 
 # NOTE Retrieve character from  json file
 try:
