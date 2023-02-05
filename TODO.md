@@ -22,6 +22,6 @@
 - [x] add text to state the name of the player
 - [x] add more characters
 - [x] get buttons / hover to work
-- [ ] use border assets
+- [x] use border assets
 ### Main Menu
 - [x] get choice boxes to work
