@@ -19,6 +19,7 @@ this project through creating pull requests or issues as it greatly helps the de
 It is suggested to use the latest release <a href=https://github.com/JoshuaDRose/Ninja-Adventure/tags>tag</a>
 as the master branch is not always release-ready.
 Please note that some requirements need to be installed. This can be done with the following command:
+
 ```sh
 python3 -m pip install -r requirements/base.txt
 ```
@@ -32,7 +33,7 @@ If you are in the src directory:
 python3 __main__.py
 ```
 
-<h4>Build from source</h4>
+Fixes to markdown<h4>Build from source</h4>
 Alternatively, if you are experimenting or making changes by forking the project, or simply want 
 to experiment with the code, you can build from source.
 On linux:
