@@ -31,10 +31,6 @@ Install requirements using the python
 python3 -m pip install -r requirements/base.txt
 ```
 
-
-```sh
-python3 src
-```
 additionally, rtp can be set from the src directory
 ```sh
 python3 __main__.py
@@ -42,6 +38,10 @@ python3 __main__.py
 
 <blockquote><i>Note that the runtime path is mutable</i></blockquote><br>
 rtp can be set from the <code>src</code> directory<br>
+
+```sh
+python3 src
+```
 
 <h4>Build from source</h4>
 Alternatively, if you are experimenting or making changes by forking the project, or simply want 
