@@ -3,6 +3,7 @@ import pygame
 from ..entities import Player
 from ..utils import Camera
 from loguru import logger
+from pytmx.util_pygame import load_pygame
 
 
 class Tutorial(object):
@@ -39,6 +40,8 @@ class Tutorial(object):
         self.text["header"]["rect"].y = 100
         self.text["body_a"]["rect"].y = 190
         self.text["body_b"]["rect"].y = 230
+
+        self.tmx_map = pytmx.TiledMap("src/data/maps/tutorial.tmx")
 
     def load_sprites(self):
         pass
