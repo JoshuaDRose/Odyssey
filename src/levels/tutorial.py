@@ -23,7 +23,6 @@ class Tutorial(object):
         self.clock = pygame.time.Clock()
         self.running = False
 
-        # NOTE it is times like these that I wish I was using javascript.
         self.fonts = {
                 "header": pygame.font.Font('assets/HUD/Font/NormalFont.ttf', 55),
                 "body": pygame.font.Font('assets/HUD/Font/NormalFont.ttf', 30)
