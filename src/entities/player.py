@@ -5,10 +5,26 @@ import utils
 import entities
 
 import pygame
+from loguru import logger
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, group):
         super().__init__(group)
+
+        try:
+            with open('src/data/meta.json') as fp:
+                data = json.load(fp)
+                character = data['character']
+                ftp = data['ftp']
+                fp.close()
+        except FileNotFoundError:
+            # NOTE: this will likely never happen as path checks are done for json 
+            # files before this even runs
+            logger.critical("Could not find essential files: meta.json")
+            # NOTE: code 1 is exit vode
+            sys.exit(1)
+
         self.image = pygame.image.load('assets/Actor/Characters/Boy/').convert_alpha()
         self.image = pygame.transform.scale(self.image, (self.image.get_width() // 2, self.image.get_height() // 2))
         w, h = self.image.get_size()
