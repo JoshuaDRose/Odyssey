@@ -20,6 +20,7 @@ with open('src/data/tiles.json') as fp:
 class Tutorial(object):
     def __init__(self):
         self.screen = pygame.display.get_surface()
+        self.clock = pygame.time.Clock()
         self.running = False
 
         # NOTE it is times like these that I wish I was using javascript.
@@ -97,6 +98,7 @@ class Tutorial(object):
         self.sprites.center(self.player.rect.center)
         self.player.update()
         pygame.display.update()
+        self.clock.tick(60)
 
         """
         for sprite in self.sprites:
