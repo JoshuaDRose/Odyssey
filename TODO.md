@@ -17,7 +17,7 @@
 - [ ] saving settings / stats system
 - [ ] add text rendering capability from image asset with letters and such
 - [x] Add href links to the shield.io icons on readme to website, license etc
-### Selection menu
+### - [ ] Selection menu
 - [ ] add statistics to each player on hover
 - [x] add text to state the name of the player
 - [x] add more characters
