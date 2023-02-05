@@ -54,7 +54,9 @@ class Tutorial(object):
 
         # self.player = str()
 
-        self.tmx_map = load_pygame("src/data/maps/tutorial.tmx")
+        self.tmx_map = load_pygame(
+                "src/data/maps/tutorial.tmx",
+                allow_duplicate_names=False)
         self.scrolling_layer = pyscroll.BufferedRenderer(
                 pyscroll.TiledMapData(self.tmx_map),
                 (400, 400))
@@ -69,7 +71,7 @@ class Tutorial(object):
     def load_sprites(self):
         x = 0
         y = 0
-        for layer in self.tmx_map:
+        for layer in self.tmx_map.visible_tile_layers:
             for x, y, image in layer.tiles():
                 if y > self.scrolling_layer._size[0]:
                     y += TILE_HEIGHT
