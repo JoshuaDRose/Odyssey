@@ -15,19 +15,26 @@ class Tutorial(object):
                 }
 
         self.text = {
-                header: {
+                'header': {
                     "text": "Hey there!",
                     "font": self.fonts.get("header")
                     },
-                body_a: {
+                'body_a': {
                     "text": "I Noticed this is your first time playing!",
                     "font": self.fonts.get("body")
                     },
-                body_b: {
+                'body_b': {
                     "text": "Would you like to do a quick tutorial?",
                     "font": self.fonts.get("body")
                     },
                 }
+
+        self.header = self.text['header']['font'].render(
+                self.text['header']['text'], 1, (228, 109, 58))
+        self.body_a = self.text['header']['font'].render(
+                self.text['header']['text'], 1, (228, 109, 58))
+        self.body_b = self.text['header']['font'].render(
+                self.text['header']['text'], 1, (228, 109, 58))
 
         # self.header = self.font.render(self.header, 1, 
 
