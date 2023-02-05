@@ -39,7 +39,7 @@ class Choice(pygame.sprite.Sprite):
                 self.buttons[i].rect.x = self.rect.width - 80
             else:
                 self.buttons[i].rect.x = 30
-            self.buttons[i].rect.y = self.rect.height // 2 - (self.buttons[i].rect.height // 2) - 8
+            self.buttons[i].rect.y = self.rect.height // 2 - (self.buttons[i].rect.height // 2)
             self.image.blit(self.buttons[i].image, self.buttons[i].rect)
 
         self.choice = 0
@@ -67,7 +67,6 @@ class Choice(pygame.sprite.Sprite):
         mp: mouse position
         Detects if mouse is over self.buttons
         """
-        logger.debug(self.choice)
         for button in self.buttons.values():
 
             # BUG only tests for collision with rect that is relative 

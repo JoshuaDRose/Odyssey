@@ -103,7 +103,6 @@ if ftp:
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                # logger.debug(f"mouse button: {mp}")
                 tutorial_query.button_collided(mp)
             elif event.type == pygame.MOUSEMOTION:
                 mp = pygame.mouse.get_pos()
@@ -113,13 +112,10 @@ if ftp:
         pygame.display.flip()
         clock.tick(Window.fps)
 
-    logger.debug(f"{tutorial_query}")
-
     mp = tuple()
     if tutorial_query.choice == 1:
         while tutorial.running:
             tutorial.draw()
-        logger.debug("Tutorial object removed")
     elif tutorial_query.choice == -1:
         # NOTE Don't do tutorial, create level instance etc ...
         # TODO Setup tutorial as mentioned above
