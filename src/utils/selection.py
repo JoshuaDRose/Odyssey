@@ -28,7 +28,7 @@ except FileNotFoundError:
     os.chdir('..')
 locations = json.load(open('src/data/profiles.json'))
 
-current_text = "Choose your character"
+current_text = ""
 
 
 class Box(pygame.sprite.Sprite):
@@ -143,26 +143,18 @@ class SelectionScreen:
         self.load_profiles()
 
         self.sound_init = pygame.mixer.Sound(os.path.join(sfx, "choose_character.wav"))
+        self.selection_music = pygame.mixer.Sound("assets/Music/1 - Adventure Begin.ogg")
         pygame.display.set_caption("Ninja Adventure - Choose Your Character!")
 
         self.queue = []
 
         pygame.mixer.Channel(1).set_volume(.5)
         pygame.mixer.Channel(6).set_volume(.75)
-        pygame.mixer.Channel(1).play(self.sound_init)
+        pygame.mixer.Channel(1).play(self.selection_music)
 
-        self.textbox = TextBox(self.screen.get_width() // 2, self.screen.get_height() // 2, 55)
 
-        self.preview = PreviewBox(300, 350)
-        pygame.draw.rect(
-                self.screen,
-                (255, 255, 255),
-                pygame.Rect(
-                    (self.screen.get_width() - self.preview.rect.width) - 10,
-                    10,
-                    10,
-                    self.screen.get_height()),
-                5)
+        self.preview = PreviewBox(self.screen.get_width() - 150, 25)
+        self.textbox = TextBox(self.preview.rect.x, self.preview.rect.height + 5, 55)
         self.draw()
         self.screen.blit(selectBox.image, selectBox.rect)
         self.textbox.draw(current_text, 0)
@@ -189,9 +181,24 @@ class SelectionScreen:
 
     def draw(self):
         self.screen.fill((0, 0, 0))
-        self.preview.draw(self.screen)
+        pygame.draw.rect(
+                self.screen,
+                (255, 255, 255),
+                pygame.Rect(
+                    (self.screen.get_width() - (self.preview.rect.width * 2)) - 10,
+                    10,
+                    10,
+                    self.screen.get_height()-10),
+                5, 5)
+
         for icon in self.profile_icons:
             self.screen.blit(icon.image, icon.rect)
+
+
+        self.preview.draw(self.screen)
+        self.screen.blit(
+                self.profile_icons[ProfileIcon.selected].image,
+                (self.preview.rect.x + 10, self.preview.rect.y + 10))
 
     def update(self):
         if SelectionScreen.running:
@@ -230,9 +237,9 @@ class PreviewBox(pygame.sprite.Sprite):
             super().__init__(group)
         else:
             super().__init__()
-        self.image = pygame.image.load('assets/HUD/Dialog/FacesetBox.png')
+        self.image = pygame.image.load('assets/HUD/Dialog/FacesetBox.png').convert()
         self.image.set_colorkey((0, 0, 0))
-        self.image = pygame.transform.scale_by(self.image, 4)
+        self.image = pygame.transform.scale_by(self.image, 2)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
