@@ -1,9 +1,15 @@
 <div align="center">
-  <h1>
-  <img src="https://img.shields.io/website?down_color=lightgrey&down_message=offline&style=for-the-badge&up_color=yellow&up_message=online&url=https%3A%2F%2Fjoshuadrose.github.io%2FNinja-Adventure%2F">
-  <img src="https://img.shields.io/github/license/JoshuaDRose/Ninja-Adventure?color=9cf&style=for-the-badge">
-  <img src='https://img.shields.io/github/v/release/JoshuaDRose/ninja-adventure?include_prereleases&sort=semver&style=for-the-badge'>
-  </h1>
+    <h1>
+    <a href="https://joshuadrose.github.io/Ninja-Adventure/">
+        <img src="https://img.shields.io/website?down_color=lightgrey&down_message=offline&style=for-the-badge&up_color=yellow&up_message=online&url=https%3A%2F%2Fjoshuadrose.github.io%2FNinja-Adventure%2F">
+    </a>
+    <a href="https://github.com/JoshuaDRose/Ninja-Adventure/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/JoshuaDRose/Ninja-Adventure?color=9cf&style=for-the-badge">
+    </a>
+    <a href="https://github.com/JoshuaDRose/Ninja-Adventure/releases"
+        <img src='https://img.shields.io/github/v/release/JoshuaDRose/ninja-adventure?include_prereleases&sort=semver&style=for-the-badge'>
+    </a>
+    </h1>
 </div>
 
 
@@ -63,6 +69,6 @@ This project uses semantic versioning.
 <p align="left">
 <h3>Links</h3>
 <ul>
-  <li><b>Pixel boys github page <i>(artwork)</i></b>: https://pixel-boy.itch.io/ninja-adventure-asset-pack </li>
-  <li><b>Sematic versioning</b>: http://semver.org/</li>
-  <li><b>License</b>: https://github.com/JoshuaDRose/Ninja-Adventure/blob/main/LICENSE</li>
+<li><b>Pixel boys github page <i>(artwork)</i></b>: https://pixel-boy.itch.io/ninja-adventure-asset-pack </li>
+<li><b>Sematic versioning</b>: http://semver.org/</li>
+<li><b>License</b>: https://github.com/JoshuaDRose/Ninja-Adventure/blob/main/LICENSE</li>
