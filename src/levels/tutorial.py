@@ -1,7 +1,7 @@
 import pytmx
 import pygame
 import pyscroll
-from entities import Player
+from entities import Player, Tile
 from utils import Camera
 from loguru import logger
 from pytmx.util_pygame import load_pygame
@@ -51,9 +51,13 @@ class Tutorial(object):
 
         self.sprites = pyscroll.PyscrollGroup(self.scrolling_layer)
         self.player = Player(100, 100, self.sprites)
+                
+        self.load_sprites()
 
     def load_sprites(self):
-        pass
+        for layer in self.tmx_map:
+            for x, y, image in layer.tiles():
+                Tile(x, y, image, self.sprites)
 
     def handle_keys(self):
         key = pygame.key.get_pressed()
@@ -62,7 +66,7 @@ class Tutorial(object):
         self.player.position.y += (key[K_r] - key[K_w]) * self.player.velocity.y * dt
 
     def draw_map(self):
-        pass
+        self.sprites.draw(self.screen)
 
     def draw_sprites(self):
         """ 
@@ -70,9 +74,8 @@ class Tutorial(object):
         NOTE: Components of this are taken from https://github.com/bitcraft/pytmx#basic-use
         """
         
-        self.player.update()
         self.sprites.center(self.player.rect.center)
-        self.sprites.draw(self.screen)
+        self.player.update()
         pygame.display.update()
 
         """
