@@ -18,6 +18,35 @@ this project through creating pull requests or issues as it greatly helps the de
 <h3>Install</h3>
 It is suggested to use the latest release <a href=https://github.com/JoshuaDRose/Ninja-Adventure/tags>tag</a>
 as the master branch is not always release-ready.
+Please note that some requirements need to be installed. This can be done with the following command:
+```sh
+python3 -m pip install -r requirements/base.txt
+```
+
+The application rtp is versatile in that you can run either of the following commands to start the game:
+```sh
+python3 src
+```
+If you are in the src directory:
+```sh
+python3 __main__.py
+```
+
+<h4>Build from source</h4>
+Alternatively, if you are experimenting or making changes by forking the project, or simply want 
+to experiment with the code, you can build from source.
+On linux:
+```sh
+git clone https://github.com/JoshuaDRose/Ninja-Adventure.git
+```
+
+After cloning the repository, (if you have pip), run the following:
+```sh
+cd Ninja-Adventure
+python3 -m pip install -r requirements/base.txt
+python3 -m pip install -r requirements/dev.txt
+```
+
 
 <h3>License</h3>
 <p align="left">
