@@ -29,12 +29,9 @@ class Tutorial(object):
                     },
                 }
 
-        self.header = self.text['header']['font'].render(
-                self.text['header']['text'], 1, (228, 109, 58))
-        self.body_a = self.text['header']['font'].render(
-                self.text['header']['text'], 1, (228, 109, 58))
-        self.body_b = self.text['header']['font'].render(
-                self.text['header']['text'], 1, (228, 109, 58))
+        for key in self.text:
+            self.text[key]["render"] = self.text[key]["font"].render(
+                    self.text[key]["render"], 1, (228, 190, 58))
 
         # self.header = self.font.render(self.header, 1, 
 
