@@ -57,6 +57,7 @@ class Player(pygame.sprite.Sprite):
     def draw(self):
         """ Draw self.image and self.rect to current display (window) """
 
+        """
         if self.velocity.magnitude() > 0:
             self.velocity.normalize()
 
@@ -69,9 +70,13 @@ class Player(pygame.sprite.Sprite):
                 pos[i] = camera.size[i] - camera.background.size[i] + pos[i]
 
         window.blit(self.image, (int(pos[0]), int(pos[1])))
-
+        """
+        
+        pass
     def update(self):
+        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit(0)
+        """

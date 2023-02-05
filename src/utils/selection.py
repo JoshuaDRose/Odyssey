@@ -71,18 +71,18 @@ class Box(pygame.sprite.Sprite):
             pygame.mixer.Channel(6).play(self.sound_next)
 
         if character == 0:
-            current_text = "The One True Doge"
+            current_text = "[locked]"
             self.rect.x = 0
             return;
         else:
             if character == 1:
-                current_text = "Ninja"
+                current_text = "Dark Ninja"
             elif character == 2:
-                current_text = "Ninjet"
+                current_text = "Masked Ninja"
             elif character == 3:
-                current_text = "Bones"
+                current_text = "Skeleton"
             elif character == 4:
-                current_text = "Detective"
+                current_text = "Inspector"
         if character == 0:
             self.rect.x = 0
         else:
@@ -153,6 +153,16 @@ class SelectionScreen:
 
         self.textbox = TextBox(self.screen.get_width() // 2, self.screen.get_height() // 2, 55)
 
+        self.preview = PreviewBox(300, 350)
+        pygame.draw.rect(
+                self.screen,
+                (255, 255, 255),
+                pygame.Rect(
+                    (self.screen.get_width() - self.preview.rect.width) - 10,
+                    10,
+                    10,
+                    self.screen.get_height()),
+                5)
         self.draw()
         self.screen.blit(selectBox.image, selectBox.rect)
         self.textbox.draw(current_text, 0)
@@ -179,6 +189,7 @@ class SelectionScreen:
 
     def draw(self):
         self.screen.fill((0, 0, 0))
+        self.preview.draw(self.screen)
         for icon in self.profile_icons:
             self.screen.blit(icon.image, icon.rect)
 
@@ -211,3 +222,20 @@ class SelectionScreen:
             self.textbox.draw(current_text, time.time())
         else:
             return
+
+class PreviewBox(pygame.sprite.Sprite):
+    """ Shows player avatar and stats """
+    def __init__(self, x, y, group=None):
+        if group:
+            super().__init__(group)
+        else:
+            super().__init__()
+        self.image = pygame.image.load('assets/HUD/Dialog/FacesetBox.png')
+        self.image.set_colorkey((0, 0, 0))
+        self.image = pygame.transform.scale_by(self.image, 4)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+    def draw(self, surface):
+        surface.blit(self.image, self.rect)
