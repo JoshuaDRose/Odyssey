@@ -2,6 +2,8 @@ import json
 import os
 import sys
 
+from ..utils.spritesheet import Spritesheet
+
 import utils
 import entities
 
@@ -23,6 +25,9 @@ class Player(pygame.sprite.Sprite):
             logger.critical("Could not find essential files: meta.json")
             sys.exit(1)
 
+        self.x =  x
+        self.y =  y
+
         path = f'assets/Actor/Characters/{character}/SeparateAnim/'
         self.idle = os.path.join(path, 'Idle.png')
         self.attack = os.path.join(path, 'Attack.png')
@@ -33,8 +38,16 @@ class Player(pygame.sprite.Sprite):
         self.special2 = os.path.join(path, 'Special2.png')
         self.walk = os.path.join(path, 'Walk.png')
 
+        self.animation = self.idle
         self.frame = 0
+        self.tick = 0
+        self.fps = 10
 
+        self.image = self.animation[self.frame]
+
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 
         """
         self.image = pygame.image.load(f'assets/Actor/Characters/{character}/SeparateAnim/Idle.png').convert_alpha()
@@ -44,6 +57,12 @@ class Player(pygame.sprite.Sprite):
         self.velocity = pygame.math.Vector2(250, 250)
         self.position = pygame.math.Vector2(self.rect.x, self.rect.y)
         """
+
+    @staticmethod
+    def load_sequence(path):
+        with open('src/data/player_data.json') as fp:
+            data = json.load(fp)
+
 
     def handle_keys(self):
         """ Player keypresses are handled within this method """
@@ -77,12 +96,25 @@ class Player(pygame.sprite.Sprite):
         """
         
         pass
-    def update(self):
+
+    def update_collision(self):
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+    def update(self, dt: float):
         """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit(0)
         """
-        self.animation = self.idle
+        if self.tick >= self.fps:
+            if self.frame > len(self.animation) - 1:
+                self.frame = 0
+            else:
+                self.frame += 1
         self.image = self.animation[self.frame]
+        self.tick += 1
+
+        self.update_collision()

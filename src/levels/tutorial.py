@@ -61,6 +61,8 @@ class Tutorial(object):
                 pyscroll.TiledMapData(self.tmx_map),
                 (400, 400))
 
+        self.scrolling_layer.zoom = 2
+
         self.sprites = pyscroll.PyscrollGroup(self.scrolling_layer)
         self.player = Player(100, 100, self.sprites)
                 
@@ -69,15 +71,17 @@ class Tutorial(object):
         logger.debug("Finished generating tutorial sprites")
 
     def load_sprites(self):
-        x = 0
-        y = 0
-        for layer in self.tmx_map.visible_tile_layers:
+        px = 0
+        py = 0
+        for layer in self.tmx_map:
             for x, y, image in layer.tiles():
-                if y > self.scrolling_layer._size[0]:
-                    y += TILE_HEIGHT
-                    x = 0
-                Tile(x, y, image, self.sprites)
-                x += TILE_WIDTH
+                # BUG Following conditional is not being called
+                if py > self.scrolling_layer._size[0]:
+                    py += TILE_HEIGHT
+                    px = 0
+                Tile(px, py, image, self.sprites)
+                px += TILE_WIDTH
+                # print((px, py))
 
     def handle_keys(self):
         key = pygame.key.get_pressed()
