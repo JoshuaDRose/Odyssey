@@ -1,5 +1,6 @@
 import pytmx
 import pygame
+import pyscroll
 from ..entities import Player
 from ..utils import Camera
 from loguru import logger
@@ -41,7 +42,7 @@ class Tutorial(object):
         self.text["body_a"]["rect"].y = 190
         self.text["body_b"]["rect"].y = 230
 
-        self.tmx_map = pytmx.TiledMap("src/data/maps/tutorial.tmx")
+        self.tmx_map = load_pygame("src/data/maps/tutorial.tmx")
 
     def load_sprites(self):
         pass
@@ -51,6 +52,9 @@ class Tutorial(object):
         Draw sprites to surface.
         NOTE: Components of this are taken from https://github.com/bitcraft/pytmx#basic-use
         """
+        
+
+
         """
         for sprite in self.sprites:
             if hasattr(sprite, rect):
