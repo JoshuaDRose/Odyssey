@@ -25,6 +25,7 @@ this project through creating pull requests or issues; it greatly helps the deve
 It is recommended to use the latest release <a href=https://github.com/JoshuaDRose/Ninja-Adventure/tags>tag</a>;
  the main branch is not always release-ready.
 Also, please note that some requirements need to be installed.<br>
+<br>
 
 Install requirements using the python
 ```sh
