@@ -31,7 +31,7 @@ Install requirements using the python
 python3 -m pip install -r requirements/base.txt
 ```
 
-<i>Note that the runtime path is mutable</i>
+<blockquote><i>Note that the runtime path is mutable</i></blockquote><br>
 rtp can be set from src
 ```sh
 python3 src
