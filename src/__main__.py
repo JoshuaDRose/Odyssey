@@ -87,6 +87,7 @@ except FileNotFoundError:
 logger.debug(f"Loading main menu as {character}.")
 
 tutorial = levels.Tutorial()
+tutorial.character = character
 ftp_query = True
 
 if ftp:

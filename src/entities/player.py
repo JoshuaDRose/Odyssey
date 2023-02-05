@@ -7,9 +7,9 @@ import entities
 import pygame
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        super().__init__()
-        self.image = pygame.image.load('player.png').convert_alpha()
+    def __init__(self, x, y, group):
+        super().__init__(group)
+        self.image = pygame.image.load('assets/Actor/Characters/Boy/').convert_alpha()
         self.image = pygame.transform.scale(self.image, (self.image.get_width() // 2, self.image.get_height() // 2))
         w, h = self.image.get_size()
         self.rect = pygame.Rect(x, y, w, h)

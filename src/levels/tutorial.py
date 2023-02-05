@@ -1,8 +1,8 @@
 import pytmx
 import pygame
 import pyscroll
-from ..entities import Player
-from ..utils import Camera
+from entities import Player
+from utils import Camera
 from loguru import logger
 from pytmx.util_pygame import load_pygame
 
@@ -42,7 +42,15 @@ class Tutorial(object):
         self.text["body_a"]["rect"].y = 190
         self.text["body_b"]["rect"].y = 230
 
+        # self.player = str()
+
         self.tmx_map = load_pygame("src/data/maps/tutorial.tmx")
+        self.scrolling_layer = pyscroll.BufferedRenderer(
+                pyscroll.TiledMapData(self.tmx_map),
+                (400, 400))
+
+        self.sprites = pyscroll.PyscrollGroup(self.scrolling_layer)
+        self.player = Player(100, 100, self.sprites)
 
     def load_sprites(self):
         pass
@@ -53,7 +61,9 @@ class Tutorial(object):
         NOTE: Components of this are taken from https://github.com/bitcraft/pytmx#basic-use
         """
         
-
+        self.sprites.center(self.player.rect.center)
+        self.sprites.draw(self.screen)
+        pygame.display.update()
 
         """
         for sprite in self.sprites:
