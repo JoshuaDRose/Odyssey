@@ -1,5 +1,5 @@
 import pygame
-import Spritesheet
+from ..spritesheet import Spritesheet
 
 class Font(object):
     # TODO generate all letters from spritesheet

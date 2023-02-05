@@ -95,7 +95,7 @@ if ftp:
     # TEXT: HEY THERE! I NOTICED THIS IS YOUR FIRST TIME PLAYING! WOULD YOU LIKE TO DO THE TUTORIAL?
     # OPTIONS: YES | NO
 
-    tutorial_query = utils.Choice(True, 100)
+    tutorial_query = utils.Choice(True, True)
     while tutorial_query.choice == 0:
         screen.fill((242, 234, 241))
         for event in pygame.event.get():
