@@ -31,19 +31,19 @@ Install requirements using the python
 python3 -m pip install -r requirements/base.txt
 ```
 
-The application rtp is versatile in that you can run either of the following commands to start the game:
+<i>Note that the runtime path is mutable</i>
+rtp can be set from src
 ```sh
 python3 src
 ```
-rtp can be set from the src directory
+additionally, rtp can be set from the src directory
 ```sh
 python3 __main__.py
 ```
 
 <h4>Build from source</h4>
 Alternatively, if you are experimenting or making changes by forking the project, or simply want 
-to experiment with the code, you can build from source.
-On linux:
+to experiment with the code, you can build from source.<br>
 
 ```sh
 git clone https://github.com/JoshuaDRose/Ninja-Adventure.git
