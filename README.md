@@ -33,7 +33,7 @@ If you are in the src directory:
 python3 __main__.py
 ```
 
-Fixes to markdown<h4>Build from source</h4>
+<h4>Build from source</h4>
 Alternatively, if you are experimenting or making changes by forking the project, or simply want 
 to experiment with the code, you can build from source.
 On linux:
