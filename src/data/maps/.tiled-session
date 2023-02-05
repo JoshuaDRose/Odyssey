@@ -1,0 +1,22 @@
+{
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "/home/rosej/projects/Ninja Adventure/src/data/tilesets/TilesetFloor.tsx": {
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "/home/rosej/projects/Ninja Adventure/assets/Backgrounds/Tilesets",
+    "openFiles": [
+    ],
+    "project": ".tiled-project",
+    "recentFiles": [
+        "/home/rosej/projects/Ninja Adventure/src/data/tilesets/TilesetFloor.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

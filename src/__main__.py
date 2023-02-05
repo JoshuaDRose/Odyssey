@@ -90,11 +90,6 @@ tutorial = levels.Tutorial()
 ftp_query = True
 
 if ftp:
-
-    # NOTE: IF FIRST TIME PLAYING GIVE OPTION TO DO TUTORIAL
-    # TEXT: HEY THERE! I NOTICED THIS IS YOUR FIRST TIME PLAYING! WOULD YOU LIKE TO DO THE TUTORIAL?
-    # OPTIONS: YES | NO
-
     tutorial_query = utils.Choice(True, True)
     while tutorial_query.choice == 0:
         screen.fill((242, 234, 241))
