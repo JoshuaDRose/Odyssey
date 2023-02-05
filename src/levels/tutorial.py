@@ -1,4 +1,5 @@
 import pytmx
+import json
 import pygame
 import pyscroll
 from entities import Player, Tile
@@ -6,6 +7,15 @@ from utils import Camera
 from loguru import logger
 from pytmx.util_pygame import load_pygame
 
+
+TILE_WIDTH = int()
+TILE_HEIGHT = int()
+
+logger.info("Reading tile data")
+with open('src/data/tiles.json') as fp:
+    data = json.load(fp)
+    TILE_HEIGHT = data['TILE_HEIGHT']
+    TILE_WIDTH = data['TILE_WIDTH']
 
 class Tutorial(object):
     def __init__(self):
@@ -52,12 +62,20 @@ class Tutorial(object):
         self.sprites = pyscroll.PyscrollGroup(self.scrolling_layer)
         self.player = Player(100, 100, self.sprites)
                 
+        logger.debug("Reading src/data/maps/tutorial.tmx")
         self.load_sprites()
+        logger.debug("Finished generating tutorial sprites")
 
     def load_sprites(self):
+        x = 0
+        y = 0
         for layer in self.tmx_map:
             for x, y, image in layer.tiles():
+                if y > self.scrolling_layer._size[0]:
+                    y += TILE_HEIGHT
+                    x = 0
                 Tile(x, y, image, self.sprites)
+                x += TILE_WIDTH
 
     def handle_keys(self):
         key = pygame.key.get_pressed()
