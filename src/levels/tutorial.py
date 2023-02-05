@@ -47,13 +47,17 @@ class Tutorial(object):
         pass
 
     def draw(self):
+        """ 
+        Draw sprites to surface.
+        NOTE: Components of this are taken from https://github.com/bitcraft/pytmx#basic-use
+        """
+        """
         for sprite in self.sprites:
-            """
             if hasattr(sprite, rect):
                 sprite.draw(self.screen, sprite.rect)
             else:
                 # NOTE Not that clean, but handles any errors
                 logger.error(f"Sprite: {sprite} does not have rect")
-            """
 
             sprite.draw(self.screen, sprite.rect)
+        """
