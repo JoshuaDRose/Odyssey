@@ -55,6 +55,12 @@ class Tutorial(object):
     def load_sprites(self):
         pass
 
+    def handle_keys(self):
+        key = pygame.key.get_pressed()
+
+        self.player.position.x += (key[K_s] - key[K_a]) * self.player.velocity.x * dt
+        self.player.position.y += (key[K_r] - key[K_w]) * self.player.velocity.y * dt
+
     def draw(self):
         """ 
         Draw sprites to surface.

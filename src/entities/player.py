@@ -43,18 +43,22 @@ class Player(pygame.sprite.Sprite):
 
     def handle_keys(self):
         """ Player keypresses are handled within this method """
-        if self.velocity.magnitude() > 0:
-            self.velocity.normalize()
 
+        """
         key = pygame.key.get_pressed()
 
         self.position.x += (key[K_s] - key[K_a]) * self.velocity.x * dt
         self.position.y += (key[K_r] - key[K_w]) * self.velocity.y * dt
         self.position.x = max(0, min(camera.background.size[0] - 20, self.position.x))
         self.position.y = max(0, min(camera.background.size[1] - 20, self.position.y))
-
+        """
+        pass
     def draw(self):
         """ Draw self.image and self.rect to current display (window) """
+
+        if self.velocity.magnitude() > 0:
+            self.velocity.normalize()
+
         pos = [self.position.x, self.position.y]
 
         for i in range(2):
