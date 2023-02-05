@@ -9,10 +9,15 @@
 
 <h3>About</h3>
 <p align="left">
-Ninja adventure is loosely inspired by Zelda, where there are various boss fights and      <br>
-rpg mechanics that can also be found in Ninja Adventure. The asset pack that is being used <br>
-  in this project can be found below.
+Ninja adventure is loosely inspired by Zelda, where there are various boss fights and
+rpg mechanics that can also be found in Ninja Adventure. The asset pack that is being used
+in this project can be found below. If you'd feel so inclined, please consider contributing to 
+this project through creating pull requests or issues as it greatly helps the development of this project.
 </p>
+
+<h3>Install</h3>
+It is suggested to use the latest release <a href=https://github.com/JoshuaDRose/Ninja-Adventure/tags>tag</a>
+as the master branch is not always release-ready.
 
 <h3>License</h3>
 <p align="left">
