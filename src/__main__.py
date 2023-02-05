@@ -98,6 +98,9 @@ if ftp:
     tutorial_query = utils.Choice(True, True)
     while tutorial_query.choice == 0:
         screen.fill((242, 234, 241))
+        for element in tutorial.text:
+            screen.blit(tutorial.text[element]["render"],
+                        tutorial.text[element]["rect"])
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
