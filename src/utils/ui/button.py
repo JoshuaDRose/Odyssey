@@ -69,6 +69,7 @@ class Choice(pygame.sprite.Sprite):
         """
         for button in self.buttons.values():
             if pygame.Rect.collidepoint(button.rect, mp):
+                logger.debug(button.rect)
                 if button == self.buttons["yes"]:
                     self.choice == 1
                 elif button == self.buttons["no"]:
@@ -91,7 +92,7 @@ class Button(pygame.sprite.Sprite):
 
         self.path = image
         self.image = pygame.image.load(self.path)
-        self.image = pygame.transform.scale2x(self.buttons[i].image)
+        self.image = pygame.transform.scale2x(self.image)
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = x, y
 
