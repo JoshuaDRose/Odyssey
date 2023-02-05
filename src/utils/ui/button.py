@@ -29,9 +29,6 @@ class Choice(pygame.sprite.Sprite):
                 "no": Button(0, 0, 'assets/HUD/Dialog/NoButton.png')}
 
         # NOTE scale all sprites 
-
-        for i in self.buttons:
-            self.buttons[i].image = pygame.transform.scale2x(self.buttons[i].image)
         """
         for button in self.buttons:
             self.buttons[button]
@@ -81,7 +78,8 @@ class Choice(pygame.sprite.Sprite):
 class Button(pygame.sprite.Sprite):
     """ Button, can be used in choice class as well """
     def __init__(self, x, y, image: str, group=None):
-        """ Constructor inherits all sprite methods, draw is overriden unless
+        """
+            Constructor inherits all sprite methods, draw is overriden unless
             called from an instance of pygame.sprite.Group().draw()
         """
         if group:
@@ -93,6 +91,7 @@ class Button(pygame.sprite.Sprite):
 
         self.path = image
         self.image = pygame.image.load(self.path)
+        self.image = pygame.transform.scale2x(self.buttons[i].image)
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = x, y
 

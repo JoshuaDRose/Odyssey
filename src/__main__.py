@@ -103,6 +103,7 @@ if ftp:
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                logger.debug(f"mouse button: {mp}")
                 tutorial_query.button_collided(mp)
             elif event.type == pygame.MOUSEMOTION:
                 mp = pygame.mouse.get_pos()

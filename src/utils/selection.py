@@ -8,7 +8,6 @@ import json
 import utils
 from .debug import TextBox
 from pygame import K_RIGHT, K_LEFT, AUDIO_ALLOW_FREQUENCY_CHANGE, AUDIO_ALLOW_CHANNELS_CHANGE
-from pygame import K_UP, K_DOWN, MOUSEBUTTONDOWN, MOUSEBUTTONUP, MOUSEMOTION
 from loguru import logger
 
 import numpy as np
@@ -96,6 +95,7 @@ class Box(pygame.sprite.Sprite):
 
 selectBox = Box(0, 0)
 
+
 class ProfileIcon(pygame.sprite.Sprite):
     selected = 0
     def __init__(self, image, x, y):
@@ -129,7 +129,6 @@ class ProfileIcon(pygame.sprite.Sprite):
                 fp.close()
         finally:
             logger.info(f"Stored as {character}")
-
 
 
 class SelectionScreen:
