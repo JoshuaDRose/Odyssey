@@ -37,8 +37,8 @@ additionally, rtp can be set from the src directory
 python3 __main__.py
 ```
 
-<blockquote><i>Note that the runtime path is mutable</i></blockquote><br>
-rtp can be set from the <code>src</code> directory
+<blockquote><i>Note that the runtime path is mutable</i></blockquote>
+rtp can be set from the <code>src</code> directory<br>
 
 ```sh
 python3 src
