@@ -15,17 +15,18 @@
 
 <h3>About</h3>
 <p align="left">
-Ninja adventure is loosely inspired by Zelda, where there are various boss fights and
-rpg mechanics that can also be found in Ninja Adventure. The asset pack that is being used
+Ninja Adventure is loosely inspired by <a href="https://www.zelda.com/breath-of-the-wild/"><i>Zelda: Breath of the Wild</i></a>, where there are various boss fights and
+RPG mechanics that can also be found in Ninja Adventure. The asset pack that is being used
 in this project can be found below. If you'd feel so inclined, please consider contributing to 
-this project through creating pull requests or issues as it greatly helps the development of this project.
+this project through creating pull requests or issues; it greatly helps the development of this project.
 </p>
 
 <h3>Install</h3>
-It is suggested to use the latest release <a href=https://github.com/JoshuaDRose/Ninja-Adventure/tags>tag</a>
-as the master branch is not always release-ready.
-Please note that some requirements need to be installed. This can be done with the following command:
+It is recommended to use the latest release <a href=https://github.com/JoshuaDRose/Ninja-Adventure/tags>tag</a>;
+ the master branch is not always release-ready.
+Also, please note that some requirements need to be installed.
 
+Install requirements using the python
 ```sh
 python3 -m pip install -r requirements/base.txt
 ```
@@ -34,7 +35,7 @@ The application rtp is versatile in that you can run either of the following com
 ```sh
 python3 src
 ```
-If you are in the src directory:
+rtp can be set from the src directory
 ```sh
 python3 __main__.py
 ```
@@ -48,7 +49,7 @@ On linux:
 git clone https://github.com/JoshuaDRose/Ninja-Adventure.git
 ```
 
-After cloning the repository, (if you have pip), run the following:
+Install requirements using python (including devel reqs)
 ```sh
 cd Ninja-Adventure
 python3 -m pip install -r requirements/base.txt
@@ -58,12 +59,12 @@ python3 -m pip install -r requirements/dev.txt
 
 <h3>License</h3>
 <p align="left">
-This project is registered under the MIT license which can be found in the <code>license.md</code> file.
+This project is registered under the MIT license which can be found in the <code>license.md</code> file or in links at the bottom of this file.
 </p>
 
 <p align="left">
 <h3>Versioning</h3>
-This project uses semantic versioning.
+This project uses semantic versioning. More details on this versioning system can be found in the links section below.
 </p>
 
 <p align="left">
