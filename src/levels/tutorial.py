@@ -93,6 +93,7 @@ class Tutorial(object):
         
         self.sprites.center(self.player.rect.center)
         self.sprites.draw(self.screen)
+
         self.player.update()
         pygame.display.update()
         self.clock.tick(60)
