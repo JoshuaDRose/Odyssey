@@ -61,12 +61,16 @@ class Tutorial(object):
         self.player.position.x += (key[K_s] - key[K_a]) * self.player.velocity.x * dt
         self.player.position.y += (key[K_r] - key[K_w]) * self.player.velocity.y * dt
 
-    def draw(self):
+    def draw_map(self):
+        pass
+
+    def draw_sprites(self):
         """ 
         Draw sprites to surface.
         NOTE: Components of this are taken from https://github.com/bitcraft/pytmx#basic-use
         """
         
+        self.player.update()
         self.sprites.center(self.player.rect.center)
         self.sprites.draw(self.screen)
         pygame.display.update()

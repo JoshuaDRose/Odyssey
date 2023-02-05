@@ -33,6 +33,9 @@ class Player(pygame.sprite.Sprite):
         self.special2 = os.path.join(path, 'Special2.png')
         self.walk = os.path.join(path, 'Walk.png')
 
+        self.frame = 0
+
+
         """
         self.image = pygame.image.load(f'assets/Actor/Characters/{character}/SeparateAnim/Idle.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (self.image.get_width() // 2, self.image.get_height() // 2))
@@ -81,3 +84,5 @@ class Player(pygame.sprite.Sprite):
                 pygame.quit()
                 sys.exit(0)
         """
+        self.animation = self.idle
+        self.image = self.animation[self.frame]

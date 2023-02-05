@@ -113,7 +113,8 @@ if ftp:
     mp = tuple()
     if tutorial_query.choice == 1:
         while tutorial.running:
-            tutorial.draw()
+            tutorial.draw_map()
+            tutorial.draw_sprites()
     elif tutorial_query.choice == -1:
         # NOTE Don't do tutorial, create level instance etc ...
         # TODO Setup tutorial as mentioned above
