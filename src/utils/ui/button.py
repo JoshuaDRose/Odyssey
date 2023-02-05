@@ -68,11 +68,18 @@ class Choice(pygame.sprite.Sprite):
         Detects if mouse is over self.buttons
         """
         for button in self.buttons.values():
-            if pygame.Rect.collidepoint(button.rect, mp):
-                logger.debug(button.rect)
-                if button == self.buttons["yes"]:
+
+            # BUG only tests for collision with rect that is relative 
+            # to the bounding box. needs to add bounding box rect.
+            if pygame.Rect.collidepoint(pygame.Rect(
+                button.rect.x + self.rect.x,
+                button.rect.y + self.rect.y,
+                button.rect.width,
+                button.rect.height), mp):
+
+                if button.text == 'yes':
                     self.choice == 1
-                elif button == self.buttons["no"]:
+                elif button.text == 'no':
                     self.choice == -1
 
 
@@ -91,6 +98,7 @@ class Button(pygame.sprite.Sprite):
             logger.critical(f"Image loaded as {type(image)}, needs to be loaded as string")
 
         self.path = image
+        self.text = self.path
         self.image = pygame.image.load(self.path)
         self.image = pygame.transform.scale2x(self.image)
         self.rect = self.image.get_rect()
