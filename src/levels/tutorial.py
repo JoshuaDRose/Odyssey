@@ -85,9 +85,6 @@ class Tutorial(object):
         self.player.position.x += (key[K_s] - key[K_a]) * self.player.velocity.x * dt
         self.player.position.y += (key[K_r] - key[K_w]) * self.player.velocity.y * dt
 
-    def draw_map(self):
-        self.sprites.draw(self.screen)
-
     def draw_sprites(self):
         """ 
         Draw sprites to surface.
@@ -95,6 +92,7 @@ class Tutorial(object):
         """
         
         self.sprites.center(self.player.rect.center)
+        self.sprites.draw(self.screen)
         self.player.update()
         pygame.display.update()
         self.clock.tick(60)
