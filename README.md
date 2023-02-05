@@ -36,6 +36,7 @@ python3 __main__.py
 Alternatively, if you are experimenting or making changes by forking the project, or simply want 
 to experiment with the code, you can build from source.
 On linux:
+
 ```sh
 git clone https://github.com/JoshuaDRose/Ninja-Adventure.git
 ```
