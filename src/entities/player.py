@@ -12,25 +12,34 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, group):
         super().__init__(group)
 
+        character = str()
+
         try:
             with open('src/data/meta.json') as fp:
                 data = json.load(fp)
                 character = data['character']
-                ftp = data['ftp']
-                fp.close()
         except FileNotFoundError:
-            # NOTE: this will likely never happen as path checks are done for json 
-            # files before this even runs
             logger.critical("Could not find essential files: meta.json")
-            # NOTE: code 1 is exit vode
             sys.exit(1)
 
-        self.image = pygame.image.load('assets/Actor/Characters/Boy/').convert_alpha()
+        path = f'assets/Actor/Characters/{character}/SeparateAnim/'
+        self.idle = os.path.join(path, 'Idle.png')
+        self.attack = os.path.join(path, 'Attack.png')
+        self.dead = os.path.join(path, 'Dead.png')
+        self.item = os.path.join(path, 'Item.png')
+        self.jump = os.path.join(path, 'Jump.png')
+        self.special1 = os.path.join(path, 'Special1.png')
+        self.special2 = os.path.join(path, 'Special2.png')
+        self.walk = os.path.join(path, 'Walk.png')
+
+        """
+        self.image = pygame.image.load(f'assets/Actor/Characters/{character}/SeparateAnim/Idle.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (self.image.get_width() // 2, self.image.get_height() // 2))
         w, h = self.image.get_size()
         self.rect = pygame.Rect(x, y, w, h)
         self.velocity = pygame.math.Vector2(250, 250)
         self.position = pygame.math.Vector2(self.rect.x, self.rect.y)
+        """
 
     def handle_keys(self):
         """ Player keypresses are handled within this method """
