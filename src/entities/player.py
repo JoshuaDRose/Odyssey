@@ -53,6 +53,7 @@ class Player(pygame.sprite.Sprite):
         self.position.y = max(0, min(camera.background.size[1] - 20, self.position.y))
         """
         pass
+
     def draw(self):
         """ Draw self.image and self.rect to current display (window) """
 
