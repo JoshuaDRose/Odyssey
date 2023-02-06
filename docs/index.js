@@ -1,3 +1,4 @@
+import { XMLHttpRequest } from "xmlhttp";
 var xmlhttp = new XMLHttpRequest();
 var url = "core.php";
 

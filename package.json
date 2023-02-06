@@ -2,12 +2,9 @@
   "name": "ninja-adventure",
   "version": "0.3.4-0.1.0",
   "description": "Ninja Adventure",
-  "main": "src/index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "main": "docs/index.js",
   "scripts": {
-      "start": "node docs/index.js"
+    "start": "node docs/index.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +28,9 @@
   },
   "homepage": "https://github.com/JoshuaDRose/Ninja-Adventure",
   "publishConfig": {
-   "@JoshuaDRose:registry": "https://npm.pkg.github.com"
- }
+    "@JoshuaDRose:registry": "https://npm.pkg.github.com"
+  },
+  "dependencies": {
+    "xmlhttp": "^0.0.0"
+  }
 }
