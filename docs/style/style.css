@@ -5,29 +5,10 @@
     font-weight: 400;
 }
 
-.center {
-    margin: 0 auto;
-    text-align: center;
-}
-
-.cover > #heading {
-    font-size: 24pt;
-    margin-bottom: 0px;
-}
-
-.cover > #subtext {
-    font-size: 18pt;
-    font-style: italic;
-}
-
-.content {
-    width: 600px;
-    text-align: left;
-    margin: 0 auto;
-}
-
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-.row.content {height: 1500px}
+.row.content {
+    height: 1500px
+}
 
 /* Set gray background color and 100% height */
 .sidenav {
@@ -42,11 +23,11 @@ footer {
     padding: 15px;
 }
 
-/* On small screens, set height to 'auto' for sidenav and grid */
-@media screen and (max-width: 767px) {
-    .sidenav {
-        height: auto;
-        padding: 15px;
-    }
-    .row.content {height: auto;} 
+/* On small screens, set height to 'auto' for sidenav and grid 
+.sidenav {
+    height: auto;
+    padding: 15px;
 }
+.row.content {height: auto;} 
+
+*/
