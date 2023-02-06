@@ -6,6 +6,9 @@
   "directories": {
     "doc": "docs"
   },
+  "scripts": {
+      "start": "node docs/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JoshuaDRose/Ninja-Adventure.git"
