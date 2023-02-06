@@ -16,6 +16,7 @@ body {
 
 .cover > #heading {
     font-size: 24pt;
+    margin-bottom: 0px;
 }
 
 .cover > #subtext {
