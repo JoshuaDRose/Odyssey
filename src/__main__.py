@@ -112,6 +112,11 @@ if ftp:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    tutorial_query.choice = -1
+                elif event.key == pygame.K_RETURN:
+                    tutorial_query.choice = 1
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 tutorial_query.button_collided(mp)
             elif event.type == pygame.MOUSEMOTION:

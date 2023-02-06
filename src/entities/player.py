@@ -42,6 +42,11 @@ class Player(pygame.sprite.Sprite):
         self.tick = 0
         self.fps = 10
 
+        if isinstance(self.animation, list) and len(self.animation) == 1:
+            logger.error('List instance as group: refactoring list')
+            self.animation = self.animation[0]
+        logger.success(self.animation)
+
         self.image = self.animation[self.frame]
 
         self.rect = self.image.get_rect()
@@ -66,14 +71,20 @@ class Player(pygame.sprite.Sprite):
         spritesheet = utils.Spritesheet(path)
         with open('src/data/player_data.json') as fp:
             data = json.load(fp)
-            print(file)
-            for index, key in enumerate(data):
-                size = len(data[file])
-                print(size)
-                if size > 0:
-                    for item in data[file][key]:
-                        images.append(spritesheet.load_strip((item[0], item[0], 16, 16), len(data[file][item])))
-                    return images
+            for anim in data:
+                if len(data[file]) > 0:
+                    for item in data[file]:
+                        if len(item) > 1:
+                            for direction in data[file][item]:
+                                images.append(
+                                        spritesheet.load_strip((data[file][item][direction][0], data[file][item][direction][1], 16, 16),
+                                            len(data[file][item])))
+                                return images
+
+                        images.append(
+                                spritesheet.load_strip((data[file][item][0], data[file][item][0], 16, 16),
+                                    len(data[file][item])))
+                        return images
                 else:
                     for item in data[file]:
                         images.append(item)
@@ -110,7 +121,7 @@ class Player(pygame.sprite.Sprite):
 
         window.blit(self.image, (int(pos[0]), int(pos[1])))
         """
-        
+
         pass
 
     def update_collision(self):
@@ -126,7 +137,7 @@ class Player(pygame.sprite.Sprite):
                 sys.exit(0)
         """
         if self.tick >= self.fps:
-            if self.frame > len(self.animation) - 1:
+            if self.frame > len(self.animation):
                 self.frame = 0
             else:
                 self.frame += 1
