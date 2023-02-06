@@ -5,9 +5,20 @@
     font-weight: 400;
 }
 
+body {
+    height: 8000px
+}
+
 .center {
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.cover > #heading {
+    font-size: 24pt;
+}
+
+.cover > #subtext {
+    font-size: 18pt;
+    font-style: italic;
 }
