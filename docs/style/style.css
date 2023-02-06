@@ -6,7 +6,8 @@
 }
 
 body {
-    height: 8000px
+    height: 8000px;
+    line-height: 20px;
 }
 
 .center {
