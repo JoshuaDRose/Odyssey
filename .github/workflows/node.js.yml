@@ -19,18 +19,9 @@ jobs:
         node-version: [14.x, 16.x, 18.x]
 
     steps:
-      - name: Cache node modules
-        id: cache-npm
-        uses: actions/cache@v3
-        with:
-          persist-credentials: false
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
-          persist-credentials: false
-        env:
-          cache-name: cache-node-modules
-
       - name: Install dependencies
         run: npm install
       - name: Build
