@@ -1,10 +1,20 @@
 {
     "activeFile": "",
     "expandedProjectPaths": [
+        "/home/rosej/projects/Ninja Adventure/assets/Backgrounds/Tilesets"
     ],
     "fileStates": {
         "/home/rosej/projects/Ninja Adventure/src/data/tilesets/TilesetFloor.tsx": {
+            "scaleInDock": 2,
             "scaleInEditor": 1
+        },
+        "tutorial.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 296,
+                "y": 1261
+            }
         }
     },
     "last.imagePath": "/home/rosej/projects/Ninja Adventure/assets/Backgrounds/Tilesets",
@@ -12,6 +22,7 @@
     ],
     "project": ".tiled-project",
     "recentFiles": [
+        "tutorial.tmx",
         "/home/rosej/projects/Ninja Adventure/src/data/tilesets/TilesetFloor.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",

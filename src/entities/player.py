@@ -2,8 +2,6 @@ import json
 import os
 import sys
 
-from ..utils.spritesheet import Spritesheet
-
 import utils
 import entities
 
@@ -60,8 +58,11 @@ class Player(pygame.sprite.Sprite):
 
     @staticmethod
     def load_sequence(path):
+        images = []
         with open('src/data/player_data.json') as fp:
             data = json.load(fp)
+            for index, sprite in enumerate(data):
+                images.append(sprite)
 
 
     def handle_keys(self):

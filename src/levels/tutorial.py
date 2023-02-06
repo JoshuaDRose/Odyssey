@@ -1,19 +1,13 @@
 import sys
 link = "https://github.com/JoshuaDRose/Ninja-Adventure"
-try:
-    import pytmx
-    import pyscroll
-    import pygame
-    import json
-    from entities import Player, Tile
-    from utils import Camera
-    from loguru import logger
-    from pytmx.util_pygame import load_pygame
-except ImportError:
-    print("Please install requirements.")
-    print("For installation instructions please see {}".format(link))
-    sys.exit(1)
-
+import pytmx
+import pyscroll
+import pygame
+import json
+from entities import Player, Tile
+from utils import Camera
+from loguru import logger
+from pytmx.util_pygame import load_pygame
 
 TILE_WIDTH = int()
 TILE_HEIGHT = int()
