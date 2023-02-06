@@ -8,6 +8,9 @@ import entities
 import pygame
 from loguru import logger
 
+from pygame import K_w, K_s, K_a, K_d
+from pygame import K_UP, K_DOWN, K_LEFT, K_RIGHT
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, group):
@@ -28,7 +31,8 @@ class Player(pygame.sprite.Sprite):
 
         self.character = character.replace(' ', '', character.count(' '))
         path = f'assets/Actor/Characters/{self.character}/SeparateAnim/'
-        self.idle = Player.load_sequence(os.path.join(path, 'Idle.png'))
+        self.idle_down = Player.load_sequence(os.path.join(path, 'Idle.png'))[0]
+        self.idle_up = Player.load_sequence(os.path.join(path, 'Idle.png'))[1]
         self.attack = Player.load_sequence(os.path.join(path, 'Attack.png'))
         self.dead = Player.load_sequence(os.path.join(path, 'Dead.png'))
         self.item = Player.load_sequence(os.path.join(path, 'Item.png'))
@@ -37,15 +41,12 @@ class Player(pygame.sprite.Sprite):
         self.special2 = Player.load_sequence(os.path.join(path, 'Special2.png'))
         self.walk = Player.load_sequence(os.path.join(path, 'Walk.png'))
 
-        self.animation = self.idle
+        self.animation = self.idle_down
+        if not isinstance(self.animation, list):
+            self.animation = [self.animation]
         self.frame = 0
         self.tick = 0
         self.fps = 10
-
-        if isinstance(self.animation, list) and len(self.animation) == 1:
-            logger.error('List instance as group: refactoring list')
-            self.animation = self.animation[0]
-        logger.success(self.animation)
 
         self.image = self.animation[self.frame]
 
@@ -53,14 +54,8 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-        """
-        self.image = pygame.image.load(f'assets/Actor/Characters/{character}/SeparateAnim/Idle.png').convert_alpha()
-        self.image = pygame.transform.scale(self.image, (self.image.get_width() // 2, self.image.get_height() // 2))
-        w, h = self.image.get_size()
-        self.rect = pygame.Rect(x, y, w, h)
         self.velocity = pygame.math.Vector2(250, 250)
         self.position = pygame.math.Vector2(self.rect.x, self.rect.y)
-        """
 
     @staticmethod
     def load_sequence(path) -> list[pygame.surface.Surface]:
@@ -75,15 +70,19 @@ class Player(pygame.sprite.Sprite):
                 if len(data[file]) > 0:
                     for item in data[file]:
                         if len(item) > 1:
-                            for direction in data[file][item]:
-                                images.append(
-                                        spritesheet.load_strip((data[file][item][direction][0], data[file][item][direction][1], 16, 16),
-                                            len(data[file][item])))
+                            for index, direction in enumerate(data[file][item]):
+                                print(data[file][item])
+                                img_list = spritesheet.load_strip((data[file][item][str(index)][0], data[file][item][str(index)][1], 16, 16), 4)
+                                for image in img_list:
+                                    image.set_colorkey((0, 0, 0))
+                                    images.append(image)
                                 return images
 
-                        images.append(
-                                spritesheet.load_strip((data[file][item][0], data[file][item][0], 16, 16),
-                                    len(data[file][item])))
+                        img_list = spritesheet.load_strip((data[file][item][0], data[file][item][0], 16, 16),
+                                    len(data[file][item]))
+                        for image in img_list:
+                            image.set_colorkey((0, 0, 0))
+                            images.append(image)
                         return images
                 else:
                     for item in data[file]:
@@ -91,18 +90,26 @@ class Player(pygame.sprite.Sprite):
                     return images
 
 
-    def handle_keys(self):
+    def handle_keys(self, dt):
         """ Player keypresses are handled within this method """
 
-        """
         key = pygame.key.get_pressed()
 
-        self.position.x += (key[K_s] - key[K_a]) * self.velocity.x * dt
-        self.position.y += (key[K_r] - key[K_w]) * self.velocity.y * dt
-        self.position.x = max(0, min(camera.background.size[0] - 20, self.position.x))
-        self.position.y = max(0, min(camera.background.size[1] - 20, self.position.y))
+        self.position.x += (key[K_d] - key[K_a]) * self.velocity.x * dt
+        self.position.y += (key[K_s] - key[K_w]) * self.velocity.y * dt
         """
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_s:
+                    self.position.y += 1 * self.velocity.y + dt
+                if event.key == pygame.K_w:
+                    self.position.y -= 1 * self.velocity.y + dt
+                if event.key == pygame.K_a:
+                    self.position.x -= 1 * self.velocity.x + dt
+                if event.key == pygame.K_d:
+                    self.position.x -= 1 * self.velocity.x + dt
         pass
+        """
 
     def draw(self):
         """ Draw self.image and self.rect to current display (window) """
@@ -136,11 +143,14 @@ class Player(pygame.sprite.Sprite):
                 pygame.quit()
                 sys.exit(0)
         """
+        self.handle_keys(dt)
         if self.tick >= self.fps:
-            if self.frame > len(self.animation):
+            if self.frame >= len(self.animation)-1:
                 self.frame = 0
             else:
                 self.frame += 1
+            self.tick = 0
+
         self.image = self.animation[self.frame]
         self.tick += 1
 
