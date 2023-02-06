@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/JoshuaDRose/Ninja-Adventure/issues"
   },
-  "homepage": "https://github.com/JoshuaDRose/Ninja-Adventure#readme"
+  "homepage": "https://github.com/JoshuaDRose/Ninja-Adventure",
+  "publishConfig": {
+   "@JoshuaDRose:registry": "https://npm.pkg.github.com"
+ }
 }
