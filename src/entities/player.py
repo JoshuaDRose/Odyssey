@@ -57,12 +57,23 @@ class Player(pygame.sprite.Sprite):
         """
 
     @staticmethod
-    def load_sequence(path):
+    def load_sequence(path) -> list[pygame.surface.Surface]:
+        """ Returns a list of positions relative to player_data.json file """
         images = []
+        animation = os.path.split(path)
+        spritesheet = utils.Spritesheet(path)
         with open('src/data/player_data.json') as fp:
             data = json.load(fp)
-            for index, sprite in enumerate(data):
-                images.append(sprite)
+            for index, key in enumerate(data[path]):
+                len = len(data[path][key])
+                if len > 0:
+                    for list in data[path][key]:
+                        images.append(spritesheet.load_strip((list[0], list[0], 16, 16), len(data[path][list])))
+                    return images
+                else:
+                    for item in data[path]:
+                        images.append(item)
+                    return images
 
 
     def handle_keys(self):
