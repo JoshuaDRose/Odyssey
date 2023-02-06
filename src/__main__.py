@@ -1,3 +1,18 @@
+import sys
+
+class Version:
+    version = sys.version.split(' ')[0]
+    major = int(version.split('.')[0])
+    minor = int(version.split('.')[1])
+    patch = int(version.split('.')[2])
+
+if Version.major < 3:
+    print("You are using python {}. Please use >= python3.7.0".format(Version.version))
+    sys.exit(1)
+elif Version.minor < 6:
+    print("<=python3.6 is not supported")
+    sys.exit(1)
+
 import json
 import os
 import levels
@@ -6,7 +21,6 @@ import pygame
 import utils
 from loguru import logger
 from pygame import K_ESCAPE, QUIT
-
 
 logger.remove()
 logger.add(
@@ -50,9 +64,7 @@ pygame.display.set_caption("Ninja Adventure")
 if not pygame.mixer.get_init():
     logger.debug("Initializing pygame.mixer")
 
-logger.info(f"""[Mixer]
-Bitrate: {pygame.mixer.get_init()[0]}
-Channels: {pygame.mixer.get_num_channels()}""", feature="f-strings""")
+logger.info("[Mixer]\n Bitrate: {}\nChannels: {}", pygame.mixer.get_init()[0], pygame.mixer.get_num_channels(), feature="f-strings")
 
 clock = pygame.time.Clock()
 
@@ -84,7 +96,7 @@ except FileNotFoundError:
     sys.exit(1)
 
 # TODO: remove when redundant or ready
-logger.debug(f"Loading main menu as {character}.")
+logger.debug("Loading main menu as {}.", character, feature="f-strings")
 
 tutorial = levels.Tutorial()
 ftp_query = True
