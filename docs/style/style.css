@@ -1,1 +1,5 @@
 @import url('../fonts/Satoshi_Complete/Fonts/WEB/css/satoshi.css');
+
+.satoshi {
+    font-family: "satoshi";
+}
