@@ -1,0 +1,30 @@
+{
+  "name": "ninja-adventure",
+  "version": "0.3.4-0.1.0",
+  "description": "Ninja Adventure",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshuaDRose/Ninja-Adventure.git"
+  },
+  "keywords": [
+    "python",
+    "rpg",
+    "programming",
+    "sdl",
+    "sdl2",
+    "game-development",
+    "pygame",
+    "rpg-game",
+    "pygame-games"
+  ],
+  "author": "Joshua Rose",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoshuaDRose/Ninja-Adventure/issues"
+  },
+  "homepage": "https://github.com/JoshuaDRose/Ninja-Adventure#readme"
+}
