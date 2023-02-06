@@ -22,34 +22,21 @@ jobs:
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+          persist-credentials: false
         env:
           cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: List the state of node modules
-        continue-on-error: true
-        run: npm list
-        working-directory: ..
 
       - name: Install dependencies
         run: npm install
-        working-directory: ..
       - name: Build
         run: npm run build
-        working-directory: ..
       - name: Test
         run: npm test
-        working-directory: ..
       - run: npm ci
-        working-directory: ..
       - run: npm run build --if-present
-        working-directory: ..
       - run: npm test
-        working-directory: ..
