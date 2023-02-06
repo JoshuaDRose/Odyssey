@@ -26,15 +26,16 @@ class Player(pygame.sprite.Sprite):
         self.x =  x
         self.y =  y
 
-        path = f'assets/Actor/Characters/{character}/SeparateAnim/'
-        self.idle = os.path.join(path, 'Idle.png')
-        self.attack = os.path.join(path, 'Attack.png')
-        self.dead = os.path.join(path, 'Dead.png')
-        self.item = os.path.join(path, 'Item.png')
-        self.jump = os.path.join(path, 'Jump.png')
-        self.special1 = os.path.join(path, 'Special1.png')
-        self.special2 = os.path.join(path, 'Special2.png')
-        self.walk = os.path.join(path, 'Walk.png')
+        self.character = character.replace(' ', '', character.count(' '))
+        path = f'assets/Actor/Characters/{self.character}/SeparateAnim/'
+        self.idle = Player.load_sequence(os.path.join(path, 'Idle.png'))
+        self.attack = Player.load_sequence(os.path.join(path, 'Attack.png'))
+        self.dead = Player.load_sequence(os.path.join(path, 'Dead.png'))
+        self.item = Player.load_sequence(os.path.join(path, 'Item.png'))
+        self.jump = Player.load_sequence(os.path.join(path, 'Jump.png'))
+        self.special1 = Player.load_sequence(os.path.join(path, 'Special1.png'))
+        self.special2 = Player.load_sequence(os.path.join(path, 'Special2.png'))
+        self.walk = Player.load_sequence(os.path.join(path, 'Walk.png'))
 
         self.animation = self.idle
         self.frame = 0
@@ -61,6 +62,7 @@ class Player(pygame.sprite.Sprite):
         """ Returns a list of positions relative to player_data.json file """
         images = []
         animation = os.path.split(path)
+        logger.info(f"[player] Loading animation: {animation}", feature="f-strings")
         spritesheet = utils.Spritesheet(path)
         with open('src/data/player_data.json') as fp:
             data = json.load(fp)
