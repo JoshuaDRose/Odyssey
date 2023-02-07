@@ -73,6 +73,8 @@ class Player(pygame.sprite.Sprite):
     def load_sequence(path, character, dir=None) -> list[pygame.surface.Surface]:
         """ Returns a list of positions relative to player_data.json file """
         images = []
+
+        # NOTE Manually assign colormask
         colorkey = (0, 0, 0)
         if character == 'darkninja':
             colorkey = (0, 0, 0)
@@ -81,9 +83,11 @@ class Player(pygame.sprite.Sprite):
             colorkey = (255, 255, 255)
         elif character == 'maskedninja':
             colorkey = (255, 255, 255)
+
         file = os.path.split(path)[1].removesuffix('.png').lower()
         logger.info(f"[player] Loading animation from path: {path}", feature="f-strings")
         spritesheet = utils.Spritesheet(path)
+
         with open('src/data/player_data.json') as fp:
             data = json.load(fp)
             images = []
@@ -105,9 +109,6 @@ class Player(pygame.sprite.Sprite):
                         images.append(spritesheet.image_at((
                             *data[seq][frame], 16, 16), colorkey))
                         return images
-
-
-
 
     def handle_keys(self):
         """ Player keypresses are handled within this method """
