@@ -3,6 +3,7 @@ import os
 import sys
 
 from utils import Spritesheet
+from utils.ui import Heart
 
 import pygame
 from loguru import logger
@@ -61,6 +62,10 @@ class Player(pygame.sprite.Sprite):
 
         self.health = 3 # 3 hearts
 
+        self.hearts = pygame.sprite.Group()
+
+        for i in range(self.health):
+            Heart(Heart.x, Heart.y, self.hearts)
 
         self.velocity = pygame.math.Vector2(0, 0)
         self.accel = pygame.math.Vector2(0, 0)

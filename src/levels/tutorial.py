@@ -97,5 +97,6 @@ class Tutorial(object):
         self.player.handle_keys()
         self.player.update()
 
+
         pygame.display.update()
         self.clock.tick(60)
