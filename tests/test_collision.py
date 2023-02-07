@@ -1,4 +1,7 @@
-from src.entities.sprite import Sprite
+try:
+    from src.entities.sprite import Sprite
+except ModuleNotFoundError:
+    from entities.sprite import Sprite
 import pytest
 
 def test_rect():
