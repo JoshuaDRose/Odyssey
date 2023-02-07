@@ -112,8 +112,13 @@ class Player(pygame.sprite.Sprite):
             self.accel.x = -ACC
         if keys[K_RIGHT] or keys[K_s]:
             self.accel.x = ACC
+        if keys[K_UP] or keys[K_w]:
+            self.accel.y = -ACC
+        if keys[K_DOWN] or keys[K_r]:
+            self.accel.y = ACC
 
         self.accel.x += self.velocity.x * self.friction
+        self.accel.y += self.velocity.y * self.friction
         self.velocity += self.accel
         self.position += self.velocity + 0.5 * self.accel
 
@@ -131,3 +136,4 @@ class Player(pygame.sprite.Sprite):
 
         self.image = self.animation[self.frame]
         self.tick += 1
+        self.update_collision()
