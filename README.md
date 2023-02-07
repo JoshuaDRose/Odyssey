@@ -9,6 +9,9 @@
     <a href="https://github.com/JoshuaDRose/Ninja-Adventure/releases">
         <img src='https://img.shields.io/github/v/release/JoshuaDRose/ninja-adventure?include_prereleases&sort=semver&style=for-the-badge'>
     </a>
+    <a href="https://codecov.io/gh/JoshuaDRose/Ninja-Adventure" > 
+        <img src="https://codecov.io/gh/JoshuaDRose/Ninja-Adventure/branch/main/graph/badge.svg?token=EN4JAW4IIH"/> 
+     </a>
     </h1>
 </div>
 
