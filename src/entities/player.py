@@ -94,8 +94,7 @@ class Player(pygame.sprite.Sprite):
         elif self.character == 'maskedninja':
             colorkey = (255, 255, 255)
 
-        sprite_sheet = Spritesheet(
-                os.path.join(self.path, 'Idle.png'))
+        sprite_sheet = Spritesheet(os.path.join(self.path, 'Idle.png'))
 
         if direction == "down":
             image = sprite_sheet.image_at((0, 0, 16, 16), colorkey)
@@ -127,8 +126,8 @@ class Player(pygame.sprite.Sprite):
             colorkey = (255, 255, 255)
         elif self.character == 'maskedninja':
             colorkey = (255, 255, 255)
+
         sprite_sheet = Spritesheet(os.path.join(self.path, 'Walk.png'))
-        logger.info(f"[player] Loading animation from path: {sprite_sheet}", feature="f-strings")
 
         with open('src/data/player_data.json') as fp:
             data = json.load(fp)
@@ -173,12 +172,16 @@ class Player(pygame.sprite.Sprite):
 
         if not keydown:
             if lastkey == 'a':
+                self.frame = 0
                 self.animation = self.idle_left
             elif lastkey == 's':
+                self.frame = 0
                 self.animation = self.idle_right
             elif lastkey == 'w':
+                self.frame = 0
                 self.animation = self.idle_up
             elif lastkey == 'r':
+                self.frame = 0
                 self.animation = self.idle_down
 
         self.accel.x += self.velocity.x * self.friction
