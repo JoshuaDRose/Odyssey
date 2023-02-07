@@ -11,6 +11,7 @@ from loguru import logger
 from pygame import K_w, K_s, K_a, K_r
 from pygame import K_UP, K_DOWN, K_LEFT, K_RIGHT
 
+ACC = 0.25
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, group):
@@ -57,6 +58,7 @@ class Player(pygame.sprite.Sprite):
         self.velocity = pygame.math.Vector2(0, 0)
         self.accel = pygame.math.Vector2(0, 0)
         self.position = pygame.math.Vector2(self.rect.x, self.rect.y)
+        self.friction = -0.25
 
     @staticmethod
     def load_sequence(path) -> list[pygame.surface.Surface]:
@@ -97,34 +99,20 @@ class Player(pygame.sprite.Sprite):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == K_r:
-                    self.accel.y += .2
-                if event.key == K_w:
-                    self.accel.y -= .2
-                if event.key == K_a:
-                    self.accel.x -= .2
-                if event.key == K_s:
-                    self.accel.x -= .2
-            if event.type == pygame.KEYUP:
-                if event.key in (K_a, K_s):
-                    self.accel.x = 0
-                if event.key in (K_w, K_r):
-                    self.accel.y = 0
 
-        self.velocity.x += self.accel.x
-        self.velocity.y += self.accel.y
+        self.accel.x = 0
+        self.accel.y = 0
 
-        if self.velocity.magnitude() > 0:
-            self.velocity = self.velocity.normalize()
+        keys = pygame.key.get_pressed()
 
-        if self.accel.x == 0:
-            self.velocity.x *= 0.92
-        if self.accel.y == 0:
-            self.velocity.y *= 0.92
+        if keys[K_LEFT] or keys[K_a]:
+            self.accel.x = -ACC
+        if keys[K_RIGHT] or keys[K_s]:
+            self.accel.x = ACC
 
-        self.position.x += self.velocity.x
-        self.position.y += self.velocity.y
+        self.accel.x += self.velocity.x * self.friction
+        self.velocity += self.accel
+        self.position += self.velocity + 0.5 * self.accel
 
     def draw(self):
         """ Draw self.image and self.rect to current display (window) """
