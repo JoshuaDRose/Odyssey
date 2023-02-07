@@ -117,21 +117,11 @@ class Player(pygame.sprite.Sprite):
         self.velocity += self.accel
         self.position += self.velocity + 0.5 * self.accel
 
-    def draw(self):
-        """ Draw self.image and self.rect to current display (window) """
-        pass
-
     def update_collision(self):
         self.rect.x = int(self.position.x)
         self.rect.y = int(self.position.y)
 
     def update(self):
-        """
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit(0)
-        """
         if self.tick >= self.fps:
             if self.frame >= len(self.animation)-1:
                 self.frame = 0

@@ -54,7 +54,6 @@ class Tutorial(object):
         self.text["body_a"]["rect"].y = 190
         self.text["body_b"]["rect"].y = 230
 
-
         self.tmx_map = load_pygame(
                 "src/data/maps/tutorial.tmx",
                 allow_duplicate_names=False)
@@ -89,8 +88,6 @@ class Tutorial(object):
         Draw sprites to surface.
         NOTE: Components of this are taken from https://github.com/bitcraft/pytmx#basic-use
         """
-        
-
         self.sprites.center(self.player.rect.center)
         self.sprites.draw(self.screen)
 
@@ -99,14 +96,3 @@ class Tutorial(object):
 
         pygame.display.update()
         self.clock.tick(60)
-
-        """
-        for sprite in self.sprites:
-            if hasattr(sprite, rect):
-                sprite.draw(self.screen, sprite.rect)
-            else:
-                # NOTE Not that clean, but handles any errors
-                logger.error(f"Sprite: {sprite} does not have rect")
-
-            sprite.draw(self.screen, sprite.rect)
-        """
