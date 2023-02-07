@@ -1,5 +1,4 @@
 import sys
-link = "https://github.com/JoshuaDRose/Ninja-Adventure"
 import pytmx
 import pyscroll
 import pygame
@@ -13,10 +12,12 @@ TILE_WIDTH = int()
 TILE_HEIGHT = int()
 
 logger.info("Reading tile data")
+
 with open('src/data/tiles.json') as fp:
     data = json.load(fp)
     TILE_HEIGHT = data['TILE_HEIGHT']
     TILE_WIDTH = data['TILE_WIDTH']
+
 
 class Tutorial(object):
     def __init__(self):
