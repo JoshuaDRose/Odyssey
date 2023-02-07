@@ -32,20 +32,22 @@ class Player(pygame.sprite.Sprite):
 
         self.character = character.replace(' ', '', character.count(' '))
         path = f'assets/Actor/Characters/{self.character}/SeparateAnim/'
-        self.idle_down = Player.load_sequence(os.path.join(path, 'Idle.png'))[0]
-        self.idle_up = Player.load_sequence(os.path.join(path, 'Idle.png'))[1]
+        self.idle = Player.load_sequence(os.path.join(path, 'Idle.png'))
         self.attack = Player.load_sequence(os.path.join(path, 'Attack.png'))
         self.dead = Player.load_sequence(os.path.join(path, 'Dead.png'))
         self.item = Player.load_sequence(os.path.join(path, 'Item.png'))
         self.jump = Player.load_sequence(os.path.join(path, 'Jump.png'))
         self.special1 = Player.load_sequence(os.path.join(path, 'Special1.png'))
         self.special2 = Player.load_sequence(os.path.join(path, 'Special2.png'))
-        self.walk_down = Player.load_sequence(os.path.join(path, 'Walk.png'))[0]
+        self.walk = Player.load_sequence(os.path.join(path, 'Walk.png'))
+
+        """
         self.walk_up = Player.load_sequence(os.path.join(path, 'Walk.png'))[1]
         self.walk_left = Player.load_sequence(os.path.join(path, 'Walk.png'))[2]
         self.walk_right = Player.load_sequence(os.path.join(path, 'Walk.png'))[3]
+        """
 
-        self.animation = self.idle_down
+        self.animation = self.idle
         if not isinstance(self.animation, list):
             self.animation = [self.animation]
         self.frame = 0
@@ -72,28 +74,26 @@ class Player(pygame.sprite.Sprite):
         spritesheet = utils.Spritesheet(path)
         with open('src/data/player_data.json') as fp:
             data = json.load(fp)
-            for anim in data:
-                if len(data[file]) > 0:
-                    for item in data[file]:
-                        if len(item) > 1:
-                            for index, direction in enumerate(data[file][item]):
-                                print(data[file][item])
-                                img_list = spritesheet.load_strip((data[file][item][str(index)][0], data[file][item][str(index)][1], 16, 16), 4)
-                                for image in img_list:
-                                    image.set_colorkey((0, 0, 0))
-                                    images.append(image)
-                                return images
-
-                        img_list = spritesheet.load_strip((data[file][item][0], data[file][item][0], 16, 16),
-                                    len(data[file][item]))
-                        for image in img_list:
-                            image.set_colorkey((0, 0, 0))
-                            images.append(image)
+            images = []
+            for seq in data.keys():
+                for frame in data[seq]:
+                    if frame in ["up",
+                                 "down",
+                                 "left",
+                                 "right",
+                                 "jump",
+                                 "idle",
+                                 "attack"]:
+                        for i in value:
+                            images.append(spritesheet.image_at((
+                                *data[seq][value][i], 16, 16)))
                         return images
-                else:
-                    for item in data[file]:
-                        images.append(item)
-                    return images
+                    else:
+                        images.append(spritesheet.image_at((
+                            *data[seq][frame], 16, 16)))
+                        return images
+
+
 
 
     def handle_keys(self):
@@ -110,12 +110,16 @@ class Player(pygame.sprite.Sprite):
 
         if keys[K_LEFT] or keys[K_a]:
             self.accel.x = -ACC
+            self.animation = self.walk
         if keys[K_RIGHT] or keys[K_s]:
             self.accel.x = ACC
+            self.animation = self.walk
         if keys[K_UP] or keys[K_w]:
             self.accel.y = -ACC
+            self.animation = self.walk
         if keys[K_DOWN] or keys[K_r]:
             self.accel.y = ACC
+            self.animation = self.walk
 
         self.accel.x += self.velocity.x * self.friction
         self.accel.y += self.velocity.y * self.friction

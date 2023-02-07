@@ -5,7 +5,7 @@ import pyscroll
 import pygame
 import json
 from entities import Player, Tile
-from utils import Camera
+from utils import Camera, Spritesheet
 from loguru import logger
 from pytmx.util_pygame import load_pygame
 
@@ -65,6 +65,9 @@ class Tutorial(object):
 
         self.sprites = pyscroll.PyscrollGroup(self.scrolling_layer)
         self.player = Player(100, 100, self.sprites)
+
+        self.tutorial_spritesheet = Spritesheet( f'assets/HUD/Tuto.png')
+        self.tutorial_move = self.tutorial_spritesheet.image_at((0, 0, 40, 40))
                 
         logger.debug("Reading src/data/maps/tutorial.tmx")
         self.load_sprites()
@@ -75,13 +78,11 @@ class Tutorial(object):
         py = 0
         for layer in self.tmx_map:
             for x, y, image in layer.tiles():
-                # BUG Following conditional is not being called
                 if py > self.scrolling_layer._size[0]:
                     py += TILE_HEIGHT
                     px = 0
                 Tile(px, py, image, self.sprites)
                 px += TILE_WIDTH
-                # print((px, py))
 
     def draw_sprites(self):
         """ 
