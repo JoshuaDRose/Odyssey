@@ -17,7 +17,7 @@ from matplotlib import animation
 if not pygame.mixer.get_init():
     pygame.mixer.init()
 
-pygame.mixer.music.set_volume(1.0)
+pygame.mixer.music.set_volume(0.1)
 
 image_path = os.path.join('assets/Actor/Characters', 'AllPreview.png')
 sfx = 'assets/sfx/Menu'
@@ -148,8 +148,8 @@ class SelectionScreen:
 
         self.queue = []
 
-        pygame.mixer.Channel(1).set_volume(.5)
-        pygame.mixer.Channel(6).set_volume(.75)
+        pygame.mixer.Channel(1).set_volume(.1)
+        pygame.mixer.Channel(6).set_volume(.2)
         pygame.mixer.Channel(1).play(self.selection_music)
 
 

@@ -57,8 +57,7 @@ logger.info("Workspace: {}",
 screen = pygame.display.set_mode((Window.width, Window.height), 0, 32)
 # BUG: pygame.get_display is called, and we need not assign selection_screen here.
 selection_screen = utils.SelectionScreen()
-# BUG: Caption cannot be redeclared unless the display from THIS SCOPE is parsed into a 
-# seperate file.
+# BUG: Caption cannot be redeclared unless the display from THIS SCOPE is parsed into a seperate file.
 pygame.display.set_caption("Ninja Adventure")
 
 if not pygame.mixer.get_init():
@@ -67,7 +66,6 @@ if not pygame.mixer.get_init():
 logger.info("[Mixer]\n Bitrate: {}\nChannels: {}", pygame.mixer.get_init()[0], pygame.mixer.get_num_channels(), feature="f-strings")
 
 clock = pygame.time.Clock()
-
 
 if pygame.mouse.get_visible():
     # NOTE Default = 0
@@ -89,8 +87,7 @@ try:
         ftp = data['ftp']
         fp.close()
 except FileNotFoundError:
-    # NOTE: this will likely never happen as path checks are done for json 
-    # files before this even runs
+    # NOTE: this will likely never happen as path checks are done for json files before this even runs
     logger.critical("Could not find essential files: meta.json")
     # NOTE: code 1 is exit vode
     sys.exit(1)
