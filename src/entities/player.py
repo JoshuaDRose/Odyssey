@@ -44,12 +44,8 @@ class Player(pygame.sprite.Sprite):
         self.jump = Player.load_sequence(os.path.join(path, 'Jump.png'), self.character.lower())
         self.special1 = Player.load_sequence(os.path.join(path, 'Special1.png'), self.character.lower())
         self.special2 = Player.load_sequence(os.path.join(path, 'Special2.png'), self.character.lower())
-        self.walk = Player.load_sequence(os.path.join(path, 'Walk.png'), self.character.lower())
-        print(self.walk)
-        self.walk_down = [self.walk[i] for i in range(0, 4)]
-        self.walk_up = [self.walk[i] for i in range(4, 8)]
-        self.walk_left = [self.walk[i] for i in range(8, 12)]
-        self.walk_right = [self.walk[i] for i in range(12, 16)]
+
+        self.walk_down = self.load_walk_cycle("down")
 
         # TODO character UI
 
@@ -77,9 +73,8 @@ class Player(pygame.sprite.Sprite):
         self.position = pygame.math.Vector2(self.rect.x, self.rect.y)
         self.friction = -0.25
 
-    @staticmethod
-    def load_sequence(path, character, dir=None) -> list[pygame.surface.Surface]:
-        """ Returns a list of positions relative to player_data.json file """
+    def load_walk_cycle(self, direction):
+        """ Loads character walk cycle (can be dynamic) """
         images = []
 
         # NOTE Manually assign colormask
@@ -92,30 +87,18 @@ class Player(pygame.sprite.Sprite):
         elif character == 'maskedninja':
             colorkey = (255, 255, 255)
 
-        file = os.path.split(path)[1].removesuffix('.png').lower()
-        logger.info(f"[player] Loading animation from path: {path}", feature="f-strings")
-        spritesheet = Spritesheet(path)
+        file = os.path.split(sprite_sheet)[1].removesuffix('.png').lower()
+        logger.info(f"[player] Loading animation from path: {sprite_sheet}", feature="f-strings")
+
+        sprite_sheet = Spritesheet(
+                os.path.join(path, 'Idle.png'), self.character.lower())
 
         with open('src/data/player_data.json') as fp:
             data = json.load(fp)
-            images = []
-            for seq in data.keys():
-                for frame in data[seq]:
-                    if seq in ["up",
-                               "down",
-                               "left",
-                               "right",
-                               "jump",
-                               "idle",
-                               "attack"]:
-                        for index, direction in enumerate(data[seq]):
-                            images.append(spritesheet.image_at((
-                                *data[seq][direction], 16, 16), colorkey))
-                        return images
-                    else:
-                        images.append(spritesheet.image_at((
-                            *data[seq][frame], 16, 16), colorkey))
-                        return images
+            for image in data["walk"][direction]:
+                images.append(image)
+        return images
+
 
     def handle_keys(self):
         """ Player keypresses are handled within this method """
