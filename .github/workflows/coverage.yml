@@ -15,7 +15,7 @@ jobs:
     - name: Validating yaml
       run: curl --data-binary @codecov.yml https://codecov.io/validate
     - name: Run tests and collect coverage
-      run: pytest --cov ..
+      run: pytest --cov ./
     - name: Upload coverage reports to Codecov
       run: |
         # Replace `linux` below with the appropriate OS
