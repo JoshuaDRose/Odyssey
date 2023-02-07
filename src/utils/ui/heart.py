@@ -4,8 +4,8 @@ from utils.spritesheet import Spritesheet
 
 class Heart(pygame.sprite.Sprite):
     count = 0
-    x = 32
-    y = 32
+    x = 4
+    y = 2
     def __init__(self, x, y, group):
         super().__init__(group)
         spritesheet = Spritesheet('assets/HUD/Heart.png', alpha=True)
@@ -22,6 +22,6 @@ class Heart(pygame.sprite.Sprite):
         self.image = self.hearts["100%"]
 
         self.rect = self.image.get_rect()
-        self.x, self.y = x, y
-        Heart.x += self.rect.width
+        self.rect.x, self.rect.y = x, y
+        Heart.x += self.rect.width + 3
         Heart.count += 1
