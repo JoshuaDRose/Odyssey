@@ -1,4 +1,10 @@
+from ..src.entities.sprite import Sprite
 import pytest
-import pygame
+
+
+def test_rect():
+    sprite = Sprite('assets/HUD/Heart.png')
+
+    assert sprite.rect.x >= 0
 
 
