@@ -1,10 +1,10 @@
 ### Player
- - [ ] Physics
- - [ ] Camera compatability
+ - [x] Physics
+ - [x] Camera compatability
  - [ ] SFX
  - [ ] Entity interaction
  - [ ] Spawn point and respawns
- - [ ] Player animation / sprite by sprite
+ - [x] Player animation / sprite by sprite
  - [ ] Death sequences
  - [ ] Dialogue boxes
  - [ ] Enemy interaction and combat
@@ -15,7 +15,6 @@
 - [ ] pause menu
 - [ ] graphics menu 
 - [ ] saving settings / stats system
-- [ ] add text rendering capability from image asset with letters and such
 - [x] Add href links to the shield.io icons on readme to website, license etc
 ### Selection menu
 - [ ] add statistics to each player on hover
