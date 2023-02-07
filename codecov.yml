@@ -1,0 +1,5 @@
+coverage:
+  round: down
+  precision: 5
+fixes:
+  - "before/::"
