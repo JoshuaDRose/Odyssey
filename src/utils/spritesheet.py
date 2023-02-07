@@ -5,9 +5,12 @@ Taken from https://www.pygame.org/wiki/Spritesheet
 import pygame
 
 class Spritesheet(object):
-    def __init__(self, filename):
+    def __init__(self, filename, alpha=False):
         try:
-            self.sheet = pygame.image.load(filename).convert()
+            if alpha:
+                self.sheet = pygame.image.load(filename).convert_alpha()
+            else:
+                self.sheet = pygame.image.load(filename).convert()
         except pygame.error as message:
             print('Unable to load spritesheet image: %s', filename)
             raise(SystemExit, message)

@@ -94,6 +94,8 @@ class Tutorial(object):
         self.sprites.center(self.player.rect.center)
         self.sprites.draw(self.screen)
 
+        self.player.hearts.draw(self.screen)
+
         self.player.handle_keys()
         self.player.update()
 
