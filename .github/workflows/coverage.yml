@@ -12,6 +12,8 @@ jobs:
       run: |
         pip install -r requirements/dev.txt
         pip install -r requirements/base.txt
+    - name: Validating yaml
+      run: curl --data-binary @codecov.yml https://codecov.io/validate
     - name: Run tests and collect coverage
       run: pytest --cov ..
     - name: Upload coverage reports to Codecov
