@@ -1,7 +1,10 @@
 try:
-    from src.entities.sprite import Sprite
-except ModuleNotFoundError:
+    from ..src.entities.sprite import Sprite
+except (ModuleNotFoundError, ImportError):
     from entities.sprite import Sprite
+except ModuleNotFoundError:
+    import os
+    print(os.getcwd())
 import pytest
 
 def test_rect():
