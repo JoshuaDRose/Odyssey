@@ -4,7 +4,7 @@
         <img src='https://img.shields.io/github/v/release/JoshuaDRose/ninja-adventure?include_prereleases&sort=semver&style=for-the-badge'>
     </a>
     <a href="https://codecov.io/gh/JoshuaDRose/Ninja-Adventure" > 
-        <img src="https://img.shields.io/codecov/c/github/JoshuaDRose/Ninja-Adventure?style=for-the-badge&token=EN4JAW4IIH"/> 
+        <img src="https://img.shields.io/codecov/c/github/JoshuaDRose/Ninja-Adventure?color=008080&logo=codecov&logoColor=white&style=for-the-badge&token=EN4JAW4IIH"/> 
      </a>
     </h1>
 </div>
