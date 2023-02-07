@@ -45,10 +45,13 @@ class Player(pygame.sprite.Sprite):
         self.special1 = Player.load_sequence(os.path.join(path, 'Special1.png'), self.character.lower())
         self.special2 = Player.load_sequence(os.path.join(path, 'Special2.png'), self.character.lower())
         self.walk = Player.load_sequence(os.path.join(path, 'Walk.png'), self.character.lower())
+        print(self.walk)
         self.walk_down = [self.walk[i] for i in range(0, 4)]
         self.walk_up = [self.walk[i] for i in range(4, 8)]
         self.walk_left = [self.walk[i] for i in range(8, 12)]
         self.walk_right = [self.walk[i] for i in range(12, 16)]
+
+        # TODO character UI
 
         """
         self.walk_up = Player.load_sequence(os.path.join(path, 'Walk.png'))[1]
@@ -105,10 +108,9 @@ class Player(pygame.sprite.Sprite):
                                "jump",
                                "idle",
                                "attack"]:
-                        for direction in data[seq]:
-                            for i in range(4):
-                                images.append(spritesheet.image_at((
-                                    *data[seq][direction], 16, 16), colorkey))
+                        for index, direction in enumerate(data[seq]):
+                            images.append(spritesheet.image_at((
+                                *data[seq][direction], 16, 16), colorkey))
                         return images
                     else:
                         images.append(spritesheet.image_at((
@@ -151,6 +153,7 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         if self.tick >= self.fps:
+            print(self.frame)
             if self.frame >= len(self.animation)-1:
                 self.frame = 0
             else:
