@@ -26,6 +26,7 @@ class Choice(pygame.sprite.Sprite):
         self.buttons = {
                 "yes": Button(0, 0, 'assets/HUD/Dialog/YesButton.png'),
                 "no": Button(0, 0, 'assets/HUD/Dialog/NoButton.png')
+
                 }
 
         # NOTE scale all sprites 
