@@ -32,14 +32,14 @@ class Player(pygame.sprite.Sprite):
 
         self.character = character.replace(' ', '', character.count(' '))
         path = f'assets/Actor/Characters/{self.character}/SeparateAnim/'
-        self.idle = Player.load_sequence(os.path.join(path, 'Idle.png'))
-        self.attack = Player.load_sequence(os.path.join(path, 'Attack.png'))
-        self.dead = Player.load_sequence(os.path.join(path, 'Dead.png'))
-        self.item = Player.load_sequence(os.path.join(path, 'Item.png'))
-        self.jump = Player.load_sequence(os.path.join(path, 'Jump.png'))
-        self.special1 = Player.load_sequence(os.path.join(path, 'Special1.png'))
-        self.special2 = Player.load_sequence(os.path.join(path, 'Special2.png'))
-        self.walk = Player.load_sequence(os.path.join(path, 'Walk.png'))
+        self.idle = Player.load_sequence(os.path.join(path, 'Idle.png'), self.character.lower())
+        self.attack = Player.load_sequence(os.path.join(path, 'Attack.png'), self.character.lower())
+        self.dead = Player.load_sequence(os.path.join(path, 'Dead.png'), self.character.lower())
+        self.item = Player.load_sequence(os.path.join(path, 'Item.png'), self.character.lower())
+        self.jump = Player.load_sequence(os.path.join(path, 'Jump.png'), self.character.lower())
+        self.special1 = Player.load_sequence(os.path.join(path, 'Special1.png'), self.character.lower())
+        self.special2 = Player.load_sequence(os.path.join(path, 'Special2.png'), self.character.lower())
+        self.walk = Player.load_sequence(os.path.join(path, 'Walk.png'), self.character.lower())
 
         """
         self.walk_up = Player.load_sequence(os.path.join(path, 'Walk.png'))[1]
@@ -66,9 +66,17 @@ class Player(pygame.sprite.Sprite):
         self.friction = -0.25
 
     @staticmethod
-    def load_sequence(path) -> list[pygame.surface.Surface]:
+    def load_sequence(path, character, dir=None) -> list[pygame.surface.Surface]:
         """ Returns a list of positions relative to player_data.json file """
         images = []
+        colorkey = (0, 0, 0)
+        if character == 'darkninja':
+            colorkey = (0, 0, 0)
+        elif character == 'skeleton':
+            # BUG/TODO: fix skeleton bounding box
+            colorkey = (255, 255, 255)
+        elif character == 'maskedninja':
+            colorkey = (255, 255, 255)
         file = os.path.split(path)[1].removesuffix('.png').lower()
         logger.info(f"[player] Loading animation from path: {path}", feature="f-strings")
         spritesheet = utils.Spritesheet(path)
@@ -77,20 +85,22 @@ class Player(pygame.sprite.Sprite):
             images = []
             for seq in data.keys():
                 for frame in data[seq]:
-                    if frame in ["up",
-                                 "down",
-                                 "left",
-                                 "right",
-                                 "jump",
-                                 "idle",
-                                 "attack"]:
-                        for i in value:
-                            images.append(spritesheet.image_at((
-                                *data[seq][value][i], 16, 16)))
+                    if seq in ["up",
+                               "down",
+                               "left",
+                               "right",
+                               "jump",
+                               "idle",
+                               "attack"]:
+                        for direction in data[seq]:
+                            print(direction)
+                            for i in range(4):
+                                images.append(spritesheet.image_at((
+                                    *data[seq][direction], 16, 16), colorkey))
                         return images
                     else:
                         images.append(spritesheet.image_at((
-                            *data[seq][frame], 16, 16)))
+                            *data[seq][frame], 16, 16), colorkey))
                         return images
 
 
