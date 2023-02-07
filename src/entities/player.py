@@ -59,6 +59,9 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+        self.health = 3 # 3 hearts
+
+
         self.velocity = pygame.math.Vector2(0, 0)
         self.accel = pygame.math.Vector2(0, 0)
         self.position = pygame.math.Vector2(self.rect.x, self.rect.y)
@@ -99,6 +102,7 @@ class Player(pygame.sprite.Sprite):
 
     def load_walk_cycle(self, direction):
         """ Loads character walk cycle (can be dynamic) """
+        # NOTE pygame needs external scope method assignment
         images = []
         # NOTE Manually assign colormask
         colorkey = (0, 0, 0)
@@ -158,7 +162,6 @@ class Player(pygame.sprite.Sprite):
             self.animation = self.walk_down
 
         if not keydown:
-            print('idle')
             if self.lastkey == 'a':
                 self.animation = self.idle_left
                 self.frame = 0
