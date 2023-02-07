@@ -40,6 +40,10 @@ class Player(pygame.sprite.Sprite):
         self.special1 = Player.load_sequence(os.path.join(path, 'Special1.png'), self.character.lower())
         self.special2 = Player.load_sequence(os.path.join(path, 'Special2.png'), self.character.lower())
         self.walk = Player.load_sequence(os.path.join(path, 'Walk.png'), self.character.lower())
+        self.walk_down = [self.walk[i] for i in range(0, 4)]
+        self.walk_up = [self.walk[i] for i in range(4, 8)]
+        self.walk_left = [self.walk[i] for i in range(8, 12)]
+        self.walk_right = [self.walk[i] for i in range(12, 16)]
 
         """
         self.walk_up = Player.load_sequence(os.path.join(path, 'Walk.png'))[1]
@@ -93,7 +97,6 @@ class Player(pygame.sprite.Sprite):
                                "idle",
                                "attack"]:
                         for direction in data[seq]:
-                            print(direction)
                             for i in range(4):
                                 images.append(spritesheet.image_at((
                                     *data[seq][direction], 16, 16), colorkey))
@@ -120,16 +123,16 @@ class Player(pygame.sprite.Sprite):
 
         if keys[K_LEFT] or keys[K_a]:
             self.accel.x = -ACC
-            self.animation = self.walk
+            self.animation = self.walk_left
         if keys[K_RIGHT] or keys[K_s]:
             self.accel.x = ACC
-            self.animation = self.walk
+            self.animation = self.walk_right
         if keys[K_UP] or keys[K_w]:
             self.accel.y = -ACC
-            self.animation = self.walk
+            self.animation = self.walk_up
         if keys[K_DOWN] or keys[K_r]:
             self.accel.y = ACC
-            self.animation = self.walk
+            self.animation = self.walk_down
 
         self.accel.x += self.velocity.x * self.friction
         self.accel.y += self.velocity.y * self.friction
