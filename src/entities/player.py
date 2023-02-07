@@ -67,18 +67,17 @@ class Player(pygame.sprite.Sprite):
     def load_idle_cicle(self, direction):
         """ Load character idle cycle (one animation per direction) """
         images = []
-
-        # NOTE Manually assign colormask
         colorkey = (0, 0, 0)
-        if self.character == 'darkninja':
-            print("Setting to black")
-            colorkey = (0, 0, 0)
+        if self.character == 'maskedninja':
+            colorkey = (255, 255, 255)
         elif self.character == 'skeleton':
-            # BUG/TODO: fix skeleton bounding box
+            # BUG/TODO: fix bounding box
             colorkey = (255, 255, 255)
-        elif self.character == 'maskedninja':
+        elif self.character == 'grayninja':
             colorkey = (255, 255, 255)
-
+        elif self.character == 'noble':
+            # BUG/TODO: fix bounding box
+            colorkey = (255, 255, 255)
         sprite_sheet = Spritesheet(os.path.join(self.path, 'Idle.png'))
 
         if direction == "down":
@@ -101,15 +100,17 @@ class Player(pygame.sprite.Sprite):
     def load_walk_cycle(self, direction):
         """ Loads character walk cycle (can be dynamic) """
         images = []
-
         # NOTE Manually assign colormask
         colorkey = (0, 0, 0)
-        if self.character == 'darkninja':
-            colorkey = (0, 0, 0)
-        elif self.character == 'skeleton':
-            # BUG/TODO: fix skeleton bounding box
+        if self.character == 'maskedninja':
             colorkey = (255, 255, 255)
-        elif self.character == 'maskedninja':
+        elif self.character == 'skeleton':
+            # BUG/TODO: fix bounding box
+            colorkey = (255, 255, 255)
+        elif self.character == 'grayninja':
+            colorkey = (255, 255, 255)
+        elif self.character == 'noble':
+            # BUG/TODO: fix bounding box
             colorkey = (255, 255, 255)
 
         sprite_sheet = Spritesheet(os.path.join(self.path, 'Walk.png'))

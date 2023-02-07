@@ -76,13 +76,13 @@ class Box(pygame.sprite.Sprite):
             return;
         else:
             if character == 1:
-                current_text = "Dark Ninja"
-            elif character == 2:
                 current_text = "Masked Ninja"
+            elif character == 2:
+                current_text = "Gray Ninja"
             elif character == 3:
                 current_text = "Skeleton"
             elif character == 4:
-                current_text = "Inspector"
+                current_text = "Noble"
         if character == 0:
             self.rect.x = 0
         else:
