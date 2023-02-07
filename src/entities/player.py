@@ -26,21 +26,12 @@ class Player(pygame.sprite.Sprite):
             logger.critical("Could not find essential files: meta.json")
             sys.exit(1)
 
-        self.x =  x
-        self.y =  y
+        self.x = x
+        self.y = y
 
         self.character = character.replace(' ', '', character.count(' '))
         self.path = f'assets/Actor/Characters/{self.character}/SeparateAnim/'
         self.character = self.character.lower()
-        """
-        self.idle = Player.load_sequence(os.path.join(path, 'Idle.png'), self.character.lower())
-        self.attack = Player.load_sequence(os.path.join(path, 'Attack.png'), self.character.lower())
-        self.dead = Player.load_sequence(os.path.join(path, 'Dead.png'), self.character.lower())
-        self.item = Player.load_sequence(os.path.join(path, 'Item.png'), self.character.lower())
-        self.jump = Player.load_sequence(os.path.join(path, 'Jump.png'), self.character.lower())
-        self.special1 = Player.load_sequence(os.path.join(path, 'Special1.png'), self.character.lower())
-        self.special2 = Player.load_sequence(os.path.join(path, 'Special2.png'), self.character.lower())
-        """
 
         self.walk_down = self.load_walk_cycle("down")
         self.walk_up = self.load_walk_cycle("up")
@@ -51,14 +42,6 @@ class Player(pygame.sprite.Sprite):
         self.idle_up = self.load_idle_cicle("up")
         self.idle_left = self.load_idle_cicle("left")
         self.idle_right = self.load_idle_cicle("right")
-
-        # TODO character UI
-
-        """
-        self.walk_up = Player.load_sequence(os.path.join(path, 'Walk.png'))[1]
-        self.walk_left = Player.load_sequence(os.path.join(path, 'Walk.png'))[2]
-        self.walk_right = Player.load_sequence(os.path.join(path, 'Walk.png'))[3]
-        """
 
         self.animation = self.idle_down
         if not isinstance(self.animation, list):
@@ -149,6 +132,7 @@ class Player(pygame.sprite.Sprite):
 
         keydown = False
         lastkey = 'r'
+
         if keys[K_LEFT] or keys[K_a]:
             keydown = True
             lastkey = 'a'
