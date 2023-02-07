@@ -1,5 +1,6 @@
 import pygame
 
+_ = pygame.display.set_mode((0, 0), 0, 32)
 
 class Sprite(pygame.sprite.Sprite):
     def __init__(self,
@@ -7,5 +8,6 @@ class Sprite(pygame.sprite.Sprite):
                  x: int,
                  y: int, *groups):
         super().__init__(*groups)
-        self.image = image
+        self.image = pygame.image.load(image).convert()
         self.rect = self.image.get_rect()
+        self.rect.center = x, y

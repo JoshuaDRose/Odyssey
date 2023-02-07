@@ -1,10 +1,6 @@
-from ..src.entities.sprite import Sprite
+from src.entities.sprite import Sprite
 import pytest
 
-
 def test_rect():
-    sprite = Sprite('assets/HUD/Heart.png')
-
-    assert sprite.rect.x >= 0
-
-
+    sprite = Sprite('assets/HUD/Heart.png', 50, 50)
+    assert (sprite.rect.x and sprite.rect.y >= 0), "Invalid position"

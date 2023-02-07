@@ -2,8 +2,13 @@ import json
 import os
 import sys
 
-import utils
-import entities
+try:
+    from ..utils import Spritesheet
+except ImportError:
+    try:
+        from utils import Spritesheet
+    except ModuleNotFoundError:
+        pass
 
 import pygame
 from loguru import logger
@@ -86,7 +91,7 @@ class Player(pygame.sprite.Sprite):
 
         file = os.path.split(path)[1].removesuffix('.png').lower()
         logger.info(f"[player] Loading animation from path: {path}", feature="f-strings")
-        spritesheet = utils.Spritesheet(path)
+        spritesheet = Spritesheet(path)
 
         with open('src/data/player_data.json') as fp:
             data = json.load(fp)
