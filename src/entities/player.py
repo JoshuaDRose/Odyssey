@@ -8,7 +8,7 @@ import entities
 import pygame
 from loguru import logger
 
-from pygame import K_w, K_s, K_a, K_d
+from pygame import K_w, K_s, K_a, K_r
 from pygame import K_UP, K_DOWN, K_LEFT, K_RIGHT
 
 
@@ -54,7 +54,8 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-        self.velocity = pygame.math.Vector2(250, 250)
+        self.velocity = pygame.math.Vector2(0, 0)
+        self.accel = pygame.math.Vector2(0, 0)
         self.position = pygame.math.Vector2(self.rect.x, self.rect.y)
 
     @staticmethod
@@ -92,58 +93,54 @@ class Player(pygame.sprite.Sprite):
 
     def handle_keys(self, dt):
         """ Player keypresses are handled within this method """
-
-        key = pygame.key.get_pressed()
-
-        self.position.x += (key[K_d] - key[K_a]) * self.velocity.x * dt
-        self.position.y += (key[K_s] - key[K_w]) * self.velocity.y * dt
-        """
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_s:
-                    self.position.y += 1 * self.velocity.y + dt
-                if event.key == pygame.K_w:
-                    self.position.y -= 1 * self.velocity.y + dt
-                if event.key == pygame.K_a:
-                    self.position.x -= 1 * self.velocity.x + dt
-                if event.key == pygame.K_d:
-                    self.position.x -= 1 * self.velocity.x + dt
-        pass
-        """
+                if event.key == K_r:
+                    self.accel.y += .2
+                if event.key == K_w:
+                    self.accel.y -= .2
+                if event.key == K_a:
+                    self.accel.x -= .2
+                if event.key == K_s:
+                    self.accel.x -= .2
+            if event.type == pygame.KEYUP:
+                if event.key in (K_a, K_s):
+                    self.accel.x = 0
+                if event.key in (K_w, K_r):
+                    self.accel.y = 0
+
+        self.velocity.x += self.accel.x
+        self.velocity.y += self.accel.y
+
+        if self.velocity.magnitude() > 0:
+            self.velocity = self.velocity.normalize()
+
+        if self.accel.x == 0:
+            self.velocity.x *= 0.92
+        if self.accel.y == 0:
+            self.velocity.y *= 0.92
+
+        self.position.x += self.velocity.x
+        self.position.y += self.velocity.y
 
     def draw(self):
         """ Draw self.image and self.rect to current display (window) """
-
-        """
-        if self.velocity.magnitude() > 0:
-            self.velocity.normalize()
-
-        pos = [self.position.x, self.position.y]
-
-        for i in range(2):
-            if camera.center[i] < pos[i] <= camera.background.size[i] - camera.center[i]:
-                pos[i] = camera.center[i]
-            elif pos[i] > camera.background.size[i] - camera.center[i]:
-                pos[i] = camera.size[i] - camera.background.size[i] + pos[i]
-
-        window.blit(self.image, (int(pos[0]), int(pos[1])))
-        """
-
         pass
 
     def update_collision(self):
-        self.rect = self.image.get_rect()
-        self.rect.x = self.x
-        self.rect.y = self.y
+        self.rect.x = int(self.position.x)
+        self.rect.y = int(self.position.y)
 
-    def update(self, dt: float):
+    def update(self):
         """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit(0)
         """
-        self.handle_keys(dt)
         if self.tick >= self.fps:
             if self.frame >= len(self.animation)-1:
                 self.frame = 0

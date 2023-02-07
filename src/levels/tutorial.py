@@ -29,6 +29,7 @@ class Tutorial(object):
                 "body": pygame.font.Font('assets/HUD/Font/NormalFont.ttf', 30)
                 }
 
+        self.do_zoom =0
         self.text = {
                 'header': {
                     "text": "Hey there!",
@@ -64,7 +65,7 @@ class Tutorial(object):
                 pyscroll.TiledMapData(self.tmx_map),
                 (400, 400))
 
-        self.scrolling_layer.zoom = 2
+        self.scrolling_layer.zoom = 1.5
 
         self.sprites = pyscroll.PyscrollGroup(self.scrolling_layer)
         self.player = Player(100, 100, self.sprites)
@@ -92,14 +93,12 @@ class Tutorial(object):
         NOTE: Components of this are taken from https://github.com/bitcraft/pytmx#basic-use
         """
         
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit(0)
+
         self.sprites.center(self.player.rect.center)
         self.sprites.draw(self.screen)
 
-        self.player.update(self.dt)
+        self.player.handle_keys(self.dt)
+        self.player.update()
 
         pygame.display.update()
         self.dt = self.clock.tick(60) / 1000
