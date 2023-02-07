@@ -2,13 +2,7 @@ import json
 import os
 import sys
 
-try:
-    from ..utils import Spritesheet
-except ImportError:
-    try:
-        from utils import Spritesheet
-    except ModuleNotFoundError:
-        pass
+from utils import Spritesheet
 
 import pygame
 from loguru import logger
@@ -36,7 +30,9 @@ class Player(pygame.sprite.Sprite):
         self.y =  y
 
         self.character = character.replace(' ', '', character.count(' '))
-        path = f'assets/Actor/Characters/{self.character}/SeparateAnim/'
+        self.path = f'assets/Actor/Characters/{self.character}/SeparateAnim/'
+        self.character = self.character.lower()
+        """
         self.idle = Player.load_sequence(os.path.join(path, 'Idle.png'), self.character.lower())
         self.attack = Player.load_sequence(os.path.join(path, 'Attack.png'), self.character.lower())
         self.dead = Player.load_sequence(os.path.join(path, 'Dead.png'), self.character.lower())
@@ -44,8 +40,17 @@ class Player(pygame.sprite.Sprite):
         self.jump = Player.load_sequence(os.path.join(path, 'Jump.png'), self.character.lower())
         self.special1 = Player.load_sequence(os.path.join(path, 'Special1.png'), self.character.lower())
         self.special2 = Player.load_sequence(os.path.join(path, 'Special2.png'), self.character.lower())
+        """
 
         self.walk_down = self.load_walk_cycle("down")
+        self.walk_up = self.load_walk_cycle("up")
+        self.walk_left = self.load_walk_cycle("left")
+        self.walk_right = self.load_walk_cycle("right")
+
+        self.idle_down = self.load_idle_cicle("down")
+        self.idle_up = self.load_idle_cicle("up")
+        self.idle_left = self.load_idle_cicle("left")
+        self.idle_right = self.load_idle_cicle("right")
 
         # TODO character UI
 
@@ -55,9 +60,10 @@ class Player(pygame.sprite.Sprite):
         self.walk_right = Player.load_sequence(os.path.join(path, 'Walk.png'))[3]
         """
 
-        self.animation = self.idle
+        self.animation = self.idle_down
         if not isinstance(self.animation, list):
             self.animation = [self.animation]
+
         self.frame = 0
         self.tick = 0
         self.fps = 10
@@ -73,32 +79,62 @@ class Player(pygame.sprite.Sprite):
         self.position = pygame.math.Vector2(self.rect.x, self.rect.y)
         self.friction = -0.25
 
+    def load_idle_cicle(self, direction):
+        """ Load character idle cycle (one animation per direction) """
+        images = []
+
+        # NOTE Manually assign colormask
+        colorkey = (0, 0, 0)
+        if self.character == 'darkninja':
+            print("Setting to black")
+            colorkey = (0, 0, 0)
+        elif self.character == 'skeleton':
+            # BUG/TODO: fix skeleton bounding box
+            colorkey = (255, 255, 255)
+        elif self.character == 'maskedninja':
+            colorkey = (255, 255, 255)
+
+        sprite_sheet = Spritesheet(
+                os.path.join(self.path, 'Idle.png'))
+
+        if direction == "down":
+            image = sprite_sheet.image_at((0, 0, 16, 16), colorkey)
+            images.append(image)
+        elif direction == "up":
+            image = sprite_sheet.image_at((16, 0, 16, 16), colorkey)
+            images.append(image)
+        elif direction == "left":
+            image = sprite_sheet.image_at((32, 0, 16, 16), colorkey)
+            images.append(image)
+        elif direction == "right":
+            image = sprite_sheet.image_at((48, 0, 16, 16), colorkey)
+            images.append(image)
+
+        return images
+
+
+
     def load_walk_cycle(self, direction):
         """ Loads character walk cycle (can be dynamic) """
         images = []
 
         # NOTE Manually assign colormask
         colorkey = (0, 0, 0)
-        if character == 'darkninja':
+        if self.character == 'darkninja':
             colorkey = (0, 0, 0)
-        elif character == 'skeleton':
+        elif self.character == 'skeleton':
             # BUG/TODO: fix skeleton bounding box
             colorkey = (255, 255, 255)
-        elif character == 'maskedninja':
+        elif self.character == 'maskedninja':
             colorkey = (255, 255, 255)
-
-        file = os.path.split(sprite_sheet)[1].removesuffix('.png').lower()
+        sprite_sheet = Spritesheet(os.path.join(self.path, 'Walk.png'))
         logger.info(f"[player] Loading animation from path: {sprite_sheet}", feature="f-strings")
-
-        sprite_sheet = Spritesheet(
-                os.path.join(path, 'Idle.png'), self.character.lower())
 
         with open('src/data/player_data.json') as fp:
             data = json.load(fp)
-            for image in data["walk"][direction]:
-                images.append(image)
+            for image in data["walk"][direction].values():
+                images.append(sprite_sheet.image_at((image[0], image[1], 16, 16), colorkey))
         return images
-
 
     def handle_keys(self):
         """ Player keypresses are handled within this method """
@@ -112,18 +148,38 @@ class Player(pygame.sprite.Sprite):
 
         keys = pygame.key.get_pressed()
 
+        keydown = False
+        lastkey = 'r'
         if keys[K_LEFT] or keys[K_a]:
+            keydown = True
+            lastkey = 'a'
             self.accel.x = -ACC
             self.animation = self.walk_left
         if keys[K_RIGHT] or keys[K_s]:
+            lastkey = 's'
+            keydown = True
             self.accel.x = ACC
             self.animation = self.walk_right
         if keys[K_UP] or keys[K_w]:
+            lastkey = 'w'
             self.accel.y = -ACC
+            keydown = True
             self.animation = self.walk_up
         if keys[K_DOWN] or keys[K_r]:
+            lastkey = 'r'
+            keydown = True
             self.accel.y = ACC
             self.animation = self.walk_down
+
+        if not keydown:
+            if lastkey == 'a':
+                self.animation = self.idle_left
+            elif lastkey == 's':
+                self.animation = self.idle_right
+            elif lastkey == 'w':
+                self.animation = self.idle_up
+            elif lastkey == 'r':
+                self.animation = self.idle_down
 
         self.accel.x += self.velocity.x * self.friction
         self.accel.y += self.velocity.y * self.friction
@@ -136,7 +192,6 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         if self.tick >= self.fps:
-            print(self.frame)
             if self.frame >= len(self.animation)-1:
                 self.frame = 0
             else:

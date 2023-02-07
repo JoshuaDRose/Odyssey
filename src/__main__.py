@@ -118,6 +118,7 @@ if ftp:
                 tutorial_query.button_collided(mp)
             elif event.type == pygame.MOUSEMOTION:
                 mp = pygame.mouse.get_pos()
+
         tutorial_query.draw(screen)
         tutorial_query.update()
 
@@ -139,6 +140,7 @@ while not Window.done:
     for event in pygame.event.get():
         if event.type == QUIT:
             Window.done = True
+
     # NOTE filling display with black also prevents frame ghosting
     screen.fill((0, 0, 0))
 

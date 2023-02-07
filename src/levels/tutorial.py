@@ -22,6 +22,7 @@ with open('src/data/tiles.json') as fp:
 class Tutorial(object):
     def __init__(self):
         self.screen = pygame.display.get_surface()
+        logger.debug(self.screen)
         self.clock = pygame.time.Clock()
         self.running = False
 
