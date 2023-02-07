@@ -92,10 +92,15 @@ class Tutorial(object):
         NOTE: Components of this are taken from https://github.com/bitcraft/pytmx#basic-use
         """
         
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit(0)
         self.sprites.center(self.player.rect.center)
         self.sprites.draw(self.screen)
 
         self.player.update(self.dt)
+
         pygame.display.update()
         self.dt = self.clock.tick(60) / 1000
 
