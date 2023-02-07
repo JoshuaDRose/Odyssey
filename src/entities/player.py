@@ -29,6 +29,8 @@ class Player(pygame.sprite.Sprite):
         self.x = x
         self.y = y
 
+        self.lastkey = 'r'
+
         self.character = character.replace(' ', '', character.count(' '))
         self.path = f'assets/Actor/Characters/{self.character}/SeparateAnim/'
         self.character = self.character.lower()
@@ -131,42 +133,43 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
 
         keydown = False
-        lastkey = 'r'
+        # lastkey = 'r'
 
         if keys[K_LEFT] or keys[K_a]:
             keydown = True
-            lastkey = 'a'
+            self.lastkey = 'a'
             self.accel.x = -ACC
             self.animation = self.walk_left
         if keys[K_RIGHT] or keys[K_s]:
-            lastkey = 's'
+            self.lastkey = 's'
             keydown = True
             self.accel.x = ACC
             self.animation = self.walk_right
         if keys[K_UP] or keys[K_w]:
-            lastkey = 'w'
+            self.lastkey = 'w'
             self.accel.y = -ACC
             keydown = True
             self.animation = self.walk_up
         if keys[K_DOWN] or keys[K_r]:
-            lastkey = 'r'
+            self.lastkey = 'r'
             keydown = True
             self.accel.y = ACC
             self.animation = self.walk_down
 
         if not keydown:
-            if lastkey == 'a':
-                self.frame = 0
+            print('idle')
+            if self.lastkey == 'a':
                 self.animation = self.idle_left
-            elif lastkey == 's':
                 self.frame = 0
+            elif self.lastkey == 's':
                 self.animation = self.idle_right
-            elif lastkey == 'w':
                 self.frame = 0
+            elif self.lastkey == 'w':
                 self.animation = self.idle_up
-            elif lastkey == 'r':
                 self.frame = 0
+            elif self.lastkey == 'r':
                 self.animation = self.idle_down
+                self.frame = 0
 
         self.accel.x += self.velocity.x * self.friction
         self.accel.y += self.velocity.y * self.friction
