@@ -11,7 +11,7 @@ from loguru import logger
 from pygame import K_w, K_s, K_a, K_r
 from pygame import K_UP, K_DOWN, K_LEFT, K_RIGHT
 
-ACC = 0.25
+ACC = 0.20
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, group):
@@ -40,7 +40,10 @@ class Player(pygame.sprite.Sprite):
         self.jump = Player.load_sequence(os.path.join(path, 'Jump.png'))
         self.special1 = Player.load_sequence(os.path.join(path, 'Special1.png'))
         self.special2 = Player.load_sequence(os.path.join(path, 'Special2.png'))
-        self.walk = Player.load_sequence(os.path.join(path, 'Walk.png'))
+        self.walk_down = Player.load_sequence(os.path.join(path, 'Walk.png'))[0]
+        self.walk_up = Player.load_sequence(os.path.join(path, 'Walk.png'))[1]
+        self.walk_left = Player.load_sequence(os.path.join(path, 'Walk.png'))[2]
+        self.walk_right = Player.load_sequence(os.path.join(path, 'Walk.png'))[3]
 
         self.animation = self.idle_down
         if not isinstance(self.animation, list):
@@ -93,7 +96,7 @@ class Player(pygame.sprite.Sprite):
                     return images
 
 
-    def handle_keys(self, dt):
+    def handle_keys(self):
         """ Player keypresses are handled within this method """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -138,5 +141,3 @@ class Player(pygame.sprite.Sprite):
 
         self.image = self.animation[self.frame]
         self.tick += 1
-
-        self.update_collision()

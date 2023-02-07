@@ -55,9 +55,6 @@ class Tutorial(object):
         self.text["body_b"]["rect"].y = 230
 
 
-        self.dt = 0.0
-        # self.player = str()
-
         self.tmx_map = load_pygame(
                 "src/data/maps/tutorial.tmx",
                 allow_duplicate_names=False)
@@ -97,11 +94,11 @@ class Tutorial(object):
         self.sprites.center(self.player.rect.center)
         self.sprites.draw(self.screen)
 
-        self.player.handle_keys(self.dt)
+        self.player.handle_keys()
         self.player.update()
 
         pygame.display.update()
-        self.dt = self.clock.tick(60) / 1000
+        self.clock.tick(60)
 
         """
         for sprite in self.sprites:
