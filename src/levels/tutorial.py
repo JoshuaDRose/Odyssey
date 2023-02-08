@@ -61,7 +61,11 @@ class Tutorial(object):
         self.tmx_map = load_pygame("src/data/maps/tutorial.tmx")
 
         self.player_spawn = self.tmx_map.get_object_by_name('player')
-        logger.debug(self.player_spawn)
+        """
+        logger.debug(self.player_spawn.__dir__()) YIELDS:
+        properties parent id name type x y width height rotation gid
+        visible closed template image parse_xml apply_transformations as_points allow_duplicate_names
+         """
 
         self.scrolling_layer = pyscroll.BufferedRenderer(
                 pyscroll.TiledMapData(self.tmx_map),
@@ -70,7 +74,7 @@ class Tutorial(object):
         self.scrolling_layer.zoom = 1.5
 
         self.sprites = pyscroll.PyscrollGroup(self.scrolling_layer)
-        self.player = Player(100, 100, self.sprites)
+        self.player = Player(self.player_spawn.x, self.player_spawn.y, self.sprites)
 
         self.tutorial_spritesheet = Spritesheet( f'assets/HUD/Tuto.png')
         self.tutorial_move = self.tutorial_spritesheet.image_at((0, 0, 40, 40))
