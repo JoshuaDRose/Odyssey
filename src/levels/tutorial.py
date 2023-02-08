@@ -7,6 +7,8 @@ from entities import Player, Tile
 from utils import Camera, Spritesheet
 from loguru import logger
 from pytmx.util_pygame import load_pygame
+from pytmx import TiledMap
+from pytmx.pytmx import TiledObject, TiledTileLayer
 
 TILE_WIDTH = int()
 TILE_HEIGHT = int()
@@ -56,9 +58,11 @@ class Tutorial(object):
         self.text["body_a"]["rect"].y = 190
         self.text["body_b"]["rect"].y = 230
 
-        self.tmx_map = load_pygame(
-                "src/data/maps/tutorial.tmx",
-                allow_duplicate_names=False)
+        self.tmx_map = load_pygame("src/data/maps/tutorial.tmx")
+
+        self.player_spawn = self.tmx_map.get_object_by_name('player')
+        logger.debug(self.player_spawn)
+
         self.scrolling_layer = pyscroll.BufferedRenderer(
                 pyscroll.TiledMapData(self.tmx_map),
                 (400, 400))
@@ -78,13 +82,14 @@ class Tutorial(object):
     def load_sprites(self):
         px = 0
         py = 0
-        for layer in self.tmx_map:
-            for x, y, image in layer.tiles():
-                if py > self.scrolling_layer._size[0]:
-                    py += TILE_HEIGHT
-                    px = 0
-                Tile(px, py, image, self.sprites)
-                px += TILE_WIDTH
+        for layer in self.tmx_map.layers:
+            if isinstance(layer, TiledTileLayer):
+                for x, y, image in layer.tiles():
+                    if py > self.scrolling_layer._size[0]:
+                        py += TILE_HEIGHT
+                        px = 0
+                    Tile(px, py, image, self.sprites)
+                    px += TILE_WIDTH
 
     def draw_sprites(self):
         """ 
