@@ -63,7 +63,7 @@ class Tutorial(object):
         self.player_spawn = self.tmx_map.get_object_by_name('player')
         """
         logger.debug(self.player_spawn.__dir__()) YIELDS:
-        properties parent id name type x y width height rotation gid
+            properties parent id name type x y width height rotation gid
         visible closed template image parse_xml apply_transformations as_points allow_duplicate_names
          """
 
@@ -78,7 +78,7 @@ class Tutorial(object):
 
         self.tutorial_spritesheet = Spritesheet( f'assets/HUD/Tuto.png')
         self.tutorial_move = self.tutorial_spritesheet.image_at((0, 0, 40, 40))
-                
+
         logger.debug("Reading src/data/maps/tutorial.tmx")
         self.load_sprites()
         logger.debug("Finished generating tutorial sprites")
