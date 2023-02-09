@@ -244,6 +244,20 @@ class Statistics(object):
         self.rect.x = screen.get_width() // 2 - self.rect.x
         self.rect.y = y
 
+        self.health_amount = 1
+        self.attack_amount = 1
+
+        self.heart_group = pygame.sprite.Group()
+        self.attack_group = pygame.sprite.Group()
+
+    def set_heart_count():
+        """ Sets the heart count when a new character is selected """
+        pass
+
+    def set_attack_count():
+        """ Sets the attack count when a new character is selected """
+        pass
+
     def draw(self, surface: pygame.surface.Surface) -> None:
         surface.blit(self.image, self.rect)
 
