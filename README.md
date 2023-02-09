@@ -18,10 +18,7 @@
 </a>
 <h3>About</h3>
 <p align="left">
-Odyssey is loosely inspired by <a href="https://www.zelda.com/breath-of-the-wild/">Breath of the Wild</a>, where there are various boss fights and
-RPG mechanics that can also be found in Odyssey. The asset pack that is being used
-in this project can be found below. If you'd feel so inclined, please consider contributing to 
-this project through creating pull requests or issues; it would mean a lot.
+Odyssey is loosely inspired by <a href="https://www.zelda.com/breath-of-the-wild/">Breath of the Wild</a>. The RPG elements such as boss fights, foreging, quest taking, exploration from Breath of the Wild that were or are currently) being put into Odyssey are very close to my heart, and I hope you enjoy the game as much as I enjoy creating it.
 </p>
 
 <h3>Install</h3>
