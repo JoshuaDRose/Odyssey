@@ -20,6 +20,8 @@
             A seldom story lies deep within the forest, among the pine trees. Go out into the unknown. Battle through hoardes of enemies. Unfamiliar worlds and strange creatures lie in the shadows of the unknown.<br>Reward is at a high price, for you must fight against your senses as you trek through torch lit temples.<br>The journey beckons you.<br>Good luck.
         </p>
 </div>
+<br>
+<blockquote><h2>This project is still in pre-alpha.</h2></blockquote>
 
 <h3>Install</h3>
 It is recommended to install the latest <a href=https://github.com/JoshuaDRose/Odyssey/tags>release</a> as
