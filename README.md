@@ -1,4 +1,3 @@
-<br>
 <!--
 <div align="center">
     <h1>
@@ -9,19 +8,18 @@
      </a>
     </h1>
 </div>
--->
 <a href="https://github.com/JoshuaDRose/Odyssey/releases">
     <img src='https://img.shields.io/github/v/release/JoshuaDRose/Odyssey?include_prereleases&sort=semver&style=for-the-badge'>
 <a href="https://github.com/JoshuaDRose/Odyssey/commits/main">
     <img src='https://img.shields.io/badge/status-maintained-D0F0C0?style=for-the-badge'>
-    
 </a>
-<h3>About</h3>
-<p align="left">
-Go out into the wild, battle your way through hoardes of enemies, all the while exploring new biomes and finding new creatures. Reward is a high price; you must battle your way through temples and dungeons. The journey awaits you. Good luck.
-
-
-</p>
+-->
+<div align="center">
+    <h3>About</h3>
+        <p>
+            A seldom story lies deep within the forest, among the pine trees. Go out into the unknown. Battle through hoardes of enemies.<br>Unfamiliar worlds and strange creatures lie in the shadows of the unknown. Reward is at a high price, for you must fight against your senses as you trek through torch lit temples.<br>The journey beckons you.<br>Good luck.
+        </p>
+</div>
 
 <h3>Install</h3>
 It is recommended to install the latest <a href=https://github.com/JoshuaDRose/Odyssey/tags>release</a> as
