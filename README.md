@@ -22,7 +22,7 @@
 </div>
 <br>
 
-<img src='https://img.shields.io/badge/-Python-yellow?color=FFD800&style=for-the-badge&logo=python&logoColor=grey'>    <img src='https://img.shields.io/tokei/lines/GitHub/JoshuaDRose/Odyssey?color=FC9F1B&label=Lines&logo=Bookmeter&logoColor=white&style=for-the-badge'>
+<img src='https://img.shields.io/badge/-Python-yellow?color=FFD800&style=for-the-badge&logo=python&logoColor=grey'>    <img src='https://img.shields.io/tokei/lines/GitHub/JoshuaDRose/Odyssey?color=FC9F1B&label=Lines&logo=Bookmeter&logoColor=white&style=for-the-badge'><img src='https://img.shields.io/badge/-Pygame-yellow?color=FF6302&style=for-the-badge&logo=GameJolt&logoColor=893101'>
 <blockquote><h2>This project is still in pre-alpha.</h2></blockquote>
 
 <h3>Install</h3>
