@@ -1,10 +1,8 @@
 <!--
 <div align="center">
     <h1>
-    
         <a href="https://codecov.io/gh/JoshuaDRose/Odyssey" > 
             <img src="https://img.shields.io/codecov/c/github/JoshuaDRose/Odyssey?color=008080&logo=codecov&logoColor=white&style=for-the-badge&token=EN4JAW4IIH"/> 
-     
      </a>
     </h1>
 </div>
@@ -33,10 +31,12 @@
     </p>
 </div>
 <br>
+<br>
 
-<img src='https://img.shields.io/badge/-Python-yellow?color=FFD800&style=for-the-badge&logo=python&logoColor=grey'> <img src="https://img.shields.io/github/labels/JoshuaDRose/Odyssey/Help%20Wanted?color=FF4655&style=for-the-badge">
+<img src='https://img.shields.io/badge/Python-yellow?color=yellow&style=for-the-badge&logo=python&logoColor=white'> <img src="https://img.shields.io/github/labels/JoshuaDRose/Odyssey/Help%20Wanted?color=FEAB02&style=for-the-badge&logo=Github%20Sponsors&logoColor=white">
+<img src='https://img.shields.io/badge/-Open%20source-yellow?color=FF574D&style=for-the-badge&logo=git&logoColor=white'>
 <blockquote><h2>This project is still in pre-alpha.</h2></blockquote>
-
+<br>
 <h3>Install</h3>
 It is recommended to install the latest <a href=https://github.com/JoshuaDRose/Odyssey/tags>release</a> as
  the main branch is not always release-ready.<br>
@@ -78,7 +78,6 @@ python3 -m pip install -r ./requirements/dev.txt
 This project uses semantic versioning, the details of which can be found @ http://semver.org/
 </p>
 
-
 ### Authors note
 Much of this game is inspired by Zelda, a game deeply close to me. I hope you enjoy Odyssey as much as I enjoy developing and writing it 🤍
 
@@ -87,3 +86,4 @@ Much of this game is inspired by Zelda, a game deeply close to me. I hope you en
 <ul>
     <li>https://pixel-boy.itch.io/ninja-adventure-asset-pack</li>
 </ul>
+</p>
