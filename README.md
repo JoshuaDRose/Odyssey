@@ -18,7 +18,9 @@
 </a>
 <h3>About</h3>
 <p align="left">
-Odyssey is loosely inspired by <a href="https://www.zelda.com/breath-of-the-wild/">Breath of the Wild</a>. The RPG elements such as boss fights, foreging, quest taking, exploration from Breath of the Wild that were or are currently) being put into Odyssey are very close to my heart, and I hope you enjoy the game as much as I enjoy creating it.
+Go out into the wild, battle your way through hoardes of enemies, all the while exploring new biomes and finding new creatures. Reward is a high price; you must battle your way through temples and dungeons. The journey awaits you. Good luck.
+
+
 </p>
 
 <h3>Install</h3>
@@ -61,6 +63,10 @@ python3 -m pip install -r ./requirements/dev.txt
 <h3>Versioning</h3>
 This project uses semantic versioning, the details of which can be found @ http://semver.org/
 </p>
+
+
+### Authors note
+Much of this game is inspired by Zelda, a game deeply close to me. I hope you enjoy Odyssey as much as I enjoy creating it 🤍
 
 <p align="left">
 <h3>References</h3>
