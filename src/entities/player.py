@@ -3,7 +3,7 @@ import os
 import sys
 
 from utils import Spritesheet
-from utils.ui import Heart
+from entities.ui import Heart
 
 import pygame
 from loguru import logger

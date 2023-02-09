@@ -9,5 +9,3 @@ from .logger import Logger
 from .ui import Font
 from .ui import Button
 from .ui import Choice
-from .ui import Lifebar
-from .ui import Heart
