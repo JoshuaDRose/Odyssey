@@ -234,9 +234,18 @@ class SelectionScreen:
             return
 
 
-class StatsBox(pygame.sprite.Sprite):
-    """ Draws container filled with player statistics """
-    ...
+class Statistics(object):
+    """ container filled with player statistics """
+    def __init__(self, y):
+        screen = pygame.display.get_surface()
+        self.image = pygame.Surface((100, 350))
+        self.image.fill((255, 0, 0))
+        self.rect = self.image.get_rect(center=(50, 125))
+        self.rect.x = screen.get_width() // 2 - self.rect.x
+        self.rect.y = y
+
+    def draw(self, surface: pygame.surface.Surface) -> None:
+        surface.blit(self.image, self.rect)
 
 class PreviewBox(pygame.sprite.Sprite):
     """ Shows player avatar and stats """
