@@ -12,7 +12,7 @@
 -->
 <a href="https://github.com/JoshuaDRose/Ninja-Adventure/releases">
     <img src='https://img.shields.io/github/v/release/JoshuaDRose/ninja-adventure?include_prereleases&sort=semver&style=for-the-badge'>
-<a href="https://github.com/JoshuaDRose/Ninja-Adventure/releases">
+<a href="https://github.com/JoshuaDRose/Ninja-Adventure/commits/main">
     <img src='https://img.shields.io/badge/status-maintained-D0F0C0?style=for-the-badge'>
     
 </a>
