@@ -45,6 +45,8 @@ python3 __main__.py
 
 <h3>Contributing</h3>
 
+‼️ __Before you do anything, please read [contributing.md](CONTRIBUTING.md).__
+
 If you are making changes to the code, installing development dependencies is also recommended.<br>
 
 ```sh
@@ -56,7 +58,7 @@ git checkout main
 python3 -m pip install -r ./requirements/base.txt
 python3 -m pip install -r ./requirements/dev.txt
 ```
-> Install all required requirements files
+> Installing all dependencies is recommended
 
 <p align="left">
 <h3>Versioning</h3>
