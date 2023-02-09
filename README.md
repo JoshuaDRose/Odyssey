@@ -64,7 +64,7 @@ This project uses semantic versioning, the details of which can be found @ http:
 
 
 ### Authors note
-Much of this game is inspired by Zelda, a game deeply close to me. I hope you enjoy Odyssey as much as I enjoy creating it 🤍
+Much of this game is inspired by Zelda, a game deeply close to me. I hope you enjoy Odyssey as much as I enjoy developing and writing it 🤍
 
 <p align="left">
 <h3>References</h3>
