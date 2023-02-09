@@ -1,17 +1,17 @@
 <!--
 <div align="center">
-<h1>
-
-<a href="https://codecov.io/gh/JoshuaDRose/Odyssey" > 
-<img src="https://img.shields.io/codecov/c/github/JoshuaDRose/Odyssey?color=008080&logo=codecov&logoColor=white&style=for-the-badge&token=EN4JAW4IIH"/> 
-
-</a>
-</h1>
+    <h1>
+    
+        <a href="https://codecov.io/gh/JoshuaDRose/Odyssey" > 
+            <img src="https://img.shields.io/codecov/c/github/JoshuaDRose/Odyssey?color=008080&logo=codecov&logoColor=white&style=for-the-badge&token=EN4JAW4IIH"/> 
+     
+     </a>
+    </h1>
 </div>
 <a href="https://github.com/JoshuaDRose/Odyssey/releases">
-<img src='https://img.shields.io/github/v/release/JoshuaDRose/Odyssey?include_prereleases&sort=semver&style=for-the-badge'>
+    <img src='https://img.shields.io/github/v/release/JoshuaDRose/Odyssey?include_prereleases&sort=semver&style=for-the-badge'>
 <a href="https://github.com/JoshuaDRose/Odyssey/commits/main">
-<img src='https://img.shields.io/badge/status-maintained-D0F0C0?style=for-the-badge'>
+    <img src='https://img.shields.io/badge/status-maintained-D0F0C0?style=for-the-badge'>
 </a>
 
 <img src='https://img.shields.io/tokei/lines/GitHub/JoshuaDRose/Odyssey?color=FC9F1B&label=Lines&logo=Bookmeter&logoColor=white&style=for-the-badge'>
@@ -19,10 +19,10 @@
 <img src='https://img.shields.io/badge/-Pygame-yellow?color=FF6302&style=for-the-badge&logo=GameJolt&logoColor=893101'>
 -->
 <div align="center">
-<h1><img src=https://raw.githubusercontent.com/JoshuaDRose/Odyssey/main/docs/logo.png></h1>
-<p>
-A seldom story lies deep within the forest, among the pine trees. Go out into the unknown. Battle through hoardes of enemies. Unfamiliar worlds and strange creatures lie in the shadows of the unknown.<br>Reward is at a high price, for you must fight against your senses as you trek through torch lit temples.<br>The journey beckons you.<br>Good luck.
-</p>
+    <h1><img src=https://raw.githubusercontent.com/JoshuaDRose/Odyssey/main/docs/logo.png></h1>
+        <p>
+            A seldom story lies deep within the forest, among the pine trees. Go out into the unknown. Battle through hoardes of enemies. Unfamiliar worlds and strange creatures lie in the shadows of the unknown.<br>Reward is at a high price, for you must fight against your senses as you trek through torch lit temples.<br>The journey beckons you.<br>Good luck.
+        </p>
 </div>
 <br>
 
@@ -31,7 +31,7 @@ A seldom story lies deep within the forest, among the pine trees. Go out into th
 
 <h3>Install</h3>
 It is recommended to install the latest <a href=https://github.com/JoshuaDRose/Odyssey/tags>release</a> as
-the main branch is not always release-ready.<br>
+ the main branch is not always release-ready.<br>
 <br>
 
 
@@ -77,5 +77,5 @@ Much of this game is inspired by Zelda, a game deeply close to me. I hope you en
 <p align="left">
 <h3>References</h3>
 <ul>
-<li>https://pixel-boy.itch.io/ninja-adventure-asset-pack</li>
+    <li>https://pixel-boy.itch.io/ninja-adventure-asset-pack</li>
 </ul>
