@@ -15,7 +15,7 @@
 </a>
 -->
 <div align="center">
-    <h3>About</h3>
+    <h1>Odyssey</h1>
         <p>
             A seldom story lies deep within the forest, among the pine trees. Go out into the unknown. Battle through hoardes of enemies. Unfamiliar worlds and strange creatures lie in the shadows of the unknown.<br>Reward is at a high price, for you must fight against your senses as you trek through torch lit temples.<br>The journey beckons you.<br>Good luck.
         </p>
