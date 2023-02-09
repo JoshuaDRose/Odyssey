@@ -1,6 +1,5 @@
 """ Character selection screen """
 import os
-import math
 import time
 import sys
 import pygame
