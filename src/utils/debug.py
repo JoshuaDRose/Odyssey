@@ -22,12 +22,14 @@ class TextBox(pygame.sprite.Sprite):
         """
         self.x = x
         self.y = y
-        self.image = pygame.Surface((0, 0))
-        self.i = 0
+        self.screen_width = self.surface.get_width()
+        print(self.screen_width)
+        self.screen_height = self.surface.get_height()
 
-    def draw(self, text, time):
-        text = self.font.render(text, True, pygame.Color("#EFDECD"))
+    def draw(self, text, center=False):
+        text = self.font.render(text, True, pygame.Color("#FFFFFF"))
         rect = text.get_rect()
-        self.surface.blit(text,
-                (self.surface.get_width() // 2 - rect.width // 2,
-                (self.surface.get_height() // 2 - rect.height // 2) + int(math.sin(time * 5) * 2)))
+        x = 0
+        if center:
+            x = rect.width // 2 - self.screen_width // 2
+        self.surface.blit(text, (abs(x), self.y))

@@ -31,13 +31,13 @@ current_text = ""
 
 
 class Box(pygame.sprite.Sprite):
+    """ Character preview boxes (with white border """
     def __init__(self, x, y):
         super().__init__()
         self.image = pygame.Surface((76, 80), pygame.SRCALPHA)
         self.image.set_colorkey((0, 0, 0))
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = x, y
-        pygame.draw.rect(self.image, (255, 255, 255), self.rect, 3)
         self.sound_next = pygame.mixer.Sound(os.path.join(sfx, "Menu2.wav"))
         self.sound_prev = pygame.mixer.Sound(os.path.join(sfx, "Menu3.wav"))
         self.sound_select = pygame.mixer.Sound(os.path.join(sfx, "Menu9.wav"))
@@ -105,7 +105,8 @@ class ProfileIcon(pygame.sprite.Sprite):
         self.rect.x, self.rect.y = x, y
 
     def draw(self, surface):
-        surface.blit(self.image, self.rect)
+        # surface.blit(self.image, self.rect)
+        pass
 
     @staticmethod
     def store_character(character: str):
@@ -152,11 +153,17 @@ class SelectionScreen:
         pygame.mixer.Channel(1).play(self.selection_music)
 
 
-        self.preview = PreviewBox(self.screen.get_width() - 150, 25)
-        self.textbox = TextBox(self.preview.rect.x, self.preview.rect.height + 5, 55)
+        # Where the character is individually shown
+        self.preview = PreviewBox()
+        # self.screen.get_width() - 150 == print(self.preview.rect.x)
+        self.textbox = TextBox(
+                self.preview.rect.x,
+                self.preview.rect.bottom + 10,
+                30)
+        # self.health_box = TextBox(self.p
         self.draw()
         self.screen.blit(selectBox.image, selectBox.rect)
-        self.textbox.draw(current_text, 0)
+        self.textbox.draw(current_text, center=self.preview.rect)
 
         self.current_character: ProfileIcon | None = None
 
@@ -180,21 +187,18 @@ class SelectionScreen:
 
     def draw(self):
         self.screen.fill((0, 0, 0))
-        pygame.draw.rect(
-                self.screen,
-                (255, 255, 255),
-                pygame.Rect(
-                    (self.screen.get_width() - (self.preview.rect.width * 2)) - 10,
-                    10,
-                    10,
-                    self.screen.get_height()-10),
-                5, 5)
 
+        # CHANGE: removed this long line 
+        # pygame.draw.rect( self.screen, (255, 255, 255), pygame.Rect( (self.screen.get_width() - (self.preview.rect.width * 2)) - 10, 10, 10, self.screen.get_height()-10), 5, 5)
+
+        """
         for icon in self.profile_icons:
             self.screen.blit(icon.image, icon.rect)
+        """
 
-
+        # NOTE box *image* around current selected player
         self.preview.draw(self.screen)
+
         self.screen.blit(
                 self.profile_icons[ProfileIcon.selected].image,
                 (self.preview.rect.x + 10, self.preview.rect.y + 10))
@@ -225,23 +229,28 @@ class SelectionScreen:
 
             self.draw()
             self.screen.blit(selectBox.image, (selectBox.rect.x, selectBox.rect.y))
-            self.textbox.draw(current_text, time.time())
+            self.textbox.draw(current_text, center=self.preview.rect)
         else:
             return
 
+
+class StatsBox(pygame.sprite.Sprite):
+    """ Draws container filled with player statistics """
+    ...
+
 class PreviewBox(pygame.sprite.Sprite):
     """ Shows player avatar and stats """
-    def __init__(self, x, y, group=None):
-        if group:
-            super().__init__(group)
-        else:
-            super().__init__()
+    def __init__(self):
+        super().__init__()
+        screen = pygame.display.get_surface()
         self.image = pygame.image.load('assets/HUD/Dialog/FacesetBox.png').convert()
         self.image.set_colorkey((0, 0, 0))
+        self.rect = self.image.get_rect()
         self.image = pygame.transform.scale_by(self.image, 2)
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.rect.x = screen.get_width() // 2 - self.rect.width // 2
+        self.rect.y = screen.get_height() // 2 - self.rect.height // 2
+        self.rect.y -= 50
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
