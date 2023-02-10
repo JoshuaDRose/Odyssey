@@ -9,3 +9,6 @@
 
 🦠 Bug:
 > An unexpected problem with the software.
+
+📦 Merge:
+Merge a branch to another.
