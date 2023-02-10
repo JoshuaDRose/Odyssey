@@ -42,17 +42,28 @@ class Player(pygame.sprite.Sprite):
 
         self.walk_down = [
                 #  NOTE 'y' rect needs to be one pixel down
-                self.ss_walk.image_at((0, 1, 16, 16)),
+                self.ss_walk.image_at((0, 0, 16, 16)),
                 self.ss_walk.image_at((0, 16, 16, 16)),
                 self.ss_walk.image_at((0, 32, 16, 16)),
                 self.ss_walk.image_at((0, 48, 16, 16)),
             ]
-
         self.walk_up = [
-                self.ss_walk.image_at((16, 1, 16, 16)),
+                self.ss_walk.image_at((16, 0, 16, 16)),
                 self.ss_walk.image_at((16, 16, 16, 16)),
                 self.ss_walk.image_at((16, 32, 16, 16)),
                 self.ss_walk.image_at((16, 48, 16, 16)),
+            ]
+        self.walk_left = [
+                self.ss_walk.image_at((32, 0, 16, 16)),
+                self.ss_walk.image_at((32, 16, 16, 16)),
+                self.ss_walk.image_at((32, 32, 16, 16)),
+                self.ss_walk.image_at((32, 48, 16, 16)),
+            ]
+        self.walk_right = [
+                self.ss_walk.image_at((48, 0, 16, 16)),
+                self.ss_walk.image_at((48, 16, 16, 16)),
+                self.ss_walk.image_at((48, 32, 16, 16)),
+                self.ss_walk.image_at((48, 48, 16, 16)),
             ]
 
         self.walk_left = self.load_walk_cycle("left")
