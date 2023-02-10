@@ -1,5 +1,0 @@
-numpy
-matplotlib
-pygount
-pytest
-pytest-cov
