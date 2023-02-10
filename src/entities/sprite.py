@@ -8,6 +8,6 @@ class Sprite(pygame.sprite.Sprite):
                  x: int,
                  y: int, *groups):
         super().__init__(*groups)
-        self.image = pygame.image.load(image).convert()
+        self.image = image
         self.rect = self.image.get_rect()
         self.rect.center = x, y

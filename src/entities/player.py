@@ -9,7 +9,7 @@ import pygame
 from loguru import logger
 
 from pygame import K_w, K_s, K_a, K_r
-from pygame import K_UP, K_DOWN, K_LEFT, K_RIGHT
+from pygame import K_UP, K_DOWN, K_LEFT, K_RIGHT, K_SPACE
 
 ACC = 0.20
 
@@ -30,13 +30,22 @@ class Player(pygame.sprite.Sprite):
         self.x = x
         self.y = y
 
+        self.do_report = False
+
         self.lastkey = 'r'
+
+        self.up = False
+        self.down = False
+        self.left = False
+        self.right = False
 
         self.character = character.replace(' ', '', character.count(' '))
         self.path = f'assets/Actor/Characters/{self.character}/SeparateAnim/'
         self.character = self.character.lower()
 
         self.ss_walk = Spritesheet(os.path.join(self.path, 'Walk.png'))
+
+        self.tutorial_attack_hint = False
 
         i = 1
 
@@ -75,6 +84,7 @@ class Player(pygame.sprite.Sprite):
         self.idle_right = self.load_idle_cicle("right")
 
         self.animation = self.idle_down
+
         if not isinstance(self.animation, list):
             self.animation = [self.animation]
 
@@ -99,6 +109,7 @@ class Player(pygame.sprite.Sprite):
         self.accel = pygame.math.Vector2(0, 0)
         self.position = pygame.math.Vector2(self.rect.x, self.rect.y)
         self.friction = -0.25
+
 
     def load_idle_cicle(self, direction):
         """ Load character idle cycle (one animation per direction) """
@@ -132,9 +143,7 @@ class Player(pygame.sprite.Sprite):
             images.append(image)
 
         return images
-
-
-
+    
     def load_walk_cycle(self, direction):
         """ Loads character walk cycle (can be dynamic) """
         # NOTE pygame needs external scope method assignment
@@ -173,28 +182,36 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
 
         keydown = False
-        # lastkey = 'r'
 
         if keys[K_LEFT] or keys[K_a]:
             keydown = True
             self.lastkey = 'a'
+            self.left = 1
             self.accel.x = -ACC
             self.animation = self.walk_left
         if keys[K_RIGHT] or keys[K_s]:
             self.lastkey = 's'
             keydown = True
+            self.right = 1
             self.accel.x = ACC
             self.animation = self.walk_right
         if keys[K_UP] or keys[K_w]:
             self.lastkey = 'w'
             self.accel.y = -ACC
+            self.up = 1
             keydown = True
             self.animation = self.walk_up
         if keys[K_DOWN] or keys[K_r]:
             self.lastkey = 'r'
+            self.down = 1
             keydown = True
             self.accel.y = ACC
             self.animation = self.walk_down
+        if keys[K_SPACE]:
+            # TODO => ONLY ATTACK IF NOT NEXT TO INTERACTABLE OBJECT
+            if self.attack_available:
+                self.animation = self.attack
+            self.tutorial_attack_hint = True
 
         if not keydown:
             if self.lastkey == 'a':
@@ -230,3 +247,30 @@ class Player(pygame.sprite.Sprite):
         self.image = self.animation[self.frame]
         self.tick += 1
         self.update_collision()
+
+    @property
+    def attack_available(self) -> bool:
+        """ TODO => this function should contain logic to detect if 
+                    the player is next to an object. Return if this is 
+                    true or false.
+        """
+        return False
+
+    @property
+    def report(self) -> bool:
+        """ set conditional to run send_report """
+        return all([self.up,
+                self.down,
+                self.left,
+                self.right])
+
+    @report.setter
+    def report(self):
+        """ set report property """
+        # print((self.up, self.down, self.left, self.right))
+        pass
+
+    @report.deleter
+    def report(self):
+        """ remove report property """
+        del self.do_report

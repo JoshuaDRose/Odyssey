@@ -3,7 +3,8 @@ import pytmx
 import pyscroll
 import pygame
 import json
-from entities import Player, Tile
+
+from entities import Player, Tile, Sprite
 from utils import Camera, Spritesheet
 from loguru import logger
 from pytmx.util_pygame import load_pygame
@@ -54,6 +55,19 @@ class Tutorial(object):
             self.text[key]["rect"] = self.text[key]["render"].get_rect()
             self.text[key]["rect"].x = self.screen.get_width() // 2 - self.text[key]["rect"].width // 2
 
+        ss_tutorial = Spritesheet('assets/HUD/Tuto.png')
+        self.tutorial_sprites = [
+                ss_tutorial.image_at((0, 0, 40, 40)),
+                ss_tutorial.image_at((40, 0, 90, 40))
+                ]
+
+        self.move_index, self.attack_index = 0, 1
+
+        # NOTE index starts at 0
+        for index, _ in enumerate(self.tutorial_sprites):
+            self.tutorial_sprites[index] = pygame.transform.scale_by(self.tutorial_sprites[index], 2)
+
+
         self.text["header"]["rect"].y = 100
         self.text["body_a"]["rect"].y = 190
         self.text["body_b"]["rect"].y = 230
@@ -75,9 +89,7 @@ class Tutorial(object):
 
         self.sprites = pyscroll.PyscrollGroup(self.scrolling_layer)
         self.player = Player(self.player_spawn.x, self.player_spawn.y, self.sprites)
-
-        self.tutorial_spritesheet = Spritesheet( f'assets/HUD/Tuto.png')
-        self.tutorial_move = self.tutorial_spritesheet.image_at((0, 0, 40, 40))
+        self.current_tutorial_image = Sprite(self.tutorial_sprites[self.move_index], self.player_spawn.x, self.player_spawn.y)
 
         logger.debug("Reading src/data/maps/tutorial.tmx")
         self.load_sprites()
@@ -94,6 +106,7 @@ class Tutorial(object):
                         px = 0
                     Tile(px, py, image, self.sprites)
                     px += TILE_WIDTH
+        self.sprites.add(self.current_tutorial_image)
 
     def draw_sprites(self):
         """ 
@@ -104,6 +117,7 @@ class Tutorial(object):
         self.sprites.draw(self.screen)
 
         self.player.hearts.draw(self.screen)
+        self.screen.blit(self.current_tutorial_image.image, self.current_tutorial_image.rect)
 
         self.player.handle_keys()
         self.player.update()

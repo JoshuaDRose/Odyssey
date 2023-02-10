@@ -1,3 +1,4 @@
+import os
 import sys
 
 class Version:
@@ -7,10 +8,10 @@ class Version:
     patch = int(version.split('.')[2])
 
 if Version.major < 3:
-    print("You are using python {}. Please use >= python3.7.0".format(Version.version))
+    logger.critical("You are using python {}. Please use >= python3.7.0".format(Version.version))
     sys.exit(1)
 elif Version.minor < 6:
-    print("<=python3.6 is not supported")
+    logger.critical("<=python3.6 is not supported")
     sys.exit(1)
 
 import json
@@ -38,8 +39,8 @@ for item in list(pathDict):
 
 for path in pathList:
     logger.info("Appending folder: {} to Workspace",
-            path,
-            feature='f-strings')
+                path,
+                feature='f-strings')
     sys.path.insert(0, path)
 
 class Window:
@@ -48,10 +49,10 @@ class Window:
     fps = 60
 
 logger.info("Workspace: {}",
-             os.path.relpath(
-                 utils.get_folder(
-                     utils.get_parent(os.getcwd()), __file__)),
-             feature='f-strings')
+            os.path.relpath(
+                utils.get_folder(
+                    utils.get_parent(os.getcwd()), __file__)),
+            feature='f-strings')
 
 # NOTE: This screen is also declared in utils/selection.py/Selection class
 screen = pygame.display.set_mode((Window.width, Window.height), 0, 32)
@@ -79,6 +80,30 @@ while selection_screen.running:
 character = None
 ftp = None # NOTE ftp shortened ver. of first time playing
 
+do_cache = True
+check_wasd = False
+check_attack = False
+
+
+def add_mvmnt_cache():
+    global do_cache, check_wasd, check_attack
+    """ Add json configuration for tutorial movement sprites """
+    path = os.path.join('src/data/cache', 'mvmnt.json')
+    logger.debug(f"Adding movement cache to {path}")
+
+    data = {
+            "check_wasd": check_wasd,
+            "check_attack": check_attack
+            }
+    if check_wasd is True and check_attack is not True:
+        tutorial.current_tutorial_image.image = tutorial.tutorial_sprites[tutorial.move_index]
+    elif check_attack is True:
+        tutorial.current_tutorial_image.image = tutorial.tutorial_sprites[tutorial.attack_index]
+
+    with open(path, 'w', True, 'utf8') as fp:
+        json.dump(data, fp, ensure_ascii=True, sort_keys=True)
+    do_cache = False
+
 # NOTE Retrieve character from  json file
 try:
     with open('src/data/meta.json') as fp:
@@ -95,6 +120,7 @@ except FileNotFoundError:
 # TODO: remove when redundant or ready
 logger.debug("Loading main menu as {}.", character, feature="f-strings")
 
+global tutorial
 tutorial = levels.Tutorial()
 ftp_query = True
 
@@ -130,11 +156,25 @@ if ftp:
         tutorial.running = True
         while tutorial.running:
             tutorial.draw_sprites()
+            if do_cache:
+                if tutorial.player.report:
+                    check_wasd = True
+                    add_mvmnt_cache()
+                    tutorial.current_tutorial_image.image = tutorial.tutorial_sprites[tutorial.attack_index]
+                    if all([
+                            tutorial.player.tutorial_attack_hint,
+                            tutorial.player.do_report
+                            ]):
+                        check_attack = True
+                        add_mvmnt_cache()
+                        do_cache = False
+                        logger.success("Note to self: end tutorial here - fade out idea?")
+
     elif tutorial_query.choice == -1:
         # NOTE Don't do tutorial, create level instance etc ...
         # TODO Setup tutorial as mentioned above
-        pass
-
+        logger.critical("Main levels aren\'t setup yet :(")
+        sys.exit(0)
 
 while not Window.done:
     for event in pygame.event.get():
