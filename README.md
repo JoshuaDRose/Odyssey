@@ -33,7 +33,7 @@
 <br>
 <br>
 
-<img src='https://img.shields.io/badge/Python-yellow?color=yellow&style=for-the-badge&logo=python&logoColor=white'> <img src="https://img.shields.io/github/labels/JoshuaDRose/Odyssey/Help%20Wanted?color=FEAB02&style=for-the-badge&logo=Github%20Sponsors&logoColor=white">
+<img src='https://img.shields.io/badge/Python-yellow?color=yellow&style=for-the-badge&logo=python&logoColor=white'> <img src="https://img.shields.io/badge/Help%20Wanted-feabo2?color=critical&style=for-the-badge&logo=Github%20Sponsors&logoColor=white">
 <img src='https://img.shields.io/badge/-Open%20source-yellow?color=FF574D&style=for-the-badge&logo=git&logoColor=white'>
 <blockquote><h2>This project is still in pre-alpha.</h2></blockquote>
 <br>
