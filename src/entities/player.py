@@ -23,9 +23,9 @@ class Player(pygame.sprite.Sprite):
             with open('src/data/meta.json') as fp:
                 data = json.load(fp)
                 character = data['character']
-        except FileNotFoundError:
+        except FileNotFoundError as message:
             logger.critical("Could not find essential files: meta.json")
-            sys.exit(1)
+            raise(FileNotFoundError, message)
 
         self.x = x
         self.y = y
@@ -36,8 +36,25 @@ class Player(pygame.sprite.Sprite):
         self.path = f'assets/Actor/Characters/{self.character}/SeparateAnim/'
         self.character = self.character.lower()
 
-        self.walk_down = self.load_walk_cycle("down")
-        self.walk_up = self.load_walk_cycle("up")
+        self.ss_walk = Spritesheet(os.path.join(self.path, 'Walk.png'))
+
+        i = 1
+
+        self.walk_down = [
+                #  NOTE 'y' rect needs to be one pixel down
+                self.ss_walk.image_at((0, 1, 16, 16)),
+                self.ss_walk.image_at((0, 16, 16, 16)),
+                self.ss_walk.image_at((0, 32, 16, 16)),
+                self.ss_walk.image_at((0, 48, 16, 16)),
+            ]
+
+        self.walk_up = [
+                self.ss_walk.image_at((16, 1, 16, 16)),
+                self.ss_walk.image_at((16, 16, 16, 16)),
+                self.ss_walk.image_at((16, 32, 16, 16)),
+                self.ss_walk.image_at((16, 48, 16, 16)),
+            ]
+
         self.walk_left = self.load_walk_cycle("left")
         self.walk_right = self.load_walk_cycle("right")
 
@@ -52,7 +69,7 @@ class Player(pygame.sprite.Sprite):
 
         self.frame = 0
         self.tick = 0
-        self.fps = 10
+        self.fps = 15
 
         self.image = self.animation[self.frame]
 
@@ -75,6 +92,7 @@ class Player(pygame.sprite.Sprite):
     def load_idle_cicle(self, direction):
         """ Load character idle cycle (one animation per direction) """
         images = []
+        """
         colorkey = (0, 0, 0)
         if self.character == 'maskedninja':
             colorkey = (255, 255, 255)
@@ -86,19 +104,20 @@ class Player(pygame.sprite.Sprite):
         elif self.character == 'noble':
             # BUG/TODO: fix bounding box
             colorkey = (255, 255, 255)
+        """
         sprite_sheet = Spritesheet(os.path.join(self.path, 'Idle.png'))
 
         if direction == "down":
-            image = sprite_sheet.image_at((0, 0, 16, 16), colorkey)
+            image = sprite_sheet.image_at((0, 0, 16, 16))
             images.append(image)
         elif direction == "up":
-            image = sprite_sheet.image_at((16, 0, 16, 16), colorkey)
+            image = sprite_sheet.image_at((16, 0, 16, 16))
             images.append(image)
         elif direction == "left":
-            image = sprite_sheet.image_at((32, 0, 16, 16), colorkey)
+            image = sprite_sheet.image_at((32, 0, 16, 16))
             images.append(image)
         elif direction == "right":
-            image = sprite_sheet.image_at((48, 0, 16, 16), colorkey)
+            image = sprite_sheet.image_at((48, 0, 16, 16))
             images.append(image)
 
         return images
@@ -127,7 +146,7 @@ class Player(pygame.sprite.Sprite):
         with open('src/data/player_data.json') as fp:
             data = json.load(fp)
             for image in data["walk"][direction].values():
-                images.append(sprite_sheet.image_at((image[0], image[1], 16, 16), colorkey))
+                images.append(sprite_sheet.image_at((image[0], image[1], 16, 16)))
         return images
 
     def handle_keys(self):
