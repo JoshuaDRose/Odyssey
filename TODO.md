@@ -25,4 +25,4 @@
 ### Main Menu
 - [x] get choice boxes to work
 ### Bugs
-- [ ] [#24](https://github.com/JoshuaDRose/Odyssey/issues/24)
+- [x] [#24](https://github.com/JoshuaDRose/Odyssey/issues/24)

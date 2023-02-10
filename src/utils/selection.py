@@ -181,7 +181,7 @@ class SelectionScreen:
                     self.spritesheet.image_at((
                         locations[character]['x'],
                         locations[character]['y'],
-                        38, 40), (20, 27, 27)), x, 0)
+                        38, 40)), x, 0)
             self.profile_icons.append(icon)
             x += 76
 
