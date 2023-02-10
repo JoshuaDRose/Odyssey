@@ -24,3 +24,5 @@
 - [x] use border assets
 ### Main Menu
 - [x] get choice boxes to work
+### Bugs
+- [ ] Issue #24
