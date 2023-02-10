@@ -1,5 +1,6 @@
 # Config file 
 src/data/meta.json
+src/data/cache/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
