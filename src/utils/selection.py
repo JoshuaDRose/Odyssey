@@ -9,6 +9,8 @@ from .debug import TextBox
 from pygame import K_RIGHT, K_LEFT, AUDIO_ALLOW_FREQUENCY_CHANGE, AUDIO_ALLOW_CHANNELS_CHANGE
 from loguru import logger
 
+from entities.ui import Heart, Shuriken as Attack
+
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import animation
@@ -25,8 +27,8 @@ try:
     locations = json.load(open('src/data/profiles.json'))
 except FileNotFoundError:
     os.chdir('..')
-locations = json.load(open('src/data/profiles.json'))
 
+locations = json.load(open('src/data/profiles.json'))
 current_text = ""
 
 
@@ -142,6 +144,7 @@ class SelectionScreen:
         self.screen = pygame.display.get_surface()
         self.load_profiles()
 
+
         self.sound_init = pygame.mixer.Sound(os.path.join(sfx, "choose_character.wav"))
         self.selection_music = pygame.mixer.Sound("assets/Music/1 - Adventure Begin.ogg")
         pygame.display.set_caption("Ninja Adventure - Choose Your Character!")
@@ -152,9 +155,11 @@ class SelectionScreen:
         pygame.mixer.Channel(6).set_volume(.2)
         pygame.mixer.Channel(1).play(self.selection_music)
 
-
         # Where the character is individually shown
         self.preview = PreviewBox()
+
+        self.selection = Statistics(self.preview.rect.bottom + 10)
+
         # self.screen.get_width() - 150 == print(self.preview.rect.x)
         self.textbox = TextBox(
                 self.preview.rect.x,
@@ -185,6 +190,7 @@ class SelectionScreen:
             self.profile_icons.append(icon)
             x += 76
 
+
     def draw(self):
         self.screen.fill((0, 0, 0))
 
@@ -202,6 +208,7 @@ class SelectionScreen:
         self.screen.blit(
                 self.profile_icons[ProfileIcon.selected].image,
                 (self.preview.rect.x + 10, self.preview.rect.y + 10))
+        self.selection.draw(self.screen)
 
     def update(self):
         if SelectionScreen.running:
@@ -230,6 +237,7 @@ class SelectionScreen:
             self.draw()
             self.screen.blit(selectBox.image, (selectBox.rect.x, selectBox.rect.y))
             self.textbox.draw(current_text, center=self.preview.rect)
+            # self.statistcs'
         else:
             return
 
@@ -238,10 +246,10 @@ class Statistics(object):
     """ container filled with player statistics """
     def __init__(self, y):
         screen = pygame.display.get_surface()
-        self.image = pygame.Surface((100, 350))
-        self.image.fill((255, 0, 0))
-        self.rect = self.image.get_rect(center=(50, 125))
-        self.rect.x = screen.get_width() // 2 - self.rect.x
+        self.image = pygame.Surface((150, 250))
+        self.rect = self.image.get_rect()
+        pygame.draw.rect(self.image, (255, 255, 255), self.rect, 2, 5)
+        self.rect.x = screen.get_width() // 2 - self.rect.width // 2
         self.rect.y = y
 
         self.health_amount = 1
@@ -250,16 +258,17 @@ class Statistics(object):
         self.heart_group = pygame.sprite.Group()
         self.attack_group = pygame.sprite.Group()
 
-    def set_heart_count():
+    def set_heart_count(self, count):
         """ Sets the heart count when a new character is selected """
-        pass
+        for _, _ in enumereate(range(0, count, 1)): Heart(Heart.x, Heart.y, self.heart_group)
 
-    def set_attack_count():
+    def set_attack_count(self):
         """ Sets the attack count when a new character is selected """
-        pass
+        for _, _ in enumereate(range(0, count, 1)): Attack(Attack.x, Attack.y, self.heart_group)
 
     def draw(self, surface: pygame.surface.Surface) -> None:
         surface.blit(self.image, self.rect)
+
 
 class PreviewBox(pygame.sprite.Sprite):
     """ Shows player avatar and stats """
