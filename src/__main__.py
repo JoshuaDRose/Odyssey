@@ -1,6 +1,8 @@
 import os
 import sys
 
+os.system('clear')
+
 class Version:
     version = sys.version.split(' ')[0]
     major = int(version.split('.')[0])

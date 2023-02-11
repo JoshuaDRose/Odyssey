@@ -5,11 +5,6 @@
  <tileset firstgid="909" source="../tilesets/TilesetWater.tsx"/>
  <tileset firstgid="1385" source="../tilesets/TilesetHouse.tsx"/>
  <tileset firstgid="2144" source="../tilesets/TilesetFloorDetail.tsx"/>
- <objectgroup color="#ff55ff" id="9" name="entity_spawns" opacity="0.5" tintcolor="#00ff7f">
-  <object id="15" name="player" x="1270.5" y="101">
-   <point/>
-  </object>
- </objectgroup>
  <layer id="1" name="Tile Layer 1" width="100" height="100">
   <data encoding="csv">
 1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1106,1107,265,265,265,265,265,265,265,265,265,265,265,265,265,265,199,183,178,178,178,178,178,178,178,178,204,156,157,265,265,265,265,265,265,265,177,178,178,178,178,178,178,178,178,178,178,178,178,178,178,206,265,265,265,265,265,246,265,265,265,265,265,265,
@@ -322,4 +317,12 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup color="#ff55ff" id="9" name="entity_spawns" opacity="0.5" tintcolor="#00ff7f">
+  <object id="15" name="player" class="Player" x="1269.59" y="101.273">
+   <properties>
+    <property name="DEMO_CUSTOM_PROPERTY" type="bool" value="false"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
 </map>

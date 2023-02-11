@@ -9,7 +9,7 @@ from utils import Camera, Spritesheet
 from loguru import logger
 from pytmx.util_pygame import load_pygame
 from pytmx import TiledMap
-from pytmx.pytmx import TiledObject, TiledTileLayer
+from pytmx.pytmx import TiledObject, TiledTileLayer, TiledObjectGroup
 
 TILE_WIDTH = int()
 TILE_HEIGHT = int()
@@ -88,25 +88,56 @@ class Tutorial(object):
         self.scrolling_layer.zoom = 1.5
 
         self.sprites = pyscroll.PyscrollGroup(self.scrolling_layer)
-        self.player = Player(self.player_spawn.x, self.player_spawn.y, self.sprites)
-        self.current_tutorial_image = Sprite(self.tutorial_sprites[self.move_index], self.player_spawn.x, self.player_spawn.y)
+
+
+        self.layers = list() # NOTE returns none if nothing appended
+                             # which is a compatible datatype for
+                             # PyscrollGroup.draw(_, <list | None>)
 
         logger.debug("Reading src/data/maps/tutorial.tmx")
         self.load_sprites()
         logger.debug("Finished generating tutorial sprites")
 
+        self.player = Player(self.player_spawn.x, self.player_spawn.y)
+        self.current_tutorial_image = Sprite(self.tutorial_sprites[self.move_index], self.player_spawn.x, self.player_spawn.y)
+
+        self.sprites.add(self.current_tutorial_image)
+        self.sprites.add(self.player)
+
+        sprites = [i for i in self.sprites.__dir__() if not i.endswith("_")]
+
+        self.layers = []
+
     def load_sprites(self):
-        px = 0
-        py = 0
-        for layer in self.tmx_map.layers:
+        px, py = 0, 0
+        # px = py = 0
+
+        for index, layer in enumerate(self.tmx_map.layers):
             if isinstance(layer, TiledTileLayer):
+                layer.draworder = index
+                self.layers.append(layer)
                 for x, y, image in layer.tiles():
                     if py > self.scrolling_layer._size[0]:
                         py += TILE_HEIGHT
                         px = 0
-                    Tile(px, py, image, self.sprites)
+                    tile = Tile(
+                            px,
+                            py,
+                            image,
+                            # self.tmx_map.get_tile_properties(px, py, layer),
+                            self.sprites)
+                    del tile # NOTE still remains in list
                     px += TILE_WIDTH
-        self.sprites.add(self.current_tutorial_image)
+            elif isinstance(layer, TiledObjectGroup):
+                layer.draworder = 3
+                # print(layer.parent)     RETURNS: tutorial.tmx file
+                # print(layer.name)       RETURNS: entity_spawns
+                # print(layer.visible)    RETURNS: 1
+                # print(layer.properties) RETURNS: {}
+                # self.layers.append(layer)
+            else:
+                logger.failure(type(layer))
+
 
     def draw_sprites(self):
         """ 
