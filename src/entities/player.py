@@ -14,8 +14,8 @@ from pygame import K_UP, K_DOWN, K_LEFT, K_RIGHT, K_SPACE
 ACC = 0.20
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y, group):
-        super().__init__(group)
+    def __init__(self, x, y):
+        super().__init__()
 
         character = str()
 
@@ -110,6 +110,8 @@ class Player(pygame.sprite.Sprite):
         self.position = pygame.math.Vector2(self.rect.x, self.rect.y)
         self.friction = -0.25
 
+    def draw(self, surface) -> None:
+        surface.draw(self.image, self.rect)
 
     def load_idle_cicle(self, direction):
         """ Load character idle cycle (one animation per direction) """

@@ -16,6 +16,7 @@
 - [ ] graphics menu 
 - [ ] saving settings / stats system
 - [x] Add href links to the shield.io icons on readme to website, license etc
+- [ ] zoom in and out smoothly
 ### Selection menu
 - [ ] add statistics to each player on hover
 - [x] add text to state the name of the player
