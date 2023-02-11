@@ -34,7 +34,7 @@ current_text = ""
 
 class Box(pygame.sprite.Sprite):
     """ Character preview boxes (with white border """
-    def __init__(self, x, y):
+    def __init__(self, x, y) -> None:
         super().__init__()
         self.image = pygame.Surface((76, 80), pygame.SRCALPHA)
         self.image.set_colorkey((0, 0, 0))
@@ -44,7 +44,7 @@ class Box(pygame.sprite.Sprite):
         self.sound_prev = pygame.mixer.Sound(os.path.join(sfx, "Menu3.wav"))
         self.sound_select = pygame.mixer.Sound(os.path.join(sfx, "Menu9.wav"))
 
-    def select(self, character, key=pygame.K_RIGHT):
+    def select(self, character, key=pygame.K_RIGHT) -> None:
         global current_text
         select = False
         if key == pygame.K_RIGHT:
@@ -94,24 +94,24 @@ class Box(pygame.sprite.Sprite):
             ProfileIcon.store_character(current_text)
             SelectionScreen.running = False
 
-selectBox = Box(0, 0)
+selectBox: Box = Box(0, 0) # TODO removed typehint
 
 
 class ProfileIcon(pygame.sprite.Sprite):
     selected = 0
-    def __init__(self, image, x, y):
+    def __init__(self, image, x, y) -> None:
         super().__init__()
         self.image: pygame.surface.Surface = image
         self.image = pygame.transform.scale2x(self.image)
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = x, y
 
-    def draw(self, surface):
-        # surface.blit(self.image, self.rect)
+    def draw(self, surface) -> None:
+        # surface.blit(self.image, self.rect) TODO: removed or reinstance
         pass
 
     @staticmethod
-    def store_character(character: str):
+    def store_character(character: str) -> None:
         """ Puts character name into meta.json for main file to read """
         data = dict()
         character = character
@@ -136,7 +136,7 @@ class ProfileIcon(pygame.sprite.Sprite):
 class SelectionScreen:
     running = True  # NOTE: Needs to be accessed by ProfileIcon
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.image_path = image_path
 
         self.spritesheet = utils.Spritesheet(self.image_path)
@@ -163,16 +163,15 @@ class SelectionScreen:
         # self.screen.get_width() - 150 == print(self.preview.rect.x)
         self.textbox = TextBox(
                 self.preview.rect.x,
-                self.preview.rect.bottom + 10,
+                self.preview.rect.top - 25,
                 30)
-        # self.health_box = TextBox(self.p
         self.draw()
         self.screen.blit(selectBox.image, selectBox.rect)
         self.textbox.draw(current_text, center=self.preview.rect)
 
         self.current_character: ProfileIcon | None = None
 
-    def load_profiles(self):
+    def load_profiles(self) -> None:
         """
         load profile images and add to profile_icons as sprites.
         """
@@ -191,11 +190,20 @@ class SelectionScreen:
             x += 76
 
 
-    def draw(self):
+    def draw(self) -> None:
         self.screen.fill((0, 0, 0))
 
-        # CHANGE: removed this long line 
-        # pygame.draw.rect( self.screen, (255, 255, 255), pygame.Rect( (self.screen.get_width() - (self.preview.rect.width * 2)) - 10, 10, 10, self.screen.get_height()-10), 5, 5)
+        """
+        pygame.draw.rect(
+                self.screen,
+                (255, 255, 255), pygame.Rect(
+                    (self.screen.get_width() - (self.preview.rect.width * 2)) - 10,
+                    10,
+                    10,
+                    self.screen.get_height() - 10),
+                5,
+                5)
+        """
 
         """
         for icon in self.profile_icons:
@@ -210,7 +218,15 @@ class SelectionScreen:
                 (self.preview.rect.x + 10, self.preview.rect.y + 10))
         self.selection.draw(self.screen)
 
-    def update(self):
+        for heart in self.selection.heart_group:
+            heart.draw()
+
+        for shuriken in self.selection.attack_group:
+            shuriken.draw()
+
+        self.textbox.draw(current_text, self.preview.rect)
+
+    def update(self) -> None:
         if SelectionScreen.running:
             self.screen.fill((0, 0, 0))
 
@@ -226,6 +242,7 @@ class SelectionScreen:
                         else:
                             ProfileIcon.selected += 1
                         selectBox.select(ProfileIcon.selected)
+
                     if event.key == pygame.K_LEFT:
                         if ProfileIcon.selected == 0:
                             ProfileIcon.selected = len(self.profile_icons) - 1
@@ -236,15 +253,11 @@ class SelectionScreen:
 
             self.draw()
             self.screen.blit(selectBox.image, (selectBox.rect.x, selectBox.rect.y))
-            self.textbox.draw(current_text, center=self.preview.rect)
-            # self.statistcs'
-        else:
-            return
 
 
 class Statistics(object):
     """ container filled with player statistics """
-    def __init__(self, y):
+    def __init__(self, y: int) -> None:
         screen = pygame.display.get_surface()
         self.image = pygame.Surface((150, 250))
         self.rect = self.image.get_rect()
@@ -258,11 +271,11 @@ class Statistics(object):
         self.heart_group = pygame.sprite.Group()
         self.attack_group = pygame.sprite.Group()
 
-    def set_heart_count(self, count):
+    def set_heart_count(self, count) -> None:
         """ Sets the heart count when a new character is selected """
         for _, _ in enumereate(range(0, count, 1)): Heart(Heart.x, Heart.y, self.heart_group)
 
-    def set_attack_count(self):
+    def set_attack_count(self) -> None:
         """ Sets the attack count when a new character is selected """
         for _, _ in enumereate(range(0, count, 1)): Attack(Attack.x, Attack.y, self.heart_group)
 
@@ -272,7 +285,7 @@ class Statistics(object):
 
 class PreviewBox(pygame.sprite.Sprite):
     """ Shows player avatar and stats """
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         screen = pygame.display.get_surface()
         self.image = pygame.image.load('assets/HUD/Dialog/FacesetBox.png').convert()
@@ -284,5 +297,5 @@ class PreviewBox(pygame.sprite.Sprite):
         self.rect.y = screen.get_height() // 2 - self.rect.height // 2
         self.rect.y -= 50
 
-    def draw(self, surface):
+    def draw(self, surface: pygame.surface.Surface) -> None:
         surface.blit(self.image, self.rect)

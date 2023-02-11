@@ -8,6 +8,7 @@ class Heart(pygame.sprite.Sprite):
     y = 2
     def __init__(self, x, y, group):
         super().__init__(group)
+        self.screen: pygame.surface.Surface = pygame.display.get_surface()
         spritesheet = Spritesheet('assets/HUD/Heart.png', alpha=True)
         self.hearts = {
                 "100%": spritesheet.image_at((0, 0, 16, 16)),
@@ -25,3 +26,6 @@ class Heart(pygame.sprite.Sprite):
         self.rect.x, self.rect.y = x, y
         Heart.x += self.rect.width + 3
         Heart.count += 1
+
+    def draw(self) -> None:
+        self.screen.blit(self.image, self.rect)
