@@ -22,6 +22,7 @@ import levels
 import sys
 import pygame
 import utils
+from entities.ui import Heart
 from loguru import logger
 from pygame import K_ESCAPE, QUIT
 
@@ -30,6 +31,16 @@ logger.add(
         sys.stdout,
         colorize=True,
         format="<white>{time}</white> <level>{message}</level>")
+
+argv = sys.argv; argv.remove(sys.argv[0])
+
+if len(sys.argv) >= 1:
+    if sys.argv[0] in ['--clear', '-c']:
+        if 'linux' or 'mac' in sys.platform:
+            os.system('clear')
+        else:
+            os.system('cls')
+
 
 pathDict = utils.get_insert_paths(os.getcwd()).get('paths')
 pathList = []
@@ -156,6 +167,9 @@ if ftp:
     mp = tuple()
     if tutorial_query.choice == 1:
         tutorial.running = True
+        # NOTE: resets heart count from selection screen
+        Heart.x = 4
+        Heart.y = 2
         while tutorial.running:
             tutorial.draw_sprites()
             if do_cache:

@@ -5,25 +5,25 @@
         "health": 2,
         "damage": 3
     },
-    "Ninja": {
+    "Masked Ninja": {
         "x": 225,
         "y": 144,
         "health": 2,
         "damage": 3
     },
-    "Samurai": {
+    "Gray Ninja": {
         "x": 127,
         "y": 144,
         "health": 3,
         "damage": 2
     },
-    "Bones": {
+    "Skeleton": {
         "x": 30,
         "y": 296,
         "health": 2,
         "damage": 3
     },
-    "Detective": {
+    "Noble": {
         "x": 127,
         "y": 182,
         "health": 4,
