@@ -195,6 +195,10 @@ class SelectionScreen:
             Attack.count = locations[character]['damage']
             Heart.count = locations[character]['health']
 
+            # clear sprite groups
+            self.selection.heart_group.empty()
+            self.selection.attack_group.empty()
+
             self.selection.set_heart_count()
             self.selection.set_attack_count()
 
@@ -275,6 +279,7 @@ class Statistics(object):
     def __init__(self, y: int) -> None:
         screen = pygame.display.get_surface()
         self.image = pygame.Surface((150, 250))
+        self.image.set_colorkey((0, 0, 0))
         self.rect = self.image.get_rect()
         pygame.draw.rect(self.image, (255, 255, 255), self.rect, 2, 5)
         self.rect.x = screen.get_width() // 2 - self.rect.width // 2
@@ -283,17 +288,23 @@ class Statistics(object):
         self.heart_group = pygame.sprite.Group()
         self.attack_group = pygame.sprite.Group()
 
+        self.sprite_x_offset = 375
+
     def set_heart_count(self) -> None:
         """ Sets the heart count when a new character is selected """
         logger.debug("setting heart count @ {}", Heart.count, feature="f-strings")
+        Heart.x = 4
         for _ in range(Heart.count):
-            Heart(Heart.x, Heart.y, self.heart_group)
+            Heart(self.sprite_x_offset, 390, self.heart_group)
+            Heart.increment_x_axis()
 
     def set_attack_count(self) -> None:
         """ Sets the attack count when a new character is selected """
         logger.debug("setting attack count @ {}", Attack.count, feature="f-strings")
+        Attack.x = 4
         for _ in range(Attack.count):
-            Attack(Attack.x, Attack.y, self.attack_group)
+            Attack(self.sprite_x_offset, 425, self.attack_group)
+            Attack.increment_x_axis()
 
     def draw(self, surface: pygame.surface.Surface) -> None:
         surface.blit(self.image, self.rect)

@@ -102,8 +102,10 @@ class Player(pygame.sprite.Sprite):
 
         self.hearts = pygame.sprite.Group()
 
-        for i in range(self.health):
+        for _ in range(self.health):
             Heart(Heart.x, Heart.y, self.hearts)
+
+        self.reset_heart_menu() # NOTE see docstring for util
 
         self.velocity = pygame.math.Vector2(0, 0)
         self.accel = pygame.math.Vector2(0, 0)
@@ -274,3 +276,14 @@ class Player(pygame.sprite.Sprite):
     def report(self):
         """ remove report property """
         del self.do_report
+
+    def reset_heart_menu(self):
+        """ resets heart position from previous menu """
+        x = 4
+        y = 2
+
+        for heart in self.hearts:
+            heart.rect.x = x
+            heart.rect.y = y
+            x += heart.rect.width + 2
+

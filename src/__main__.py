@@ -20,6 +20,7 @@ import levels
 import sys
 import pygame
 import utils
+from entities.ui import Heart
 from loguru import logger
 from pygame import K_ESCAPE, QUIT
 
@@ -164,6 +165,9 @@ if ftp:
     mp = tuple()
     if tutorial_query.choice == 1:
         tutorial.running = True
+        # NOTE: resets heart count from selection screen
+        Heart.x = 4
+        Heart.y = 2
         while tutorial.running:
             tutorial.draw_sprites()
             if do_cache:
