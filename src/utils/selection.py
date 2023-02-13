@@ -196,7 +196,9 @@ class SelectionScreen:
             Heart.count = locations[character]['health']
 
             # clear sprite groups
+            logger.debug("Clearing heart group")
             self.selection.heart_group.empty()
+            logger.debug("Clearing attack group")
             self.selection.attack_group.empty()
 
             self.selection.set_heart_count()
