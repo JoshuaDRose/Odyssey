@@ -6,7 +6,6 @@ class Shuriken(pygame.sprite.Sprite):
     count = 0
     width = 0
     x = 4
-    y = 2 # NOTE only here for actual ui. Not drawn on character screen
     def __init__(self, x, y, group):
         super().__init__(group)
         self.screen = pygame.display.get_surface()
