@@ -29,6 +29,9 @@ logger.add(
         colorize=True,
         format="<white>{time}</white> <level>{message}</level>")
 
+if 'linux' in sys.platform:
+    os.system('clear')
+
 pathDict = utils.get_insert_paths(os.getcwd()).get('paths')
 pathList = []
 

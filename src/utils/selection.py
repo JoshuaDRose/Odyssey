@@ -165,6 +165,7 @@ class SelectionScreen:
                 self.preview.rect.x,
                 self.preview.rect.top - 25,
                 30)
+
         self.draw()
         self.screen.blit(selectBox.image, selectBox.rect)
         self.textbox.draw(current_text, center=self.preview.rect)
