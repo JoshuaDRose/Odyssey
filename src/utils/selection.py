@@ -211,23 +211,6 @@ class SelectionScreen:
     def draw(self) -> None:
         self.screen.fill((0, 0, 0))
 
-        """
-        pygame.draw.rect(
-                self.screen,
-                (255, 255, 255), pygame.Rect(
-                    (self.screen.get_width() - (self.preview.rect.width * 2)) - 10,
-                    10,
-                    10,
-                    self.screen.get_height() - 10),
-                5,
-                5)
-        """
-
-        """
-        for icon in self.profile_icons:
-            self.screen.blit(icon.image, icon.rect)
-        """
-
         # NOTE box *image* around current selected player
         self.preview.draw(self.screen)
 
