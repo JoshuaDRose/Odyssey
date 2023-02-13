@@ -88,13 +88,19 @@ class Box(pygame.sprite.Sprite):
             self.rect.x = 0
         else:
             self.rect.x = 76 * (character)
+
+        # NOTE character is character index && current text is actual name
+        logger.debug('damage: {}\nhealth: {}',
+                     locations[current_text]['damage'],
+                     locations[current_text]['health'],
+                     feature='f-strings')
+
         if not select:
             return;
-        elif select:
-            ProfileIcon.store_character(current_text)
-            SelectionScreen.running = False
+        ProfileIcon.store_character(current_text)
+        SelectionScreen.running = False
 
-selectBox: Box = Box(0, 0) # TODO removed typehint
+selectBox = Box(0, 0)
 
 
 class ProfileIcon(pygame.sprite.Sprite):
@@ -142,8 +148,6 @@ class SelectionScreen:
         self.spritesheet = utils.Spritesheet(self.image_path)
         self.profile_icons = []
         self.screen = pygame.display.get_surface()
-        self.load_profiles()
-
 
         self.sound_init = pygame.mixer.Sound(os.path.join(sfx, "choose_character.wav"))
         self.selection_music = pygame.mixer.Sound("assets/Music/1 - Adventure Begin.ogg")
@@ -155,10 +159,10 @@ class SelectionScreen:
         pygame.mixer.Channel(6).set_volume(.2)
         pygame.mixer.Channel(1).play(self.selection_music)
 
-        # Where the character is individually shown
+        # NOTE >> MUST BE RUN IN THIS EXACT ORDER
         self.preview = PreviewBox()
-
         self.selection = Statistics(self.preview.rect.bottom + 10)
+        self.load_profiles()
 
         # self.screen.get_width() - 150 == print(self.preview.rect.x)
         self.textbox = TextBox(
@@ -187,6 +191,13 @@ class SelectionScreen:
                         locations[character]['x'],
                         locations[character]['y'],
                         38, 40)), x, 0)
+
+            Attack.count = locations[character]['damage']
+            Heart.count = locations[character]['health']
+
+            self.selection.set_heart_count()
+            self.selection.set_attack_count()
+
             self.profile_icons.append(icon)
             x += 76
 
@@ -217,7 +228,11 @@ class SelectionScreen:
         self.screen.blit(
                 self.profile_icons[ProfileIcon.selected].image,
                 (self.preview.rect.x + 10, self.preview.rect.y + 10))
+        # NOTE-TO-SELF: if textbox is drawn after it overwrites previous stat sprites
+        self.textbox.draw(current_text, self.preview.rect)
         self.selection.draw(self.screen)
+
+        # print(len(self.selection.heart_group.sprites())) >> 13. needs fix.
 
         for heart in self.selection.heart_group:
             heart.draw()
@@ -225,7 +240,6 @@ class SelectionScreen:
         for shuriken in self.selection.attack_group:
             shuriken.draw()
 
-        self.textbox.draw(current_text, self.preview.rect)
 
     def update(self) -> None:
         if SelectionScreen.running:
@@ -266,19 +280,20 @@ class Statistics(object):
         self.rect.x = screen.get_width() // 2 - self.rect.width // 2
         self.rect.y = y
 
-        self.health_amount = 1
-        self.attack_amount = 1
-
         self.heart_group = pygame.sprite.Group()
         self.attack_group = pygame.sprite.Group()
 
-    def set_heart_count(self, count) -> None:
+    def set_heart_count(self) -> None:
         """ Sets the heart count when a new character is selected """
-        for _, _ in enumereate(range(0, count, 1)): Heart(Heart.x, Heart.y, self.heart_group)
+        logger.debug("setting heart count @ {}", Heart.count, feature="f-strings")
+        for _ in range(Heart.count):
+            Heart(Heart.x, Heart.y, self.heart_group)
 
     def set_attack_count(self) -> None:
         """ Sets the attack count when a new character is selected """
-        for _, _ in enumereate(range(0, count, 1)): Attack(Attack.x, Attack.y, self.heart_group)
+        logger.debug("setting attack count @ {}", Attack.count, feature="f-strings")
+        for _ in range(Attack.count):
+            Attack(Attack.x, Attack.y, self.attack_group)
 
     def draw(self, surface: pygame.surface.Surface) -> None:
         surface.blit(self.image, self.rect)

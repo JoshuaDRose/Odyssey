@@ -29,8 +29,15 @@ logger.add(
         colorize=True,
         format="<white>{time}</white> <level>{message}</level>")
 
-if 'linux' in sys.platform:
-    os.system('clear')
+argv = sys.argv; argv.remove(sys.argv[0])
+
+if len(sys.argv) >= 1:
+    if sys.argv[0] in ['--clear', '-c']:
+        if 'linux' or 'mac' in sys.platform:
+            os.system('clear')
+        else:
+            os.system('cls')
+
 
 pathDict = utils.get_insert_paths(os.getcwd()).get('paths')
 pathList = []
