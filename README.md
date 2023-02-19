@@ -21,7 +21,7 @@
         <img src=https://raw.githubusercontent.com/JoshuaDRose/Odyssey/main/docs/logo.png>
     </h1>
     <p>
-        A seldom story lies deep within the forest, among the pine trees.
+        A seldom told story lies deep within the forest, among the pine trees.
         Go out into the unknown.
         Battle through hoardes of enemies.
         Unfamiliar worlds and strange creatures lie in the shadows of the unknown.<br>
