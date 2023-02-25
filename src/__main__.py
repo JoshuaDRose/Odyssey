@@ -1,9 +1,20 @@
 import os
 import sys
-
+from dataclasses import dataclass
 os.system('clear')
 
+import json
+import levels
+import pygame
+import utils
+from entities.ui import Heart
+from loguru import logger
+from pygame import K_ESCAPE, QUIT
+
+
+@dataclass
 class Version:
+    """ Semantic versioning dataclass """
     version = sys.version.split(' ')[0]
     major = int(version.split('.')[0])
     minor = int(version.split('.')[1])
@@ -15,17 +26,8 @@ if Version.major < 3:
 elif Version.minor < 6:
     logger.critical("<=python3.6 is not supported")
     sys.exit(1)
-
-import json
-import os
-import levels
-import sys
-import pygame
-import utils
-from entities.ui import Heart
-from loguru import logger
-from pygame import K_ESCAPE, QUIT
-
+    
+    
 logger.remove()
 logger.add(
         sys.stdout,
@@ -34,16 +36,19 @@ logger.add(
 
 argv = sys.argv; argv.remove(sys.argv[0])
 
-if len(sys.argv) >= 1:
-    if sys.argv[0] in ['--clear', '-c']:
-        if 'linux' or 'mac' in sys.platform:
-            os.system('clear')
-        else:
-            os.system('cls')
-
+def _clear():
+    """ clear console (all platforms) """
+    if len(sys.argv) >= 1:
+        if sys.argv[0] in ['--clear', '-c']:
+            if 'linux' or 'mac' in sys.platform:
+                os.system('clear')
+            else:
+                os.system('cls')
 
 pathDict = utils.get_insert_paths(os.getcwd()).get('paths')
 pathList = []
+
+_clear()
 
 logger.debug(pathDict)
 
@@ -97,10 +102,9 @@ do_cache = True
 check_wasd = False
 check_attack = False
 
-
 def add_mvmnt_cache():
-    global do_cache, check_wasd, check_attack
     """ Add json configuration for tutorial movement sprites """
+    global do_cache, check_wasd, check_attack
     path = os.path.join('src/data/cache', 'mvmnt.json')
     logger.debug(f"Adding movement cache to {path}")
 
@@ -108,6 +112,7 @@ def add_mvmnt_cache():
             "check_wasd": check_wasd,
             "check_attack": check_attack
             }
+            
     if check_wasd is True and check_attack is not True:
         tutorial.current_tutorial_image.image = tutorial.tutorial_sprites[tutorial.move_index]
     elif check_attack is True:
@@ -130,7 +135,7 @@ except FileNotFoundError:
     # NOTE: code 1 is exit vode
     sys.exit(1)
 
-# TODO: remove when redundant or ready
+# TODO: remove when redundant
 logger.debug("Loading main menu as {}.", character, feature="f-strings")
 
 global tutorial
